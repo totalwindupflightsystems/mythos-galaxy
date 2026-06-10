@@ -1,4 +1,4 @@
-// Mythos Galaxy — GitHub Pages Comic Viewer
+// Mythos Gallery — GitHub Pages Comic Viewer
 (function() {
   'use strict';
 
@@ -60,7 +60,7 @@
     }
     APP.innerHTML = '';
     APP.appendChild(list);
-    TITLE.textContent = 'Mythos Galaxy';
+    TITLE.textContent = 'Mythos Gallery';
   }
 
   function renderChapter(projects, projectSlug, chapterSlug, pageNum) {
@@ -189,7 +189,8 @@
   // ── Main render ──
   async function render() {
     try {
-      const projects = await fetchJSON('projects.json');
+      const data = await fetchJSON('projects.json');
+      const projects = data.projects || [];
       const route = getRoute();
 
       if (!route.project) {
