@@ -1,0 +1,31 @@
+{
+  "projects": [
+    {
+      "id": "proj-oxw5gvrv",
+      "name": "Watson Enterprises",
+      "slug": "watson-enterprises",
+      "description": "A comedic business empire where dogs, cats, and other animals make deals, hold board meetings, and battle corporate rivals.",
+      "chapters": [
+        {
+          "id": "chap-y674v1nl",
+          "title": "The Biggest Deal",
+          "slug": "the-biggest-deal",
+          "summary": "Professor wakes up to news that a rival conglomerate is trying to take over Watson Enterprises.",
+          "pageCount": 10,
+          "pages": [
+            {"num": 1, "image": "watson-enterprises/the-biggest-deal/pages/page-01.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-01.jpg", "caption": "Morning at the Corner Office"},
+            {"num": 2, "image": "watson-enterprises/the-biggest-deal/pages/page-02.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-02.jpg", "caption": "The stock is tanking"},
+            {"num": 3, "image": "watson-enterprises/the-biggest-deal/pages/page-03.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-03.jpg", "caption": "Emergency board meeting"},
+            {"num": 4, "image": "watson-enterprises/the-biggest-deal/pages/page-04.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-04.jpg", "caption": "A hostile takeover. In MY city."},
+            {"num": 5, "image": "watson-enterprises/the-biggest-deal/pages/page-05.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-05.jpg", "caption": "The fire hydrant war room"},
+            {"num": 6, "image": "watson-enterprises/the-biggest-deal/pages/page-06.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-06.jpg", "caption": "Fight with leverage"},
+            {"num": 7, "image": "watson-enterprises/the-biggest-deal/pages/page-07.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-07.jpg", "caption": "Arrival at the Bone & Biscuit Summit"},
+            {"num": 8, "image": "watson-enterprises/the-biggest-deal/pages/page-08.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-08.jpg", "caption": "Face-off with Furlong & Finch"},
+            {"num": 9, "image": "watson-enterprises/the-biggest-deal/pages/page-09.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-09.jpg", "caption": "The negotiation"},
+            {"num": 10, "image": "watson-enterprises/the-biggest-deal/pages/page-10.jpg", "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-10.jpg", "caption": "Victory celebration"}
+          ]
+        }
+      ]
+    }
+  ]
+}
