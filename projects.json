@@ -4,74 +4,144 @@
       "id": "proj-oxw5gvrv",
       "name": "Watson Enterprises",
       "slug": "watson-enterprises",
-      "description": "",
+      "description": "A manga about Professor, the brindle dog who runs Watson Enterprises.",
       "chapters": [
         {
-          "id": "chap-hluzl7s1",
+          "id": "the-biggest-deal",
+          "title": "The Biggest Deal",
+          "slug": "the-biggest-deal",
+          "summary": "Professor wakes up to a hostile takeover bid, rallies his team, and faces corporate raiders at the Bone & Biscuit Summit.",
+          "pageCount": 10,
+          "readingDirection": "ltr",
+          "pages": [
+            {
+              "num": 1,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-01.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-01.jpg",
+              "caption": ""
+            },
+            {
+              "num": 2,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-02.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-02.jpg",
+              "caption": ""
+            },
+            {
+              "num": 3,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-03.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-03.jpg",
+              "caption": ""
+            },
+            {
+              "num": 4,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-04.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-04.jpg",
+              "caption": ""
+            },
+            {
+              "num": 5,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-05.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-05.jpg",
+              "caption": ""
+            },
+            {
+              "num": 6,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-06.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-06.jpg",
+              "caption": ""
+            },
+            {
+              "num": 7,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-07.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-07.jpg",
+              "caption": ""
+            },
+            {
+              "num": 8,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-08.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-08.jpg",
+              "caption": ""
+            },
+            {
+              "num": 9,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-09.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-09.jpg",
+              "caption": ""
+            },
+            {
+              "num": 10,
+              "image": "watson-enterprises/the-biggest-deal/pages/page-10.jpg",
+              "thumb": "watson-enterprises/the-biggest-deal/pages/thumb-10.jpg",
+              "caption": ""
+            }
+          ]
+        },
+        {
+          "id": "the-bone-wars",
           "title": "The Bone Wars",
           "slug": "the-bone-wars",
-          "summary": "After their victory at the Bone & Biscuit Summit, Professor discovers a shadow corporation called Kennel Holdings was bankrolling his rivals. The CEO is the legendary Dogfather — an old enemy from Professor's treat-stand days. To save his company, Professor infiltrates the Kennel Holdings gala for a high-stakes confrontation.",
+          "summary": "After their victory, Professor discovers a shadow corporation bankrolling his rivals and confronts the legendary Dogfather.",
           "pageCount": 10,
           "readingDirection": "ltr",
           "pages": [
             {
               "num": 1,
               "image": "watson-enterprises/the-bone-wars/pages/page-01.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-01.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-01.jpg",
               "caption": ""
             },
             {
               "num": 2,
               "image": "watson-enterprises/the-bone-wars/pages/page-02.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-02.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-02.jpg",
               "caption": ""
             },
             {
               "num": 3,
               "image": "watson-enterprises/the-bone-wars/pages/page-03.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-03.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-03.jpg",
               "caption": ""
             },
             {
               "num": 4,
               "image": "watson-enterprises/the-bone-wars/pages/page-04.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-04.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-04.jpg",
               "caption": ""
             },
             {
               "num": 5,
               "image": "watson-enterprises/the-bone-wars/pages/page-05.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-05.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-05.jpg",
               "caption": ""
             },
             {
               "num": 6,
               "image": "watson-enterprises/the-bone-wars/pages/page-06.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-06.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-06.jpg",
               "caption": ""
             },
             {
               "num": 7,
               "image": "watson-enterprises/the-bone-wars/pages/page-07.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-07.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-07.jpg",
               "caption": ""
             },
             {
               "num": 8,
               "image": "watson-enterprises/the-bone-wars/pages/page-08.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-08.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-08.jpg",
               "caption": ""
             },
             {
               "num": 9,
               "image": "watson-enterprises/the-bone-wars/pages/page-09.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-09.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-09.jpg",
               "caption": ""
             },
             {
               "num": 10,
               "image": "watson-enterprises/the-bone-wars/pages/page-10.jpg",
-              "thumb": "watson-enterprises/the-bone-wars/pages/page-10.jpg",
+              "thumb": "watson-enterprises/the-bone-wars/pages/thumb-10.jpg",
               "caption": ""
             }
           ]
