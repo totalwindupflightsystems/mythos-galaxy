@@ -1,10 +1,15 @@
 // Mythos Gallery — GitHub Pages Comic Viewer
+// Supports LTR (American comic) and RTL (manga) reading directions
 (function() {
   'use strict';
 
   const BASE = document.querySelector('base')?.href || window.location.pathname.replace(/\/[^/]*$/, '/');
   const APP = document.getElementById('app');
   const TITLE = document.getElementById('page-title');
+
+  // ── Reading direction state ──
+  // Can be overridden per-chapter by data in projects.json, or toggled by user
+  let globalReadingDir = 'ltr'; // default: American comics LTR
 
   // ── Router ──
   function getRoute() {
@@ -40,14 +45,67 @@
     return e;
   }
 
+  function createArrow(direction, readingDir) {
+    // direction: 'prev' or 'next'
+    // readingDir: 'ltr' or 'rtl'
+    // For LTR: prev = left arrow, next = right arrow
+    // For RTL: prev = right arrow, next = left arrow
+    const isLTR = readingDir === 'ltr';
+    const isPrev = direction === 'prev';
+    // In LTR: prev on left, next on right. In RTL: reversed
+    const onLeft = isLTR ? isPrev : !isPrev;
+    const label = isPrev ? 'Previous page' : 'Next page';
+
+    const arrow = el('div', {
+      className: `page-arrow ${direction} ${onLeft ? 'left' : 'right'}`,
+      title: label,
+      'aria-label': label
+    });
+
+    // SVG arrow
+    arrow.innerHTML = onLeft
+      ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15,4 7,12 15,20"/></svg>`
+      : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9,4 17,12 9,20"/></svg>`;
+
+    return arrow;
+  }
+
+  function createDirToggle(currentDir, onChange) {
+    const isLTR = currentDir === 'ltr';
+    const toggle = el('button', {
+      className: 'dir-toggle',
+      title: `Reading direction: ${isLTR ? 'Left-to-Right' : 'Right-to-Left'} (click to switch)`,
+      'aria-label': 'Toggle reading direction',
+      onClick: onChange
+    });
+
+    toggle.appendChild(el('span', { className: 'dir-label' }, isLTR ? 'LTR' : 'RTL'));
+
+    // Direction arrows
+    const arrowRow = el('span', { className: 'dir-arrows' });
+    if (isLTR) {
+      arrowRow.innerHTML = `<span class="dir-arr">→</span>`;
+    } else {
+      arrowRow.innerHTML = `<span class="dir-arr">←</span>`;
+    }
+    toggle.appendChild(arrowRow);
+
+    return toggle;
+  }
+
   // ── Screens ──
   function renderHome(projects) {
     const list = el('div', { className: 'project-list' });
     for (const p of projects) {
       const chapters = el('div', { className: 'chapter-list' });
       for (const ch of p.chapters || []) {
+        // Determine reading direction from chapter data
+        const dir = ch.readingDirection || 'ltr';
+        const dirIcon = dir === 'ltr' ? '→' : '←';
         chapters.appendChild(
-          el('a', { className: 'chapter-link', href: `#/${p.slug}/${ch.slug}` }, ch.title)
+          el('a', { className: 'chapter-link', href: `#/${p.slug}/${ch.slug}` },
+            `${ch.title} ${dirIcon}`
+          )
         );
       }
       list.appendChild(
@@ -73,6 +131,9 @@
     const page = chapter.pages[pageIndex];
     const total = chapter.pages.length;
 
+    // Use chapter's reading direction, fallback to global default
+    const readingDir = chapter.readingDirection || globalReadingDir;
+
     TITLE.textContent = `${chapter.title} — Page ${pageIndex + 1}`;
     APP.innerHTML = '';
 
@@ -87,35 +148,89 @@
     // Viewer
     const viewer = el('div', { className: 'viewer-container' });
 
-    // Navigation bar
+    // Navigation bar with direction toggle
     const navBar = el('div', { className: 'nav-bar' },
       el('button', {
         className: 'nav-btn',
         disabled: pageIndex === 0,
         onClick: () => navigate(`#/${projectSlug}/${chapterSlug}/${pageIndex}`)
-      }, '◀ Prev'),
+      }, readingDir === 'ltr' ? '◀ Prev' : 'Next ▶'),
       el('span', { className: 'page-info' }, `Page ${pageIndex + 1} of ${total}`),
       el('button', {
         className: 'nav-btn',
         disabled: pageIndex >= total - 1,
         onClick: () => navigate(`#/${projectSlug}/${chapterSlug}/${pageIndex + 2}`)
-      }, 'Next ▶')
+      }, readingDir === 'ltr' ? 'Next ▶' : '◀ Prev')
     );
     viewer.appendChild(navBar);
 
-    // Page image
+    // Direction toggle
+    viewer.appendChild(
+      createDirToggle(readingDir, () => {
+        // Toggle reading direction for this chapter
+        chapter.readingDirection = readingDir === 'ltr' ? 'rtl' : 'ltr';
+        // Re-render at same page
+        renderChapter(projects, projectSlug, chapterSlug, pageIndex + 1);
+      })
+    );
+
+    // Image wrapper with click zones and arrows
+    const imgWrapper = el('div', { className: 'img-wrapper' });
+
     const img = el('img', {
       className: 'page-image',
       src: page.image,
       alt: `Page ${pageIndex + 1}: ${page.caption || ''}`,
-      onClick: () => window.open(page.imageFull || page.image, '_blank')
+      draggable: false
     });
-    viewer.appendChild(img);
+    imgWrapper.appendChild(img);
+
+    // Arrow overlays (visible on hover)
+    if (pageIndex > 0) {
+      imgWrapper.appendChild(createArrow('prev', readingDir));
+    }
+    if (pageIndex < total - 1) {
+      imgWrapper.appendChild(createArrow('next', readingDir));
+    }
+
+    // Click zones on the image itself
+    imgWrapper.addEventListener('click', function(e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const width = rect.width;
+      const third = width / 3;
+      const isLTR = readingDir === 'ltr';
+
+      if (x < third) {
+        // Left third
+        const prevTarget = isLTR ? pageIndex : pageIndex + 2;
+        if (isLTR && pageIndex > 0) {
+          navigate(`#/${projectSlug}/${chapterSlug}/${pageIndex}`);
+        } else if (!isLTR && pageIndex < total - 1) {
+          navigate(`#/${projectSlug}/${chapterSlug}/${pageIndex + 2}`);
+        }
+      } else if (x > width - third) {
+        // Right third
+        if (isLTR && pageIndex < total - 1) {
+          navigate(`#/${projectSlug}/${chapterSlug}/${pageIndex + 2}`);
+        } else if (!isLTR && pageIndex > 0) {
+          navigate(`#/${projectSlug}/${chapterSlug}/${pageIndex}`);
+        }
+      }
+    });
+
+    viewer.appendChild(imgWrapper);
 
     // Caption
     if (page.caption) {
-      viewer.appendChild(el('p', { className: 'page-info' }, page.caption));
+      viewer.appendChild(el('p', { className: 'page-caption' }, page.caption));
     }
+
+    // Reading direction badge
+    const dirBadge = el('div', { className: 'dir-badge' },
+      `Reading: ${readingDir === 'ltr' ? 'Left→Right' : 'Right→Left'}`
+    );
+    viewer.appendChild(dirBadge);
 
     // Page dots
     const dots = el('div', { className: 'page-nav' });
@@ -161,6 +276,7 @@
 
     const grid = el('div', { className: 'project-list' });
     for (const ch of chapters) {
+      const dir = ch.readingDirection || 'ltr';
       const thumbGrid = el('div', { className: 'thumb-grid' });
       const previews = ch.pages.slice(0, 4);
       for (const pg of previews) {
@@ -174,10 +290,10 @@
       grid.appendChild(
         el('div', { className: 'project-card' },
           el('h2', {}, ch.title),
-          el('p', {}, `${ch.pages.length} pages`),
+          el('p', {}, `${ch.pages.length} pages — ${dir === 'ltr' ? 'LTR' : 'RTL'}`),
           thumbGrid,
           el('div', { style: { marginTop: '8px' } },
-            el('a', { className: 'chapter-link', href: `#/${projectSlug}/${ch.slug}/1` }, 'Read Full Chapter →')
+            el('a', { className: 'chapter-link', href: `#/${projectSlug}/${ch.slug}/1` }, `Read Full Chapter ${dir === 'ltr' ? '→' : '←'}`)
           )
         )
       );
