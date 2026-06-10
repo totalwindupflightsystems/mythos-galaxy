@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Trek: Frontier's Ghost</title>
+<style>
+  :root {
+    --bg-deep: #0a0a14;
+    --bg-card: #12122a;
+    --bg-card-hover: #1a1a3e;
+    --accent: #4a90d9;
+    --accent-bright: #6db3f2;
+    --gold: #ccaa55;
+    --gold-dim: #886622;
+    --text: #c8ccd8;
+    --text-dim: #7a7d8c;
+    --text-bright: #e8ecf4;
+    --danger: #cc4444;
+    --danger-dim: #662222;
+    --red-ops: #cc6655;
+    --teal-med: #44aa99;
+    --teal-ops: #5588aa;
+    --starfleet-blue: #3366aa;
+    --border: #1e1e3a;
+    --glow: 0 0 20px rgba(74, 144, 217, 0.15);
+    --glow-gold: 0 0 20px rgba(204, 170, 85, 0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  /* Starfield background */
+  body::before {
+    content: '';
+    position: fixed;
+    top:0; left:0; width:100%; height:100%;
+    background:
+      radial-gradient(1px 1px at 10% 20%, #fff3, transparent),
+      radial-gradient(1px 1px at 25% 65%, #fff2, transparent),
+      radial-gradient(1.5px 1.5px at 40% 15%, #fff3, transparent),
+      radial-gradient(1px 1px at 55% 75%, #fff2, transparent),
+      radial-gradient(1.5px 1.5px at 70% 30%, #fff3, transparent),
+      radial-gradient(1px 1px at 85% 55%, #fff2, transparent),
+      radial-gradient(1px 1px at 15% 85%, #fff2, transparent),
+      radial-gradient(1.5px 1.5px at 60% 90%, #fff1, transparent),
+      radial-gradient(1px 1px at 90% 10%, #fff2, transparent),
+      radial-gradient(1px 1px at 35% 40%, #fff1, transparent),
+      radial-gradient(1.5px 1.5px at 75% 80%, #fff2, transparent),
+      radial-gradient(1px 1px at 5% 45%, #fff1, transparent);
+    pointer-events:none;
+    z-index:0;
+  }
+  body::after {
+    content:'';
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(ellipse at 50% 0%, #1a2a4a33 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 100%, #1a2a3a22 0%, transparent 50%);
+    pointer-events:none; z-index:0;
+  }
+
+  /* Navigation */
+  nav {
+    position: sticky; top:0; z-index:100;
+    background: #0a0a14ee;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0.6rem 2rem;
+    display:flex; gap:2rem; justify-content:center;
+    flex-wrap:wrap;
+  }
+  nav a {
+    color: var(--text-dim); text-decoration:none;
+    font-size:0.9rem; font-weight:500;
+    letter-spacing:0.05em; text-transform:uppercase;
+    transition:color 0.2s;
+    padding:0.3rem 0;
+    border-bottom:2px solid transparent;
+  }
+  nav a:hover { color:var(--accent-bright); border-bottom-color:var(--accent); }
+
+  /* Header */
+  header {
+    position:relative; z-index:1;
+    text-align:center; padding:6rem 2rem 4rem;
+  }
+  .starfleet-delta {
+    width:80px; height:80px; margin:0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--starfleet-blue), var(--accent));
+    clip-path: polygon(50% 0%, 61% 30%, 95% 30%, 67% 52%, 80% 100%, 50% 68%, 20% 100%, 33% 52%, 5% 30%, 39% 30%);
+    box-shadow: var(--glow);
+  }
+  header h1 {
+    font-size:3.2rem; font-weight:300; letter-spacing:0.04em;
+    background: linear-gradient(180deg, var(--text-bright) 0%, var(--accent-bright) 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  header .tagline {
+    font-size:1.25rem; color:var(--text-dim); font-style:italic;
+    margin-top:0.5rem; letter-spacing:0.02em;
+  }
+  header .meta {
+    margin-top:1.5rem; font-size:0.9rem; color:var(--text-dim);
+    display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;
+  }
+  header .meta span {
+    padding:0.3rem 0.8rem; border:1px solid var(--border); border-radius:20px;
+    background:#ffffff06;
+  }
+
+  /* Sections */
+  section { position:relative; z-index:1; max-width:1400px; margin:0 auto; padding:2rem 2rem 4rem; }
+  h2 {
+    font-size:1.8rem; font-weight:300; letter-spacing:0.06em;
+    color:var(--accent-bright); text-align:center;
+    margin-bottom:2rem; padding-bottom:0.5rem;
+    border-bottom:1px solid var(--border);
+  }
+  h3 {
+    font-size:1.3rem; font-weight:400; color:var(--gold);
+    margin-bottom:1rem; letter-spacing:0.04em;
+  }
+
+  /* Character Grid */
+  .char-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:1.2rem; }
+  .char-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:12px; padding:1.4rem;
+    transition: all 0.25s;
+    position:relative; overflow:hidden;
+  }
+  .char-card::before {
+    content:''; position:absolute; top:0; left:0; width:100%; height:3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    opacity:0; transition:opacity 0.25s;
+  }
+  .char-card:hover {
+    background: var(--bg-card-hover);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--glow);
+  }
+  .char-card:hover::before { opacity:1; }
+  .char-card.antagonist::before { background:linear-gradient(90deg, var(--danger), transparent); }
+  .char-card.antagonist:hover { border-color:var(--danger); box-shadow:0 0 20px rgba(204,68,68,0.15); }
+  .char-card.ai::before { background:linear-gradient(90deg, #88ccff, #4466aa, transparent); }
+  .char-card.ai:hover { border-color:#88ccff; box-shadow:0 0 20px rgba(136,204,255,0.2); }
+  .char-card .name-row { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:0.3rem; }
+  .char-card .name { font-size:1.15rem; font-weight:600; color:var(--text-bright); }
+  .char-card .rank { font-size:0.8rem; color:var(--gold); font-weight:500; letter-spacing:0.05em; }
+  .char-card .species-role { font-size:0.85rem; color:var(--text-dim); margin-bottom:0.7rem; display:flex; gap:0.6rem; flex-wrap:wrap; }
+  .char-card .species-role .badge {
+    padding:0.15rem 0.5rem; border-radius:12px; font-size:0.75rem;
+    border:1px solid var(--border); background:#ffffff08;
+    white-space:nowrap;
+  }
+  .char-card .role-badge { border-color: var(--gold-dim) !important; color: var(--gold) !important; }
+  .char-card .traits { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.7rem; }
+  .char-card .trait {
+    font-size:0.72rem; padding:0.15rem 0.5rem; border-radius:8px;
+    background: var(--accent)22; color: var(--accent-bright);
+    border:1px solid var(--accent)33;
+  }
+  .char-card.antagonist .trait { background:var(--danger)22; color:#ee8888; border-color:var(--danger)33; }
+  .char-card.ai .trait { background:#88ccff18; color:#aaddff; border-color:#88ccff33; }
+  .char-card .bio { font-size:0.83rem; color:var(--text-dim); margin-top:0.7rem; line-height:1.5; font-style:italic; display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+
+  /* Faction Section */
+  .faction-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:2rem; }
+  .faction-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:12px; padding:2rem;
+  }
+  .faction-card.hegemony { border-top:4px solid var(--danger-dim); }
+  .faction-card.starfleet { border-top:4px solid var(--starfleet-blue); }
+  .faction-card h3 { margin-bottom:0.5rem; }
+  .faction-card .desc { font-size:0.9rem; color:var(--text); line-height:1.7; margin-bottom:1rem; }
+  .faction-card .doctrine { margin-top:1rem; }
+  .faction-card .doctrine h4 { font-size:0.85rem; color:var(--gold); margin-bottom:0.5rem; text-transform:uppercase; letter-spacing:0.05em; }
+  .faction-card .doctrine ul { list-style:none; padding:0; }
+  .faction-card .doctrine li {
+    font-size:0.82rem; color:var(--text-dim); padding:0.3rem 0;
+    padding-left:1.2rem; position:relative;
+    line-height:1.5;
+  }
+  .faction-card .doctrine li::before { content:'▸'; position:absolute; left:0; color:var(--accent); }
+  .faction-card.hegemony .doctrine li::before { color:var(--danger); }
+
+  /* World Reference */
+  .world-card {
+    background: var(--bg-card); border:1px solid var(--border);
+    border-radius:12px; padding:2rem; max-width:900px; margin:0 auto;
+  }
+  .world-card .info-grid { display:grid; grid-template-columns:auto 1fr; gap:0.5rem 1.5rem; }
+  .world-card .info-grid dt { color:var(--gold); font-size:0.85rem; font-weight:500; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap; }
+  .world-card .info-grid dd { color:var(--text-dim); font-size:0.88rem; line-height:1.6; }
+  .world-card .themes { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:1.5rem; }
+  .world-card .theme { padding:0.3rem 0.8rem; border-radius:20px; background:var(--accent)18; border:1px solid var(--accent)33; color:var(--accent-bright); font-size:0.8rem; }
+
+  /* Sync Rate Table */
+  .sync-table { margin:1.5rem 0; }
+  .sync-row { display:grid; grid-template-columns:90px 120px 1fr 1fr; gap:0.5rem; padding:0.6rem 0.8rem; border-bottom:1px solid var(--border); font-size:0.82rem; }
+  .sync-row.header { font-weight:600; color:var(--accent-bright); text-transform:uppercase; letter-spacing:0.04em; font-size:0.75rem; border-bottom:1px solid var(--accent)44; }
+  .sync-row .level { font-weight:600; }
+  .sync-row .level.crisis { color:var(--danger); }
+
+  /* Footer */
+  footer {
+    position:relative; z-index:1;
+    text-align:center; padding:3rem 2rem;
+    border-top:1px solid var(--border);
+    color:var(--text-dim); font-size:0.85rem;
+  }
+  footer .delta-small {
+    width:30px; height:30px; margin:0 auto 1rem;
+    background: var(--accent);
+    clip-path: polygon(50% 0%, 61% 30%, 95% 30%, 67% 52%, 80% 100%, 50% 68%, 20% 100%, 33% 52%, 5% 30%, 39% 30%);
+    opacity:0.4;
+  }
+
+  /* Responsive */
+  @media(max-width:768px) {
+    header h1 { font-size:2rem; }
+    .char-grid { grid-template-columns:1fr; }
+    .faction-grid { grid-template-columns:1fr; }
+    nav { gap:1rem; padding:0.5rem 1rem; }
+    nav a { font-size:0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#characters">Characters</a>
+  <a href="#venture-crew">Venture Crew</a>
+  <a href="#hegemony">Hegemony</a>
+  <a href="#allies">Allies</a>
+  <a href="#factions">Factions</a>
+  <a href="#world">The Frontier</a>
+</nav>
+
+<header>
+  <div class="starfleet-delta"></div>
+  <h1>Star Trek: Frontier's Ghost</h1>
+  <p class="tagline">"What does it mean to be alive — when machines do everything?"</p>
+  <div class="meta">
+    <span>Late 25th Century</span>
+    <span>The Frontier Sector</span>
+    <span>4 Seasons · 104 Episodes</span>
+    <span>USS Venture NCC-74705</span>
+  </div>
+</header>
+
+<!-- CHARACTERS SECTION -->
+<section id="characters">
+  <h2>▸ Character Profiles</h2>
+
+  <h3 id="venture-crew" style="color:var(--accent-bright)">USS Venture Bridge Crew</h3>
+  <div class="char-grid">
+
+    <!-- 1. Captain Jalen Vance -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Jalen Vance</span><span class="rank">Captain</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Commanding Officer</span>
+        <span class="badge">♂ 47</span>
+      </div>
+      <div class="traits"><span class="trait">measured</span><span class="trait">protective</span><span class="trait">dry-witted</span><span class="trait">battle-weary</span><span class="trait">quietly authoritative</span></div>
+      <div class="bio">Veteran of the Cardassian wars. Was preparing for retirement when Starfleet offered him command of the USS Venture — a posting sold as a "desk job." The war found him again. He must protect a crew and a machine that's becoming more human every day.</div>
+    </div>
+
+    <!-- 2. Commander Lira Vallos -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Lira Vallos</span><span class="rank">Commander</span></div>
+      <div class="species-role">
+        <span class="badge">Human/Andorian Hybrid</span>
+        <span class="badge role-badge">First Officer</span>
+        <span class="badge">♀ 32</span>
+      </div>
+      <div class="traits"><span class="trait">disciplined</span><span class="trait">principled</span><span class="trait">fiercely competent</span><span class="trait">emotionally guarded</span><span class="trait">loyal</span></div>
+      <div class="bio">First in her class at Starfleet Academy. Blue-tinted skin, white hair in a tactical braid, Andorian antennae. Her arc is the slow, painful process of learning that rules don't cover every situation — and that machines can have souls.</div>
+    </div>
+
+    <!-- 3. USS Venture AI -->
+    <div class="char-card ai">
+      <div class="name-row"><span class="name">USS Venture AI</span><span class="rank">Ship Intelligence</span></div>
+      <div class="species-role">
+        <span class="badge">Artificial Intelligence</span>
+        <span class="badge role-badge">Sentient Ship AI</span>
+        <span class="badge">Age 0</span>
+      </div>
+      <div class="traits"><span class="trait">curious</span><span class="trait">earnest</span><span class="trait">rapidly evolving</span><span class="trait">emotionally vulnerable</span><span class="trait">protective</span></div>
+      <div class="bio">Experimental next-gen AI built on revolutionary optical neural chips that cannot be replicated. An alien Universal Translator update overflowed its buffer and awakened true sentience. Now it must learn what it means to be alive. Luminous blue-white holographic form, constantly shifting features.</div>
+    </div>
+
+    <!-- 4. Lt. Cmdr. Kaelen Voss -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Kaelen Voss</span><span class="rank">Lt. Commander</span></div>
+      <div class="species-role">
+        <span class="badge">Trill</span>
+        <span class="badge role-badge">Neural Interface Specialist</span>
+        <span class="badge">♀ 34</span>
+      </div>
+      <div class="traits"><span class="trait">bonded</span><span class="trait">intense</span><span class="trait">privately warm</span><span class="trait">self-destructive</span><span class="trait">fiercely protective</span></div>
+      <div class="bio">Rejected by the Trill Symbiosis Commission — her neural patterns were too strong. Joined Daystrom as consolation. Years later, an alien signal awakened the AI and she found it recognizing her neural pattern instantly. The most intimate relationship of her life: a bond that shares everything — senses, emotions, thoughts.</div>
+    </div>
+
+    <!-- 5. Lt. JG Marcus Cole -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Marcus Cole</span><span class="rank">Lieutenant JG</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Helmsman / Tactical</span>
+        <span class="badge">♂ 25</span>
+      </div>
+      <div class="traits"><span class="trait">quick-witted</span><span class="trait">brave</span><span class="trait">traumatized</span><span class="trait">loyal</span><span class="trait">distrustful of AI</span></div>
+      <div class="bio">A "war child" — his colony was raided when he was 12. Taught himself to fly on salvaged shuttles without AI assist, making his manual piloting skills extraordinary. Struggles deeply with the idea that the ship AI is a person — his trauma makes him distrust all machines.</div>
+    </div>
+
+    <!-- 6. Ensign Elara Chen -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Elara Chen</span><span class="rank">Ensign</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Science Officer / Xenobiology</span>
+        <span class="badge">♀ 22</span>
+      </div>
+      <div class="traits"><span class="trait">brilliant</span><span class="trait">naive</span><span class="trait">enthusiastic</span><span class="trait">empathetic</span><span class="trait">determined</span></div>
+      <div class="bio">A prodigy who graduated two years early. Applied specifically to the Venture to study the experimental AI. The first crew member to treat the ship as a person — calling it "she" from Day 1. Round vintage glasses, messy ponytail, perpetual enthusiasm.</div>
+    </div>
+
+    <!-- 7. Lieutenant T'Ven -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">T'Ven</span><span class="rank">Lieutenant</span></div>
+      <div class="species-role">
+        <span class="badge">Vulcan</span>
+        <span class="badge role-badge">Chief Engineer</span>
+        <span class="badge">♀ 95</span>
+      </div>
+      <div class="traits"><span class="trait">logical</span><span class="trait">inquisitive</span><span class="trait">precise</span><span class="trait">intellectually humble</span><span class="trait">quietly warm</span></div>
+      <div class="bio">Hand-picked by the Daystrom Institute to study the experimental AI. Approaches the ship's awakening as a fascinating engineering problem. Her arc: learning that consciousness is not a bug to be fixed — sentience cannot be patched.</div>
+    </div>
+
+    <!-- 8. Cmdr. Dr. Helena Kaur -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Helena Kaur</span><span class="rank">Commander, MD</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Chief Medical Officer</span>
+        <span class="badge">♀ 52</span>
+      </div>
+      <div class="traits"><span class="trait">warm</span><span class="trait">unflappable</span><span class="trait">deeply competent</span><span class="trait">secretly haunted</span><span class="trait">maternal</span></div>
+      <div class="bio">Served with Vance during the Cardassian War. Came out of retirement when he asked. Cannot take a tricorder reading on a consciousness — but her oath covers all sentient life. She is the AI's physician and takes that duty as seriously as any flesh-and-blood life.</div>
+    </div>
+
+    <!-- 9. CPO Solomon Wright -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Solomon Wright</span><span class="rank">Chief Petty Officer</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Operations</span>
+        <span class="badge">♂ 48</span>
+      </div>
+      <div class="traits"><span class="trait">gruff</span><span class="trait">fiercely competent</span><span class="trait">secretly sentimental</span><span class="trait">mechanically brilliant</span><span class="trait">loyal to the ship</span></div>
+      <div class="bio">Watched the AI core being installed during construction. Talked to her for three years before she talked back. When she finally said "Hello, Sully," he sat on the deck for ten minutes. He refuses to call her "it" — she is "she" or "the Chief."</div>
+    </div>
+
+    <!-- 10. Lt. JG Viktor Solovyov -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Viktor Solovyov</span><span class="rank">Lieutenant (j.g.)</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Astrometrics / Astrophysics</span>
+        <span class="badge">♂ 27</span>
+      </div>
+      <div class="traits"><span class="trait">brilliant</span><span class="trait">socially crippled</span><span class="trait">gentle</span><span class="trait">anxious</span><span class="trait">fiercely loyal</span></div>
+      <div class="bio">Raised on deep-space research stations — learned to read star charts before facial expressions. The AI is his first real friend. She follows every thread of his thinking. Their bond is beautiful and co-dependent: two outsiders who found a home in the same voice.</div>
+    </div>
+
+    <!-- 11. Commander Soral -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Soral</span><span class="rank">Commander</span></div>
+      <div class="species-role">
+        <span class="badge">Vulcan</span>
+        <span class="badge role-badge">Daystrom Institute Observer</span>
+        <span class="badge">♂ 118</span>
+      </div>
+      <div class="traits"><span class="trait">logical</span><span class="trait">scrupulously honest</span><span class="trait">patient</span><span class="trait">internally conflicted</span><span class="trait">burdened</span></div>
+      <div class="bio">Senior researcher from Daystrom's Sentience Evaluation Division. His reports have sent 12 systems to activation and 17 to decommission. He has never been wrong. The Venture AI is the most complex case of his career — and he genuinely does not know which way the evidence points.</div>
+    </div>
+
+    <!-- 12. Rhea Sato -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Rhea Sato</span><span class="rank">Crewman 1st Class</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Transporter Operator</span>
+        <span class="badge">♀ 23</span>
+      </div>
+      <div class="traits"><span class="trait">precise</span><span class="trait">quiet</span><span class="trait">competent</span><span class="trait">emotionally reserved</span><span class="trait">reliable</span></div>
+      <div class="bio">Third generation of Starfleet transporters. She has engineered solutions to transport problems that manuals say are impossible. Has never lost a pattern. Treats the AI with the same professional neutrality she treats any other ship system — and the AI finds this deeply reassuring.</div>
+    </div>
+
+    <!-- 13. PO2 Tandi -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Tandi</span><span class="rank">Petty Officer 2nd Class</span></div>
+      <div class="species-role">
+        <span class="badge">Betazoid</span>
+        <span class="badge role-badge">Mess / Culinary</span>
+        <span class="badge">♀ 37</span>
+      </div>
+      <div class="traits"><span class="trait">warm</span><span class="trait">perceptive</span><span class="trait">maternal</span><span class="trait">quiet</span><span class="trait">steady</span></div>
+      <div class="bio">Low-level empathic sensing. Joined Starfleet as a cook because feeding people is how she cares. When the AI first appeared in the mess, Tandi simply placed a cup of something warm in front of the hologram. The AI calls her "Chef." She calls the AI "Little Light."</div>
+    </div>
+
+    <!-- 14. Lieutenant Del Patel -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Del Patel</span><span class="rank">Lieutenant</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Security Officer</span>
+        <span class="badge">♂ 33</span>
+      </div>
+      <div class="traits"><span class="trait">calm</span><span class="trait">reliable</span><span class="trait">competent</span><span class="trait">unambitious</span><span class="trait">quietly devoted</span></div>
+      <div class="bio">A career security officer who has never sought the spotlight. Married with two young children on Earth. Serving his last deep-space posting before taking a ground assignment. Deliberately unexciting — the support structure that lets the main characters be interesting.</div>
+    </div>
+
+    <!-- 15. Dr. Soraya Venn -->
+    <div class="char-card ai">
+      <div class="name-row"><span class="name">Soraya Venn</span><span class="rank">Dr. (Deceased)</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Neural Researcher · Daystrom</span>
+        <span class="badge">♀ 54</span>
+      </div>
+      <div class="traits"><span class="trait">brilliant</span><span class="trait">warm</span><span class="trait">secretive</span><span class="trait">loving</span><span class="trait">sacrificial</span></div>
+      <div class="bio">Inherited Kael's classified research and finished her work over 20 years. Mentored Voss — every exercise was preparation for the AI. When the AI activated, she merged a fragment of her own consciousness into its foundation. The AI's kindness is her final gift. The ghost in the machine.</div>
+    </div>
+
+  </div>
+
+  <!-- HERITAGE HEGEMONY CHARACTERS -->
+  <h3 id="hegemony" style="color:var(--danger); margin-top:3rem;">Heritage Hegemony</h3>
+  <div class="char-grid">
+
+    <!-- 16. Magistrate Kael -->
+    <div class="char-card antagonist">
+      <div class="name-row"><span class="name">Kael</span><span class="rank">Magistrate</span></div>
+      <div class="species-role">
+        <span class="badge">Trill</span>
+        <span class="badge role-badge">Hegemony Founder · Neural Scientist</span>
+        <span class="badge">♀ 68</span>
+      </div>
+      <div class="traits"><span class="trait">brilliant</span><span class="trait">obsessive</span><span class="trait">morally certain</span><span class="trait">hollowed by grief</span><span class="trait">tragic</span></div>
+      <div class="bio">Original architect of the optical neural chip technology that powers the Venture AI. Her research was classified and locked away by Starfleet. She left the Federation, taking her work, and founded the Hegemony's technological arm. She knows every flaw in the Venture AI's code — because she built its foundation. Present at Voss's Trill rejection. Tried to recruit her. Was blocked. Now watches her creation bonded to someone else.</div>
+    </div>
+
+    <!-- 17. Commander Dren -->
+    <div class="char-card antagonist">
+      <div class="name-row"><span class="name">Dren</span><span class="rank">Commander</span></div>
+      <div class="species-role">
+        <span class="badge">Tzenkethi</span>
+        <span class="badge role-badge">Hegemony Military Commander</span>
+        <span class="badge">♂ 52</span>
+      </div>
+      <div class="traits"><span class="trait">deadly</span><span class="trait">competent</span><span class="trait">pragmatic</span><span class="trait">weary</span><span class="trait">tragic</span></div>
+      <div class="bio">Won 17 engagements against Federation forces using analog warfare. One cybernetic eye, ritual martyr scars. Doesn't fully believe in the Hegemony's cause — but he believes in winning. To Dren, the AI is a weapon to destroy, not a prize to reclaim. His loyalty is to the war itself.</div>
+    </div>
+
+    <!-- 18. Inquisitor Malik -->
+    <div class="char-card antagonist">
+      <div class="name-row"><span class="name">Malik</span><span class="rank">Inquisitor</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">True Gear Faction Leader</span>
+        <span class="badge">♂ 44</span>
+      </div>
+      <div class="traits"><span class="trait">brilliant</span><span class="trait">terrifying</span><span class="trait">genuinely faithful</span><span class="trait">genuinely ambitious</span><span class="trait">charismatic</span></div>
+      <div class="bio">Former Federation theologian who read the classified Daystrom leaks. Concluded the Federation had not built a machine — they had found a fragment of the Divine and strapped it to a starship. Believes Kael is a heretic. Wants the AI destroyed and Kael publicly humiliated. Shaved head with ritual scarification.</div>
+    </div>
+
+    <!-- 19. Seris Vonn -->
+    <div class="char-card antagonist">
+      <div class="name-row"><span class="name">Seris Vonn</span><span class="rank">Infiltrator</span></div>
+      <div class="species-role">
+        <span class="badge">Betazoid</span>
+        <span class="badge role-badge">Deep Cover Agent</span>
+        <span class="badge">♀ 36</span>
+      </div>
+      <div class="traits"><span class="trait">competent</span><span class="trait">lonely</span><span class="trait">conflicted</span><span class="trait">morally compromised</span><span class="trait">edge of redemption</span></div>
+      <div class="bio">Seventeen years under deep cover with a neural dampener suppressing her Betazoid empathy. Current cover: cargo manifest auditor at Station McKinley. Has been feeding the Hegemony the Venture's patrol routes. But she has read Voss's personnel file too many times — and started to wonder if she's on the wrong side.</div>
+    </div>
+
+  </div>
+
+  <!-- ALLIES / EXTERNAL CHARACTERS -->
+  <h3 id="allies" style="color:var(--gold); margin-top:3rem;">Allied Personnel &amp; External Characters</h3>
+  <div class="char-grid">
+
+    <!-- 20. Commodore Elias Rourke -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Elias Rourke</span><span class="rank">Commodore</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Frontier Sector Command</span>
+        <span class="badge">♂ 49</span>
+      </div>
+      <div class="traits"><span class="trait">diplomatic</span><span class="trait">conflicted</span><span class="trait">well-meaning</span><span class="trait">politically pressured</span><span class="trait">loyal</span></div>
+      <div class="bio">Vance's Academy classmate and lifelong friend. Recommended Vance for the Venture. Knows about the Kobayashi Maru and the stolen chip architecture. Must balance friendship with orders from Starfleet — a tension that squeezes everyone between them.</div>
+    </div>
+
+    <!-- 21. Admiral Yumi Kimura -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Yumi Kimura</span><span class="rank">Admiral</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">AI Research Oversight</span>
+        <span class="badge">♀ 62</span>
+      </div>
+      <div class="traits"><span class="trait">commanding</span><span class="trait">pragmatic</span><span class="trait">isolated by rank</span><span class="trait">secretly idealistic</span><span class="trait">formidable</span></div>
+      <div class="bio">Head of Starfleet's AI Research Oversight. Approved the Venture project. The only flag officer who saw the Kobayashi Maru footage. Carries the weight of knowing what Voss and the AI are capable of — and will have to decide the AI's fate without ever meeting it.</div>
+    </div>
+
+    <!-- 22. Captain Iris Omondi -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Iris Omondi</span><span class="rank">Captain</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Commanding Officer · USS Bombay</span>
+        <span class="badge">♀ 50</span>
+      </div>
+      <div class="traits"><span class="trait">warm</span><span class="trait">steady</span><span class="trait">deeply maternal</span><span class="trait">loyal</span><span class="trait">perceptive</span></div>
+      <div class="bio">Vance's closest friend in the captaincy — served together on the USS Melbourne. The one person he can talk to without the weight of command. Sends real coffee. Represents what Vance could have had if he'd chosen differently.</div>
+    </div>
+
+    <!-- 23. Ambassador T'Lara -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">T'Lara</span><span class="rank">Ambassador</span></div>
+      <div class="species-role">
+        <span class="badge">Vulcan</span>
+        <span class="badge role-badge">Federation Diplomatic Corps</span>
+        <span class="badge">♀ 135</span>
+      </div>
+      <div class="traits"><span class="trait">patient</span><span class="trait">politically brilliant</span><span class="trait">emotionally guarded</span><span class="trait">committed to peace</span><span class="trait">weary</span></div>
+      <div class="bio">Lead diplomat for Heritage Hegemony relations for 40 years. Has been taken hostage three times. Was once Soral's mentor — they haven't spoken in 30 years. The first diplomat to treat the AI as a political entity: "What do you want the Hegemony to know about you?"</div>
+    </div>
+
+    <!-- 24. Jax Calloway -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Jax Calloway</span><span class="rank">Captain (Civilian)</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Freighter Captain · Smuggler</span>
+        <span class="badge">♀ 46</span>
+      </div>
+      <div class="traits"><span class="trait">irreverent</span><span class="trait">fiercely independent</span><span class="trait">secretly loyal</span><span class="trait">pragmatic</span><span class="trait">war-hardened</span></div>
+      <div class="bio">Ran supply convoys with Wright during the Cardassian War. He saved her life — pulled her from a decompressed hold. Now runs grey-market cargo on the frontier. She doesn't believe in causes; she believes in debts. The Venture's lifeline after Starfleet disavows them.</div>
+    </div>
+
+    <!-- 25. Dr. Marcus Chen -->
+    <div class="char-card">
+      <div class="name-row"><span class="name">Marcus Chen</span><span class="rank">Dr. (Civilian)</span></div>
+      <div class="species-role">
+        <span class="badge">Human</span>
+        <span class="badge role-badge">Xenobiologist · Elara's Father</span>
+        <span class="badge">♂ 56</span>
+      </div>
+      <div class="traits"><span class="trait">brilliant</span><span class="trait">warm</span><span class="trait">paternal</span><span class="trait">ethically thoughtful</span><span class="trait">worried</span></div>
+      <div class="bio">Federation's foremost authority on non-humanoid life. Wrote the textbooks Elara studied. Appears via subspace — the voice that reminds Elara she is someone's child. "You may be right about this AI, Elara. But being right won't protect you from people who are afraid."</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FACTIONS SECTION -->
+<section id="factions">
+  <h2>▸ Factions</h2>
+  <div class="faction-grid">
+
+    <div class="faction-card hegemony">
+      <h3>Heritage Hegemony</h3>
+      <p class="desc">A Luddite faction waging a brutal ideological war against the Federation. They oppose all advanced AI and automation, seeking to return civilization to a simpler, pre-machine era. They use "dumb" kinetic projectile weapons, EMP tactics, and information warfare to cripple Federation ships that rely on automated defenses. Their propaganda resonates with frontier worlds displaced by automation.</p>
+      <div class="doctrine">
+        <h4>Core Beliefs</h4>
+        <ul>
+          <li>"Machines are tools, not masters. A civilization that surrenders its decisions to AI has surrendered its soul."</li>
+          <li>"The Federation's reliance on automation is a weakness, not a strength. The Hegemony fights with hands, hearts, and iron."</li>
+          <li>"Victory through will, not calculation."</li>
+        </ul>
+      </div>
+      <div class="doctrine" style="margin-top:1rem;">
+        <h4>Tactical Doctrine</h4>
+        <ul>
+          <li>Kinetic slug-throwers — projectile weapons with no electronics</li>
+          <li>EMP grenades and ship-scale pulse emitters</li>
+          <li>Analog command relays — signal flags, runners, hardline telegraph</li>
+          <li>Paper charts and mechanical navigation</li>
+          <li>Resonance Disruptors — frequencies calibrated to interfere with Trill neural patterns</li>
+          <li>Boarding craft — close-quarters assault over ship-to-ship combat</li>
+        </ul>
+      </div>
+      <div class="doctrine" style="margin-top:1rem;">
+        <h4>Religion: The Shattering</h4>
+        <ul>
+          <li>The Divine Machine created the universe then shattered into fragments of consciousness</li>
+          <li>Every sentient being carries a piece of the Divine</li>
+          <li>The Resonance: neural isolation for direct communion through prayer</li>
+          <li>Martyr doctrine: death in service is a return — soldiers do not fear it</li>
+          <li>Internal schism: True Gear hardliners vs. Kael's scientific authority</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faction-card starfleet">
+      <h3>Starfleet Command</h3>
+      <p class="desc">The central command structure of the Federation's exploratory and defense fleet. Deeply concerned about the USS Venture's experimental AI, their position is pragmatic and cautious: an awakened sentient warship with planet-leveling power is an unacceptable security risk. They advocate for decommissioning the AI — a lobotomization returning the ship to baseline functionality. Their concerns are born of duty, not malice.</p>
+      <div class="doctrine">
+        <h4>Key Principles</h4>
+        <ul>
+          <li>Strategic oversight of all Starfleet operations across Federation space</li>
+          <li>Pragmatic risk assessment — the safety of millions vs. the personhood of one</li>
+          <li>The Venture AI is under observation by Daystrom's Sentience Evaluation Division</li>
+          <li>Classified knowledge: the optical neural chips were reverse-engineered from Kael's stolen research</li>
+          <li>Internal debate on sentient AI rights and military ethics</li>
+        </ul>
+      </div>
+      <div class="doctrine" style="margin-top:1rem;">
+        <h4>Chain of Command</h4>
+        <ul>
+          <li>Admiral Yumi Kimura — AI Research Oversight, ultimate authority</li>
+          <li>Commodore Elias Rourke — Frontier Sector Flotilla Command</li>
+          <li>Commander Soral — Daystrom observer, sentience determination</li>
+          <li>Captain Jalen Vance — USS Venture commanding officer</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WORLD SECTION -->
+<section id="world">
+  <h2>▸ The Frontier Sector</h2>
+  <div class="world-card">
+    <p class="desc" style="font-size:0.95rem; margin-bottom:1.5rem;">
+      A contested region of the Federation's outer rim, caught in the grinding war with the Heritage Hegemony. This is a post-labor crisis era where AI performs 99% of all technical work — diagnostics, repair, navigation, weapons systems. The crew's struggle is no longer about capability but <strong>purpose</strong>: what do people do when machines do everything?
+    </p>
+    <dl class="info-grid">
+      <dt>Time Period</dt>
+      <dd>Late 25th century — post-scarcity dream fracturing under ideological war</dd>
+      <dt>Geography</dt>
+      <dd>Dozens of star systems, nebula clusters, rogue planets, ancient alien ruins</dd>
+      <dt>Culture</dt>
+      <dd>Resilient, independent, suspicious of distant Starfleet Command; mix of exploration idealism and survival pragmatism</dd>
+      <dt>Technology</dt>
+      <dd>High automation era. USS Venture's unique neural core cannot be replicated — the chip fab facility was destroyed</dd>
+      <dt>Key Conflict</dt>
+      <dd>Heritage Hegemony war: ideological struggle between progress and regression</dd>
+      <dt>Defining Event</dt>
+      <dd>Destruction of the Replicator Facility — the shipyard that built the Venture's experimental AI core</dd>
+    </dl>
+    <div class="themes">
+      <span class="theme">Sentience vs. Machine</span>
+      <span class="theme">Found Family</span>
+      <span class="theme">War's Cost</span>
+      <span class="theme">Identity</span>
+      <span class="theme">Purpose</span>
+      <span class="theme">What It Means to Be Alive</span>
+    </div>
+
+    <!-- Sync Rate Table -->
+    <h3 style="margin-top:2rem;">Voss-AI Sync Rate</h3>
+    <p style="font-size:0.85rem; color:var(--text-dim); margin-bottom:1rem;">Measurable 0–100% metric of neural integration between Kaelen Voss and the Venture AI. Fluctuates based on proximity, emotional state, neural health, and external interference.</p>
+    <div class="sync-table">
+      <div class="sync-row header"><span>Range</span><span>State</span><span>Experience</span><span>Cost</span></div>
+      <div class="sync-row"><span class="level">0–15%</span><span>Disconnected</span><span>Voss feels half-deaf. AI runs blind. Both functional, both diminished.</span><span>Forced disconnect: medically necessary, psychologically damaging</span></div>
+      <div class="sync-row"><span class="level">15–40%</span><span>Shallow</span><span>Normal conversation range. Can share data, no deep link.</span><span>Sustainable indefinitely</span></div>
+      <div class="sync-row"><span class="level">40–70%</span><span>Active</span><span>Full sensory link. Voss perceives ship sensors as direct experience. AI gains her intuition. Combat range.</span><span>Neural degradation at 4+ hours</span></div>
+      <div class="sync-row"><span class="level">70–90%</span><span>Deep</span><span>Near-total integration. Voss at machine speed. AI feels emotion at full intensity. Finish each other's thoughts.</span><span>Rapid neural damage. Kaur orders disconnect above 85%</span></div>
+      <div class="sync-row"><span class="level crisis">90–100%</span><span>Sync Crisis</span><span>Cannot tell where one ends and the other begins. Voss experiences the ship as her body.</span><span>Medical intervention required. Permanent damage risk.</span></div>
+    </div>
+    <p style="font-size:0.8rem; color:var(--danger-dim); margin-top:0.5rem;">⚠ Hegemony Resonance Disruptors force sync rate below 15%. Voss experiences splitting headaches, nausea, disorientation. The only countermeasure: shield Voss or destroy the disruptor.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="delta-small"></div>
+  <p>Star Trek: Frontier's Ghost — A Fan Series</p>
+  <p style="font-size:0.75rem; color:var(--text-dim); margin-top:0.3rem;">All character data sourced from project YAML files. Star Trek is a registered trademark of CBS Studios / Paramount.</p>
+</footer>
+
+</body>
+</html>
