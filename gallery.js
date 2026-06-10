@@ -35,6 +35,7 @@
       if (k === 'className') e.className = v;
       else if (k === 'style' && typeof v === 'object') Object.assign(e.style, v);
       else if (k.startsWith('on')) e.addEventListener(k.slice(2), v);
+      else if (k === 'disabled' || k === 'readOnly') { e[k] = v; }
       else e.setAttribute(k, v);
     }
     for (const c of children) {
