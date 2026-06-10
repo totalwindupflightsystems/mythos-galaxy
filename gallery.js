@@ -20,7 +20,6 @@
 
   function navigate(hash) {
     window.location.hash = hash;
-    render();
   }
 
   // ── Helpers ──
