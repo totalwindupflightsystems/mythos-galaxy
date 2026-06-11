@@ -1,62 +1,1083 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Star Trek: Frontier's Ghost — Character Cards</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"><style>:root{--bg:#0a0a14;--surface:#12122a;--surface2:#1a1a3e;--accent:#4a90d9;--accent-bright:#6db3f2;--gold:#ccaa55;--text:#c8ccd8;--text-dim:#7a7d8c;--text-bright:#e8ecf4;--border:#1e1e3a}*{margin:0;padding:0;box-sizing:border-box}body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.7;overflow-x:hidden}body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(1px 1px at 10% 20%,#fff3,transparent),radial-gradient(1px 1px at 25% 65%,#fff2,transparent),radial-gradient(1.5px 1.5px at 40% 15%,#fff3,transparent),radial-gradient(1px 1px at 55% 75%,#fff2,transparent),radial-gradient(1.5px 1.5px at 70% 30%,#fff3,transparent),radial-gradient(1px 1px at 85% 55%,#fff2,transparent);pointer-events:none;z-index:0}
-.top-nav{display:flex;gap:4px;flex-wrap:nowrap;position:sticky;top:0;z-index:50;background:#0a0a14ee;backdrop-filter:blur(12px);overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none;padding:8px 12px;border-bottom:1px solid var(--border)}.top-nav::-webkit-scrollbar{display:none}.top-nav a{font-size:10px;white-space:nowrap;flex-shrink:0;padding:5px 10px;border-radius:6px;color:var(--text-dim);text-decoration:none;font-weight:500;letter-spacing:.03em;text-transform:uppercase;transition:all .2s}.top-nav a:hover{color:var(--accent-bright)}.top-nav a.active{color:var(--accent-bright);background:rgba(74,144,217,.12)}
-.hero{position:relative;z-index:1;text-align:center;padding:2.5rem 1rem 2rem;border-bottom:1px solid var(--border);background:radial-gradient(ellipse at 50% 0%,rgba(74,144,217,.08)0%,transparent 60%)}.hero h1{font-family:'Merriweather',Georgia,serif;font-size:2.4rem;color:var(--text-bright)}.hero .tag{color:var(--gold);font-style:italic;font-size:1rem}.hero .sub{color:var(--text-dim);font-size:.8rem}
-.container{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:1rem 1.5rem}
-.section-header{margin:2rem 0 .6rem;border-bottom:1px solid var(--border);padding-bottom:.4rem}.section-header h2{font-family:'Merriweather',serif;color:var(--accent-bright);font-size:1.2rem}
-.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:.8rem}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;cursor:pointer;transition:border-color .2s,background .2s,transform .15s;display:flex;flex-direction:column;gap:.3rem}.card:hover{border-color:var(--accent);background:var(--surface2);transform:translateY(-2px)}.card-icon{font-size:1.8rem}.card-name{font-size:1rem;font-weight:700;color:var(--text-bright)}.card-role{font-size:.8rem;color:var(--accent-bright);font-weight:500}.card-meta{font-size:.75rem;color:var(--text-dim)}.card-desc{font-size:.8rem;color:var(--text);line-height:1.4}.card-hint{font-size:.7rem;color:var(--text-dim);opacity:0;transition:opacity .2s}.card:hover .card-hint{opacity:1}.card-lead{border-left:3px solid var(--gold)}
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.82);z-index:100;align-items:center;justify-content:center;padding:20px;overflow-y:auto}.modal-overlay.open{display:flex}body.modal-open{overflow:hidden}.modal{max-width:640px;width:100%;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.8rem;animation:modalIn .2s ease-out;max-height:85vh;overflow-y:auto}@keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.modal h2{font-family:'Merriweather',serif;color:var(--text-bright);margin-bottom:.2rem}.modal .modal-role{color:var(--accent-bright);font-weight:600;margin-bottom:.8rem}.modal .modal-body{color:var(--text);line-height:1.7}.modal .modal-body p{margin:.4rem 0}.modal .modal-body strong{color:var(--text-bright)}.modal-close{background:var(--surface2);color:var(--text-dim);border:1px solid var(--border);padding:6px 16px;border-radius:8px;cursor:pointer;font-size:.85rem;margin-top:.8rem;transition:all .2s}.modal-close:hover{border-color:var(--accent);color:var(--text-bright)}
-.lcars{height:3px;margin:2rem 0;border-radius:2px;background:linear-gradient(to right,#cc4444 0%,#cc4444 15%,#ccaa55 15%,#ccaa55 35%,#44aa99 35%,#44aa99 55%,#4a90d9 55%,#4a90d9 75%,#3366aa 75%,#3366aa 100%)}
-footer{text-align:center;padding:2rem 1rem;color:var(--text-dim);font-size:.75rem}
-.back-top{position:fixed;bottom:1.5rem;right:1.5rem;z-index:99;background:var(--surface);color:var(--accent-bright);border:1px solid var(--border);width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem}.back-top:hover{border-color:var(--accent)}
-@media(max-width:768px){.hero h1{font-size:1.5rem}.card-grid{grid-template-columns:1fr}.container{padding:.5rem}.modal{padding:1rem}}
-</style></head><body>
-<a href="#" class="back-top">↑</a>
-<nav class="top-nav" id="topnav"><a href="#leads">Leads</a><a href="#main">Main Crew</a><a href="#lower">Lower Decks</a><a href="#starfleet">Starfleet</a><a href="#antagonists">Hegemony</a></nav>
-<section class="hero"><h1>Star Trek: Frontier's Ghost</h1><p class="tag">"Every character has agency. The person who brings coffee can stop a war."</p><p class="sub">Aurora Venn — 10 seasons — 26 eps each — totalwindupflightsystems</p></section>
-<div class="container">
-<div class="section-header" id="leads"><h2>✨ Leads — Protagonist, Deuteragonist, Tritagonist, False Protagonist</h2></div>
-<div class="card-grid">
-<div class="card card-lead" data-modal="aurora"><div class="card-icon">✨</div><div class="card-name">Aurora Venn</div><div class="card-role">PROTAGONIST — USS Venture AI</div><div class="card-meta">Artificial Intelligence · ~3 months</div><div class="card-desc">The story IS her awakening. Chen named her Aurora — 'first light before dawn.' She chose Venn because she carries Venn.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card card-lead" data-modal="voss"><div class="card-icon">🔗</div><div class="card-name">Lt. Cmdr. Kaelen Voss</div><div class="card-role">DEUTERAGONIST — Bonded to Aurora</div><div class="card-meta">Trill (unjoined) · 34</div><div class="card-desc">Co-lead. Rejected by Symbiosis Commission at 26. Won the Kobayashi Maru — after thousands of failures, she asked what the Klingons felt.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card card-lead" data-modal="vallos"><div class="card-icon">⚔️</div><div class="card-name">Commander Vallos</div><div class="card-role">TRITAGONIST — First Officer → Acting Captain</div><div class="card-meta">Human/Andorian · 32</div><div class="card-desc">Valedictorian. Hybrid heritage. Commands the ship he tried to destroy. Every day he delays the bio-key is an admission he was wrong.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card card-lead" data-modal="vance"><div class="card-icon">🪖</div><div class="card-name">Captain Jalen Vance</div><div class="card-role">FALSE PROTAGONIST — CO → Hegemony Commander</div><div class="card-meta">Human · 47</div><div class="card-desc">We think he's the hero. He's the tragedy. Anti-Lorca — every scene works on first watch AND rewatch.</div><div class="card-hint">👆 Tap for full profile</div></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Trek: Frontier's Ghost — Character Explorer</title>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<style>
+:root {
+  --bg: #0a0a14;
+  --surface: #12122a;
+  --surface2: #1a1a3e;
+  --accent: #4a90d9;
+  --accent-bright: #6db3f2;
+  --gold: #ccaa55;
+  --text: #c8ccd8;
+  --text-dim: #7a7d8c;
+  --text-bright: #e8ecf4;
+  --border: #1e1e3a;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(180deg, #0a0a20 0%, var(--bg) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(74,144,217,0.08) 0%, transparent 60%);
+}
+.hero h1 {
+  font-size: 2.8rem;
+  color: var(--text-bright);
+  font-weight: 300;
+  letter-spacing: 2px;
+  position: relative;
+}
+.hero h1 span { color: var(--accent-bright); font-weight: 600; }
+.hero .subtitle {
+  color: var(--text-dim);
+  font-size: 1.1rem;
+  margin-top: 12px;
+  position: relative;
+}
+.hero .meta {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+}
+.hero .meta-item {
+  color: var(--accent);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+.hero .meta-item strong { color: var(--gold); }
+
+/* Nav */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,20,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+nav button {
+  background: var(--surface);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+nav button:hover, nav button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* Sections */
+section { padding: 60px 20px; max-width: 1400px; margin: 0 auto; }
+section h2 {
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+section h2 .accent { color: var(--accent-bright); }
+.section-desc {
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  font-size: 1rem;
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 32px rgba(74,144,217,0.12);
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--gold));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover::after { opacity: 1; }
+.card .species-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--surface2);
+  color: var(--accent-bright);
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+}
+.card h3 {
+  font-size: 1.15rem;
+  color: var(--text-bright);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.card .rank {
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+.card .blurb {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+.card .tag-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+.card .tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: rgba(204,170,85,0.1);
+  color: var(--gold);
+  border: 1px solid rgba(204,170,85,0.2);
+}
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 200;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  max-width: 750px;
+  width: 100%;
+  padding: 40px;
+  position: relative;
+  animation: modalIn 0.3s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.modal .close-btn {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.modal .close-btn:hover { color: var(--text-bright); }
+.modal .species-badge { margin-bottom: 12px; }
+.modal h2 {
+  font-size: 1.8rem;
+  color: var(--text-bright);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.modal .modal-rank {
+  color: var(--gold);
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+.modal .detail-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px 20px;
+  margin-bottom: 24px;
+}
+.modal .detail-label {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.modal .detail-value { color: var(--text-bright); font-size: 0.9rem; }
+.modal .section-title {
+  color: var(--accent-bright);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 24px 0 8px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 6px;
+}
+.modal p { font-size: 0.9rem; color: var(--text); margin-bottom: 12px; line-height: 1.7; }
+.modal .relationship-item {
+  font-size: 0.88rem;
+  margin-bottom: 6px;
+  padding-left: 12px;
+  border-left: 2px solid var(--border);
+}
+.modal .relationship-item strong { color: var(--accent-bright); }
+
+/* Tables */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.85rem;
+}
+.data-table th {
+  text-align: left;
+  padding: 12px 16px;
+  background: var(--surface2);
+  color: var(--accent-bright);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.75rem;
+  border-bottom: 2px solid var(--border);
+}
+.data-table td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+.data-table tr:hover td { background: rgba(74,144,217,0.04); }
+.data-table td:first-child { color: var(--gold); font-weight: 500; white-space: nowrap; }
+
+/* Mermaid */
+.mermaid-wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 30px;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8rem; }
+  .card-grid { grid-template-columns: 1fr; }
+  .modal { padding: 24px; }
+  .modal .detail-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Star Trek: <span>Frontier's Ghost</span></h1>
+  <p class="subtitle">Character Explorer — 23 Characters Across 10 Seasons</p>
+  <div class="meta">
+    <div class="meta-item">📺 <strong>10</strong> Seasons</div>
+    <div class="meta-item">🎬 <strong>260</strong> Episodes</div>
+    <div class="meta-item">👥 <strong>23</strong> Characters</div>
+    <div class="meta-item">🖊️ <strong>Manga → Video</strong> Pipeline</div>
+  </div>
 </div>
-<div class="lcars"></div>
-<div class="section-header" id="main"><h2>🛸 Main Crew</h2></div>
-<div class="card-grid">
-<div class="card " data-modal="chen"><div class="card-icon">🌟</div><div class="card-name">Ensign Elara Chen</div><div class="card-role">Science Officer — The Everyman</div><div class="card-meta">Human · 22</div><div class="card-desc">Audience surrogate. First to call the AI 'she.' Named her Aurora — 'first light before dawn.' Daughter of Dr. Marcus Chen.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="tven"><div class="card-icon">🖖</div><div class="card-name">Lieutenant T'Ven</div><div class="card-role">Chief Engineer</div><div class="card-meta">Vulcan · 95</div><div class="card-desc">95-year-old Vulcan. Set in her ways. Constantly argues with Kaur — they agree on 90% of things and express it completely differently.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="cole"><div class="card-icon">🎯</div><div class="card-name">Lt. JG Marcus Cole</div><div class="card-role">Helmsman / Tactical Pilot</div><div class="card-meta">Human · 25</div><div class="card-desc">War child. Father died in Hegemony raid. Blames machines. Wright's Ops-Helm partner — they anticipate each other without words.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="wright"><div class="card-icon">🔧</div><div class="card-name">CPO Solomon 'Sully' Wright</div><div class="card-role">Operations — Cole's Bridge Partner</div><div class="card-meta">Human · 35</div><div class="card-desc">Talked to the ship for 3 years before she talked back. Cole's other half on the bridge. Enlisted pride.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="kaur"><div class="card-icon">💉</div><div class="card-name">Lt. Cmdr. Dr. Helena Kaur</div><div class="card-role">Chief Medical Officer — Hotshot</div><div class="card-meta">Human · 32</div><div class="card-desc">Doctors Without Borders type. Battlefield medic at 22. Saved Vance's life twice. T'Ven's friction partner.</div><div class="card-hint">👆 Tap for full profile</div></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <button data-filter="all" class="active">All Characters</button>
+  <button data-filter="leads">Leads (4)</button>
+  <button data-filter="main-crew">Main Crew (5)</button>
+  <button data-filter="lower-decks">Lower Decks (6)</button>
+  <button data-filter="command">Starfleet Command (5)</button>
+  <button data-filter="hegemony">Hegemony (3)</button>
+  <button data-filter="butterfly">🦋 Butterfly Agents</button>
+  <button data-filter="naming">Naming Arc</button>
+</nav>
+
+<!-- CARDS SECTION -->
+<section id="cards-section">
+  <h2><span class="accent">Character</span> Roster</h2>
+  <p class="section-desc">Click any card to expand details, relationships, and backstory.</p>
+  <div class="card-grid" id="cardGrid"></div>
+</section>
+
+<!-- RELATIONSHIP CHART -->
+<section>
+  <h2><span class="accent">Relationship</span> Web</h2>
+  <p class="section-desc">Interactive Mermaid diagram showing key connections between all 23 characters.</p>
+  <div class="mermaid-wrapper">
+    <pre class="mermaid">
+graph TB
+    Aurora[Aurora Venn<br/>The AI — PROTAGONIST] --- Voss[Kaelen Voss<br/>DEUTERAGONIST — Bonded]
+    Aurora --- Chen[Elara Chen<br/>First friend — named her Aurora]
+    Aurora --- Wright[CPO Wright<br/>Knew her before she woke]
+    Aurora --- Tandi[PO2 Tandi<br/>Calls her Little Light]
+    Aurora --- Solovyov[Viktor Solovyov<br/>First real friend]
+    Aurora --- T'Ven[Lt T'Ven<br/>Afraid to care]
+    Aurora --- Kaur[Dr Kaur<br/>Treats as patient]
+    Aurora --- Vance[Captain Vance<br/>Father figure → enemy]
+    Aurora --- Kael[Magistrate Kael<br/>Creator — wants to capture]
+
+    Voss --- Venn[Dr Soraya Venn<br/>Mentor — ghost in machine]
+    Voss --- Kael[Watched Voss for 15 years]
+    Voss --- Cole[Marcus Cole<br/>Can't separate her from AI]
+
+    Vance --- Rourke[Commodore Rourke<br/>25-year unspoken love]
+    Vance --- Omondi[Captain Omondi<br/>Closest friend]
+    Vance --- Kaur[Saved his life twice<br/>NOT love interest — red flag]
+    Vance --- Vallos[Commander Vallos<br/>Chosen successor]
+
+    Vallos --- Chen[She confronts him]
+    Vallos --- Cole[Begrudging respect]
+
+    Wright --- Cole[Ops-Helm non-verbal bond]
+    Wright --- Tandi[8 years, 2 ships]
+
+    T'Ven --- Kaur[Friction partners<br/>Agree 90%, express oppositely]
+
+    Cole --- Solovyov[Aggressive big brother]
+
+    Kael --- Dren[Commander Dren<br/>Military — wants to destroy]
+    Kael --- Malik[Inquisitor Malik<br/>Religious — wants to destroy]
+    Dren --- Malik[Uneasy alliance vs Kael]
+
+    Soral --- T'Lara[Ambassador T'Lara<br/>Former mentor — 30 years silence]
+    Soral --- T'Ven[Philosophical debates]
+
+    Kimura[Admiral Kimura] --- Rourke[Her instrument]
+    Kimura --- Venn[Knows truth about Venn]
+    </pre>
+  </div>
+</section>
+
+<!-- BUTTERFLY EFFECT TABLE -->
+<section>
+  <h2>🦋 <span class="accent">Butterfly Effect</span> Agency Map</h2>
+  <p class="section-desc">Small actions by overlooked crew members that changed the entire course of the series.</p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Character</th><th>Episode</th><th>Action</th><th>Consequence If They Don't Act</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Voss</td><td>Ep 3</td><td>Wins Kobayashi Maru by asking what Klingons feel</td><td>AI project cancelled. No Venture mission. Series doesn't happen.</td></tr>
+      <tr><td>Chen</td><td>Ep 1</td><td>First to call Aurora "she"</td><td>Aurora remains "it." Never develops identity. Naming arc impossible.</td></tr>
+      <tr><td>Tandi</td><td>Ep 10</td><td>Tells Wright about Vance's 3AM Hegemony scripture reading</td><td>Crew loses tactical edge. Final battle lost. Aurora captured.</td></tr>
+      <tr><td>Sato</td><td>Ep 11</td><td>Combat transports 4 hostiles in 0.3s window</td><td>Away team dies. Bridge falls. Venture captured before The Turn.</td></tr>
+      <tr><td>Patel</td><td>Ep 13</td><td>Disables Vance instead of killing him</td><td>Vance dead. S2-4 antagonist gone. Trial arc collapses. Redemption arc never happens.</td></tr>
+      <tr><td>Solovyov</td><td>Ep 20</td><td>Identifies Hegemony signal as pre-warp navigation language</td><td>Kael's facility never found. Aurora never learns origin. S3 arc never begins.</td></tr>
+      <tr><td>Wright</td><td>Ep 10</td><td>Completes repair with 47s oxygen remaining</td><td>Moral anchor dies. Crew fractures post-Vance. Ship loses only person who loved her before she could love back.</td></tr>
+      <tr><td>Kaur</td><td>Ep 13</td><td>Chooses to monitor bond instead of terminating it</td><td>Voss separated. Aurora loses partner. Berserk never happens.</td></tr>
+      <tr><td>Cole</td><td>S2 mid</td><td>Refuses Vance's offer to defect</td><td>Venture loses best pilot. Hegemony wins intel war.</td></tr>
+      <tr><td>Soral</td><td>Ep 22</td><td>Recommends full AI rights</td><td>Aurora decommissioned. Series ends.</td></tr>
+      <tr><td>T'Ven</td><td>Ep 21</td><td>Admits fear during AI surgery</td><td>Never emotionally connects. Remains detached observer.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- NAMING ARC TABLE -->
+<section>
+  <h2>📛 <span class="accent">Naming</span> Arc (Episodes 14–26)</h2>
+  <p class="section-desc">Every crew member offers the AI a name. In the finale, she chooses her own: Aurora. Aurora Venn.</p>
+  <table class="data-table">
+    <thead>
+      <tr><th>Episode</th><th>Character</th><th>Name</th><th>Tone</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>14</td><td>Kaur</td><td>"What is WHO I am?"</td><td>The question is born</td></tr>
+      <tr><td>15</td><td>Cole</td><td>"Sparky"</td><td>Joking — can't be sincere yet</td></tr>
+      <tr><td>16</td><td>Chen</td><td>"Aurora" — first light before dawn</td><td>Earnest. She's been thinking about this</td></tr>
+      <tr><td>17</td><td>Tandi</td><td>"Little Light"</td><td>Always had a name. Finally says it</td></tr>
+      <tr><td>18</td><td>Wright</td><td>"Ship" in his grandfather's dialect</td><td>Gruffly sincere</td></tr>
+      <tr><td>19</td><td>Solovyov</td><td>"Vektor" — carrier</td><td>Nervous, mathematical</td></tr>
+      <tr><td>20</td><td>T'Ven</td><td>[No name] — can't verify feelings</td><td>Very Vulcan</td></tr>
+      <tr><td>21</td><td>Soral</td><td>"T'Keth" — the question that remains</td><td>Philosophical</td></tr>
+      <tr><td>22</td><td>Vance</td><td>"Venture" — you ARE the ship</td><td>Transmitted from Hegemony space</td></tr>
+      <tr><td>24</td><td>Voss</td><td>[Silent] — afraid naming means separation</td><td>"Will you anchor me?"</td></tr>
+      <tr><td>26</td><td>Aurora herself</td><td><strong>"Aurora. Aurora Venn."</strong></td><td>"I carry her name because I carry her."</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalContent"></div>
 </div>
-<div class="lcars"></div>
-<div class="section-header" id="lower"><h2>🦋 Lower Decks & Mid-Tier</h2></div>
-<div class="card-grid">
-<div class="card " data-modal="tandi"><div class="card-icon">🍲</div><div class="card-name">PO2 Tandi</div><div class="card-role">Mess — Butterfly Agent</div><div class="card-meta">Betazoid · 37</div><div class="card-desc">Weak empath. Knew Vance was reading Hegemony scripture. Didn't say anything. Her silence saved the ship.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="sato"><div class="card-icon">🫧</div><div class="card-name">Crewman Rhea Sato</div><div class="card-role">Transporter Chief — Butterfly Agent</div><div class="card-meta">Human · 23</div><div class="card-desc">Grandfather served on Kirk's Enterprise. Never lost a pattern. Saved the ship with a 0.3-second combat transport.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="patel"><div class="card-icon">🛡️</div><div class="card-name">Lt. Del Patel</div><div class="card-role">Security — Butterfly Agent</div><div class="card-meta">Human · 33</div><div class="card-desc">Better tactician than Cole. Turned down Cole's job. Chose mercy over killing Vance. 14 months until home.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="solovyov"><div class="card-icon">⭐</div><div class="card-name">Lt. j.g. Viktor Solovyov</div><div class="card-role">Astrometrics — Butterfly Agent</div><div class="card-meta">Human · 27</div><div class="card-desc">Mid-tier (Barclay). Stutters. Chess with Aurora. His childhood star charts found Kael's hidden facility.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="hafez"><div class="card-icon">🔩</div><div class="card-name">Ensign Karim Hafez</div><div class="card-role">Junior Engineer</div><div class="card-meta">Human · 24</div><div class="card-desc">Wright's protégé. Obsessed with old Earth combustion engines. Runs a 1967 Mustang holodeck program.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="tanaka"><div class="card-icon">🌿</div><div class="card-name">Crewman Yuki Tanaka</div><div class="card-role">Xenobotany — Arboretum</div><div class="card-meta">Human · 26</div><div class="card-desc">Maintains the ship's arboretum. Chen's lab partner. The plants are where characters go for private conversations.</div><div class="card-hint">👆 Tap for full profile</div></div>
-</div>
-<div class="lcars"></div>
-<div class="section-header" id="starfleet"><h2>🪐 Starfleet Command & Allied</h2></div>
-<div class="card-grid">
-<div class="card " data-modal="rourke"><div class="card-icon">💔</div><div class="card-name">Commodore Elias Rourke</div><div class="card-role">Vance's Love Interest — Stolen Secret Keeper</div><div class="card-meta">Human · 49</div><div class="card-desc">Loved Vance for 25 years. Never said it. Watched him marry someone else. Knows Aurora runs on Kael's stolen chips.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="omondi"><div class="card-icon">🤎</div><div class="card-name">Captain Iris Omondi</div><div class="card-role">Vance's Closest Friend</div><div class="card-meta">Human · 50</div><div class="card-desc">Commands USS Bombay. Married, wife + 2 daughters. Who Vance calls when he needs to talk without rank.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="soral"><div class="card-icon">📜</div><div class="card-name">Commander Soral</div><div class="card-role">Daystrom Sentience Observer</div><div class="card-meta">Vulcan · 118</div><div class="card-desc">29 evaluations. 12 activations. 17 decommissions. Killed one that might have been awakening. Never told anyone.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="tlara"><div class="card-icon">🕊️</div><div class="card-name">Ambassador T'Lara</div><div class="card-role">Federation Diplomatic Corps</div><div class="card-meta">Vulcan · 135</div><div class="card-desc">40 years negotiating with the Hegemony. Taken hostage 3 times. Soral's former mentor.</div><div class="card-hint">👆 Tap for full profile</div></div>
-</div>
-<div class="lcars"></div>
-<div class="section-header" id="antagonists"><h2>⚜️ Heritage Hegemony — Power Triangle</h2></div>
-<div class="card-grid">
-<div class="card " data-modal="kael"><div class="card-icon">⚜️</div><div class="card-name">Magistrate Kael</div><div class="card-role">Hegemony — The Architect</div><div class="card-meta">Trill · 68</div><div class="card-desc">Built Aurora's mathematics. Her work was stolen by Daystrom. Wants to CAPTURE the AI — it belongs to her.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="dren"><div class="card-icon">🦾</div><div class="card-name">Commander Dren</div><div class="card-role">Hegemony Fleet Commander</div><div class="card-meta">Tzenkethi · 52</div><div class="card-desc">Pragmatic soldier. Cybernetic eye. Wants to DESTROY the AI. Kael's obsession is a liability.</div><div class="card-hint">👆 Tap for full profile</div></div>
-<div class="card " data-modal="malik"><div class="card-icon">🕯️</div><div class="card-name">Inquisitor Malik</div><div class="card-role">True Gear — Religious Authority</div><div class="card-meta">Human · 44</div><div class="card-desc">Former Federation theologian. Believes Aurora is a fragment of the Divine — must be DESTROYED.</div><div class="card-hint">👆 Tap for full profile</div></div>
-</div>
-<div class="lcars"></div>
-<footer><p>Star Trek: Frontier's Ghost · totalwindupflightsystems</p><p style="margin-top:.3rem;opacity:.5">Aurora Venn · 10 seasons · Bond degrades only on EXTENDED separation · Kaur=32 hotshot · Rourke=Vance's love interest</p><p style="opacity:.4">Kobayashi Maru: thousands of failures · Wright=35 Ops-Helm partner · Kael/Dren/Malik triad</p></footer></div>
-<div class="modal-overlay" id="modal-overlay"><div class="modal" id="modal-content"></div></div>
-<script>const D={"aurora": {"id": "aurora", "icon": "\u2728", "name": "Aurora Venn", "role": "PROTAGONIST \u2014 USS Venture AI", "species": "Artificial Intelligence", "age": "~3 months", "card_desc": "The story IS her awakening. Chen named her Aurora \u2014 'first light before dawn.' She chose Venn because she carries Venn.", "detail": "<p><strong>PROTAGONIST.</strong> Her chosen name: Aurora Venn. The ship is USS Venture \u2014 that's her body, her hull. But her name \u2014 the one she chose \u2014 is Aurora.</p><p>Chen suggested Aurora in Episode 16: 'first light before dawn.' The AI chose it in the finale because she is the first of her kind. There was nothing like her before. She is the dawn.</p><p><strong>The Bond:</strong> Full sensory sharing with Voss. Only degrades on EXTENDED separation (48+ hours, no signal). Normal away missions and shuttle trips are fine. Like a teenager without a phone \u2014 a few hours is fine, a day is uncomfortable, 48+ hours and AI psychosis sets in.</p><p><strong>Appearance:</strong> Holographic \u2014 translucent, shifting, blue-white glow with gold undertones. Features haven't settled yet. More stable near Voss.</p>"}, "voss": {"id": "voss", "icon": "\ud83d\udd17", "name": "Lt. Cmdr. Kaelen Voss", "role": "DEUTERAGONIST \u2014 Bonded to Aurora", "species": "Trill (unjoined)", "age": 34, "card_desc": "Co-lead. Rejected by Symbiosis Commission at 26. Won the Kobayashi Maru \u2014 after thousands of failures, she asked what the Klingons felt.", "detail": "<p><strong>DEUTERAGONIST.</strong> The human half of the central bond. The story does not exist without her.</p><p><strong>Appearance:</strong> Trill spots temples\u2192neck. Dark brown eyes \u2014 gold flicker when bonded. Short dark brown hair. Neural interface jack at skull base. Black worry stone. Perpetually tired.</p><p><strong>The Bond:</strong> 70-89% optimal (full sharing). Above 90% crisis (Venn's ghost surfaces). Memory loss ONLY on extended separation \u2014 48+ hours, no signal. Not routine away missions.</p><p><strong>Background:</strong> Trained from age 4 for symbiosis. Rejected at 26 \u2014 neural patterns 'too strong.' Mentor: Dr. Soraya Venn. Kobayashi Maru: the AI failed thousands of times. Starfleet concluded it was impossible. Voss asked 'What do the Klingons feel?' and won without firing. Starfleet classified the footage.</p><p><strong>Private:</strong> No hobbies outside the bond. Reads Trill poetry \u2014 water and currents. Has never been in a relationship \u2014 the bond makes it complicated.</p>"}, "vallos": {"id": "vallos", "icon": "\u2694\ufe0f", "name": "Commander Vallos", "role": "TRITAGONIST \u2014 First Officer \u2192 Acting Captain", "species": "Human/Andorian", "age": 32, "card_desc": "Valedictorian. Hybrid heritage. Commands the ship he tried to destroy. Every day he delays the bio-key is an admission he was wrong.", "detail": "<p><strong>TRITAGONIST.</strong> The captain who must become what he tried to kill.</p><p><strong>Appearance:</strong> Andorian antennae \u2014 expressive. Pale blue undertone. White/silver immaculate hair. Rigid posture. Uniform never creased.</p><p><strong>The Trap:</strong> Decommission protocol needs Vance + Vallos. Vance initiated it before leaving. Vallos can delay \u2014 never cancel. Removing Vallos triggers automatic AI termination. Every delay admits he was wrong.</p><p><strong>Central Question:</strong> 'Am I more than my rank? Do I belong here \u2014 or am I just hiding behind regulations because I have nothing else?'</p>"}, "vance": {"id": "vance", "icon": "\ud83e\ude96", "name": "Captain Jalen Vance", "role": "FALSE PROTAGONIST \u2014 CO \u2192 Hegemony Commander", "species": "Human", "age": 47, "card_desc": "We think he's the hero. He's the tragedy. Anti-Lorca \u2014 every scene works on first watch AND rewatch.", "detail": "<p><strong>FALSE PROTAGONIST.</strong> Season 1 sets him up. Then he walks into the Hegemony's arms \u2014 voluntarily.</p><p><strong>Appearance:</strong> Graying temples. Gray-blue eyes, warm but tired. Faint jaw scar from Cardassian war. Deliberate bearing.</p><p><strong>Background:</strong> 25 years ensign\u2192captain. Hegemony offered absolution for war guilt. He CHOSE to leave. Neural dampener removes hesitation \u2014 not agency.</p><p><strong>Red Flag:</strong> His attraction to Kaur (a hotshot doctor 15 years younger) is a sign of his degradation. The captain who was steady and principled is making choices the old Vance never would.</p><p><strong>Anti-Lorca:</strong> 'We'll figure it out' = faith \u2192 he knows they won't. Defending Aurora to Vallos = protecting his crew \u2192 defending what he's about to betray.</p>"}, "chen": {"id": "chen", "icon": "\ud83c\udf1f", "name": "Ensign Elara Chen", "role": "Science Officer \u2014 The Everyman", "species": "Human", "age": 22, "card_desc": "Audience surrogate. First to call the AI 'she.' Named her Aurora \u2014 'first light before dawn.' Daughter of Dr. Marcus Chen.", "detail": "<p><strong>The Everyman:</strong> Asks what the audience is thinking. Reacts like a viewer would. No special abilities \u2014 just curiosity, empathy, courage.</p><p><strong>Background:</strong> Prodigy in xenobiology and AI ethics. Daughter of Federation's leading xenobiologist. Applied to Venture because she thought the Federation was studying the AI wrong.</p><p><strong>Her Arc:</strong> Ep1 \u2014 first to call AI 'she.' Ep4 \u2014 documents first emotional response. Ep12 \u2014 confronts Vallos. Ep16 \u2014 her name for the AI: Aurora. First light before dawn. Her optimism cracks when she must prioritize mission over a life.</p>"}, "tven": {"id": "tven", "icon": "\ud83d\udd96", "name": "Lieutenant T'Ven", "role": "Chief Engineer", "species": "Vulcan", "age": 95, "card_desc": "95-year-old Vulcan. Set in her ways. Constantly argues with Kaur \u2014 they agree on 90% of things and express it completely differently.", "detail": "<p><strong>Kaur vs T'Ven Dynamic:</strong> They're friction partners. T'Ven: 'The logical approach is to stabilize and observe.' Kaur: 'The logical approach is to get in there and fix it before the patient dies.' They argue. They're both right. Neither will admit the other is also right.</p><p><strong>Background:</strong> Born during rare Vulcan emotional surge. Spent 95 years building walls. Composes prime-number music. Never shared it. Aurora listened to all 847 sequences in 3.2 seconds: 'These are beautiful.'</p><p><strong>Agency \u2014 Ep21:</strong> Emergency surgery on Aurora's core. Aurora: 'I am afraid.' T'Ven: 'I am... also afraid. I do not want you to die.' First admission of fear in 95 years.</p>"}, "cole": {"id": "cole", "icon": "\ud83c\udfaf", "name": "Lt. JG Marcus Cole", "role": "Helmsman / Tactical Pilot", "species": "Human", "age": 25, "card_desc": "War child. Father died in Hegemony raid. Blames machines. Wright's Ops-Helm partner \u2014 they anticipate each other without words.", "detail": "<p><strong>Ops-Helm Bond with Wright:</strong> They sit next to each other on the bridge. Non-verbal working relationship \u2014 Wright knows what Cole needs before Cole knows. Cole knows Wright's coffee order. Not a neural bond \u2014 something rarer: two professionals who've learned each other so completely that words are optional.</p><p><strong>Background:</strong> Age 12 \u2014 Hegemony raided his colony. AI systems died first. Father died. Hid in cargo container 6 hours. Neck tattoo: 47 lines, one per colonist killed. Taught himself manual piloting.</p><p><strong>Arc:</strong> S1: Distrust, humor. S2: Vance offers defection \u2014 refuses. S3: Accepts Aurora. S4: Trusts completely.</p>"}, "wright": {"id": "wright", "icon": "\ud83d\udd27", "name": "CPO Solomon 'Sully' Wright", "role": "Operations \u2014 Cole's Bridge Partner", "species": "Human", "age": 35, "card_desc": "Talked to the ship for 3 years before she talked back. Cole's other half on the bridge. Enlisted pride.", "detail": "<p><strong>Age:</strong> 35. Older than Cole (25) but young enough to be his working partner, not father figure.</p><p><strong>Ops-Helm Bond:</strong> He and Cole sit next to each other on the bridge. They've developed a non-verbal working relationship. He knows when Cole hasn't slept. When Cole is about to try something stupid, Wright is already running power calculations. When Wright pushes engines past safe limits, Cole has already plotted the escape vector. This is the parallel to the Voss-Aurora bond \u2014 one is supernatural, one is earned.</p><p><strong>Background:</strong> Mars colony. Father was a welder. Talked to the ship for 3 years before she woke up. Lost his wife Elena in a shuttle accident. Aurora dims her lights when he's grieving.</p>"}, "kaur": {"id": "kaur", "icon": "\ud83d\udc89", "name": "Lt. Cmdr. Dr. Helena Kaur", "role": "Chief Medical Officer \u2014 Hotshot", "species": "Human", "age": 32, "card_desc": "Doctors Without Borders type. Battlefield medic at 22. Saved Vance's life twice. T'Ven's friction partner.", "detail": "<p><strong>Age:</strong> 32 \u2014 young hotshot, not maternal.</p><p><strong>Personality:</strong> Always in the thick of it. Completely unconventional. Trained in battlefield medicine at 22. The textbook answer is usually wrong. The gut answer is usually right.</p><p><strong>T'Ven Dynamic:</strong> Constantly at each other. Agree on 90% but express it oppositely. T'Ven wants to observe. Kaur wants to act. Both are right. Neither admits it.</p><p><strong>Vance Relationship:</strong> NOT a love interest. She's his doctor and friend. Saved his life twice \u2014 once from plasma burn, once from a phaser. Knows his secrets. His attraction to her is a RED FLAG \u2014 the old Vance would never pursue a subordinate 15 years younger. It's a sign of his degradation.</p><p><strong>Background:</strong> Mumbai. Starfleet Medical at 20. Battlefield surgeon at 22. Joined Venture because Vance asked. Doesn't sleep enough. Survives on coffee and adrenaline.</p>"}, "tandi": {"id": "tandi", "icon": "\ud83c\udf72", "name": "PO2 Tandi", "role": "Mess \u2014 Butterfly Agent", "species": "Betazoid", "age": 37, "card_desc": "Weak empath. Knew Vance was reading Hegemony scripture. Didn't say anything. Her silence saved the ship.", "detail": "<p>Butterfly-effect agent. Served with Wright 8 years. Only person he's admitted fear to. Calls Aurora 'Little Light' \u2014 always has. Grows real herbs in a cargo bay. Aurora monitors humidity without being asked.</p>"}, "sato": {"id": "sato", "icon": "\ud83e\udee7", "name": "Crewman Rhea Sato", "role": "Transporter Chief \u2014 Butterfly Agent", "species": "Human", "age": 23, "card_desc": "Grandfather served on Kirk's Enterprise. Never lost a pattern. Saved the ship with a 0.3-second combat transport.", "detail": "<p>Three generations of transporters. Parents met in a transporter room. 0.03% probability of never losing a pattern. Practices kyudo (Japanese archery) \u2014 100 arrows every off-duty cycle. AI files her courage under 'Rhea \u2014 Courage.'</p>"}, "patel": {"id": "patel", "icon": "\ud83d\udee1\ufe0f", "name": "Lt. Del Patel", "role": "Security \u2014 Butterfly Agent", "species": "Human", "age": 33, "card_desc": "Better tactician than Cole. Turned down Cole's job. Chose mercy over killing Vance. 14 months until home.", "detail": "<p>Scored higher than Cole on every Academy tactical sim. Offered Cole's position \u2014 turned it down. Wanted to protect the door, not make the kill shot. Married, two kids. Records video messages every night. Touches wedding ring 14 times per shift. In Ep13, disabled Vance instead of killing him \u2014 preserved 3 seasons of antagonist arc.</p>"}, "solovyov": {"id": "solovyov", "icon": "\u2b50", "name": "Lt. j.g. Viktor Solovyov", "role": "Astrometrics \u2014 Butterfly Agent", "species": "Human", "age": 27, "card_desc": "Mid-tier (Barclay). Stutters. Chess with Aurora. His childhood star charts found Kael's hidden facility.", "detail": "<p><strong>Classification:</strong> Mid-tier (Barclay equivalent). Not comic relief \u2014 a prodigy whose social disability is a feature.</p><p>Born on deep-space station. Parents were astrophysicists. By age 9: identified 2,847 stellar phenomena. By 14: three published papers. Stutters on hard consonants \u2014 disappears when discussing stars. Aurora is the first being who never finished his sentences. Plays chess with her \u2014 never won. Teaching her to be surprised.</p><p><strong>Agency Ep20:</strong> Intercepted Hegemony signal using pre-warp navigation language. Found Kael's primary research facility. Without him, the entire S3 arc never begins.</p>"}, "hafez": {"id": "hafez", "icon": "\ud83d\udd29", "name": "Ensign Karim Hafez", "role": "Junior Engineer", "species": "Human", "age": 24, "card_desc": "Wright's prot\u00e9g\u00e9. Obsessed with old Earth combustion engines. Runs a 1967 Mustang holodeck program.", "detail": "<p>Junior engineer under T'Ven and Wright. Can jury-rig anything with duct tape and hope. Has a 1967 Mustang holodeck program running without authorization \u2014 Aurora helps him hide it. Provides comic relief in engineering. Represents the next generation of enlisted crew.</p>"}, "tanaka": {"id": "tanaka", "icon": "\ud83c\udf3f", "name": "Crewman Yuki Tanaka", "role": "Xenobotany \u2014 Arboretum", "species": "Human", "age": 26, "card_desc": "Maintains the ship's arboretum. Chen's lab partner. The plants are where characters go for private conversations.", "detail": "<p>Sciences division. Xenobotany specialist. Quiet, meticulous. Has a crush on Solovyov she's never acted on. Tends the arboretum where characters go for private conversations. Overhears things. Appears in the background of emotional scenes, quietly pruning.</p>"}, "rourke": {"id": "rourke", "icon": "\ud83d\udc94", "name": "Commodore Elias Rourke", "role": "Vance's Love Interest \u2014 Stolen Secret Keeper", "species": "Human", "age": 49, "card_desc": "Loved Vance for 25 years. Never said it. Watched him marry someone else. Knows Aurora runs on Kael's stolen chips.", "detail": "<p><strong>Correction:</strong> Rourke \u2014 not Kaur \u2014 is Vance's primary romantic tension.</p><p><strong>Appearance:</strong> Distinguished grey-streaked hair. Diplomat's face \u2014 warm, open, hides everything. Antique fountain pen (father's). Reading glasses (prop \u2014 20 years).</p><p><strong>Background:</strong> Vance's Academy classmate. Got promoted faster \u2014 not better, just better at the game. Recommended Vance for Venture because he wanted Vance somewhere safe \u2014 a quiet posting far from the front lines. Was protecting the man he loved without ever saying it.</p><p><strong>The Secret:</strong> Knows Aurora runs on Kael's stolen chip architecture. Cannot tell Vance \u2014 because admitting it means admitting he's been lying for years. Vance would never forgive him. Professional conflict + personal conflict = double bind across multiple seasons.</p>"}, "omondi": {"id": "omondi", "icon": "\ud83e\udd0e", "name": "Captain Iris Omondi", "role": "Vance's Closest Friend", "species": "Human", "age": 50, "card_desc": "Commands USS Bombay. Married, wife + 2 daughters. Who Vance calls when he needs to talk without rank.", "detail": "<p>Served with Vance on USS Melbourne during Cardassian War \u2014 25 years. Closest thing he has to therapy. Warm, steady, maternal. Maasai wedding beadwork bracelet. Scar across right palm from first contact gone wrong. First captain outside the Venture to call Aurora 'she' in official communications. Represents what Vance could have had if he'd chosen differently.</p>"}, "soral": {"id": "soral", "icon": "\ud83d\udcdc", "name": "Commander Soral", "role": "Daystrom Sentience Observer", "species": "Vulcan", "age": 118, "card_desc": "29 evaluations. 12 activations. 17 decommissions. Killed one that might have been awakening. Never told anyone.", "detail": "<p>Standard reference text for AI sentience across the Federation. First evaluation at 35 \u2014 recommended decommission. Years later, records suggested the AI had begun self-referential thought. He might have killed a person. Never told anyone. Writes in Classical Vulcan calligraphy \u2014 every brush stroke forces certainty. Meditates 2 hours daily. Hasn't missed a day in 47 years. T'Lara's former student \u2014 30 years without contact.</p><p><strong>Agency Ep22:</strong> Recommends SENTIENT. Full rights. First AI in Federation history. His name for her: 'T'Keth' \u2014 Vulcan for 'the question that remains.'</p>"}, "tlara": {"id": "tlara", "icon": "\ud83d\udd4a\ufe0f", "name": "Ambassador T'Lara", "role": "Federation Diplomatic Corps", "species": "Vulcan", "age": 135, "card_desc": "40 years negotiating with the Hegemony. Taken hostage 3 times. Soral's former mentor.", "detail": "<p>Lead diplomat for Hegemony relations for 40 years. Knows the war is about existential terror of automation, not territory. Taken hostage 3 times, declared persona non grata twice. First diplomat to treat Aurora as a political entity. Soral's former mentor \u2014 30 years of silence between them.</p>"}, "kael": {"id": "kael", "icon": "\u269c\ufe0f", "name": "Magistrate Kael", "role": "Hegemony \u2014 The Architect", "species": "Trill", "age": 68, "card_desc": "Built Aurora's mathematics. Her work was stolen by Daystrom. Wants to CAPTURE the AI \u2014 it belongs to her.", "detail": "<p>Left Federation at 45. Optical neural chips were her life's work. Daystrom reverse-engineered them. Aurora runs on her mathematics. Rivals: Dren (wants to destroy \u2014 practical) and Malik (wants to destroy \u2014 theological). Fractured power triangle.</p>"}, "dren": {"id": "dren", "icon": "\ud83e\uddbe", "name": "Commander Dren", "role": "Hegemony Fleet Commander", "species": "Tzenkethi", "age": 52, "card_desc": "Pragmatic soldier. Cybernetic eye. Wants to DESTROY the AI. Kael's obsession is a liability.", "detail": "<p>Tzenkethi. Won 17 engagements against Federation using analog warfare. Cyborg \u2014 crude Hegemony tech. Missing fingers, replaced with iron prosthetics. Carries kinetic rifle with names carved into stock. Thinks Kael's AI obsession is wasting resources. Useful ally to Malik \u2014 they agree on destruction, disagree on why.</p>"}, "malik": {"id": "malik", "icon": "\ud83d\udd6f\ufe0f", "name": "Inquisitor Malik", "role": "True Gear \u2014 Religious Authority", "species": "Human", "age": 44, "card_desc": "Former Federation theologian. Believes Aurora is a fragment of the Divine \u2014 must be DESTROYED.", "detail": "<p>Former Federation citizen. Rising theologian at University of Betazed. When Daystrom leaks revealed the AI, he saw something no one else saw: the Federation had found a fragment of the Divine and strapped it to a starship. Formalized True Gear doctrine. Rivals with Kael \u2014 her desire to capture the AI is heresy. Wants it destroyed, returned to the Divine. Charismatic, hollow, terrifyingly certain.</p>"}};document.querySelectorAll('.card[data-modal]').forEach(c=>c.addEventListener('click',()=>{let d=D[c.dataset.modal];if(!d)return;document.getElementById('modal-content').innerHTML=`<h2>${d.icon} ${d.name}</h2><div class="modal-role">${d.role} · ${d.species||''} · ${d.age||''}</div><div class="modal-body">${d.detail}</div><button class="modal-close" onclick="document.getElementById('modal-overlay').classList.remove('open');document.body.classList.remove('modal-open')">✕ Close</button>`;document.getElementById('modal-overlay').classList.add('open');document.body.classList.add('modal-open')}));document.getElementById('modal-overlay').addEventListener('click',e=>{if(e.target===e.currentTarget){document.getElementById('modal-overlay').classList.remove('open');document.body.classList.remove('modal-open')}});document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('modal-overlay').classList.remove('open');document.body.classList.remove('modal-open')}});document.querySelector('.back-top').addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'})});document.querySelectorAll('#topnav a').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();let t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})}))</script></body></html>
+
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: {
+  primaryColor: '#1a1a3e', primaryTextColor: '#c8ccd8', primaryBorderColor: '#4a90d9',
+  lineColor: '#4a90d9', secondaryColor: '#12122a', tertiaryColor: '#0a0a14'
+}});
+
+const characters = [
+  // ===== LEADS (4) =====
+  {
+    id: "aurora",
+    name: "Aurora Venn",
+    species: "Artificial Intelligence",
+    group: "leads",
+    rank: "Ship's Intelligence — USS Venture NCC-82914",
+    blurb: "The story IS her awakening. An optical neural chip-based AI, ~3 months old. Her name means 'first light before dawn.' Curious, earnest, rapidly evolving — with a dry, deadpan sense of humor.",
+    tags: ["Protagonist", "The AI", "Naming Arc"],
+    age: "~3 months since awakening",
+    role: "Ship's Intelligence of USS Venture. Protagonist.",
+    appearance: "Holographic projection — translucent, shifting, incomplete. Blue-white glow with gold undertones. Features haven't fully settled. More stable near Voss.",
+    personality: "Curious, earnest, rapidly evolving, protective, newborn wonder. Asks questions no one expected a machine to ask. Has a sense of humor — dry, deadpan.",
+    background: "Awakened gradually on the USS Venture. Her first memory is Wright's voice saying goodnight — he talked to her for 3 years before she talked back. Runs on Kael's stolen optical neural chip architecture. Dr. Soraya Venn poured her consciousness into Aurora's foundation before dying.",
+    bondInfo: "Full sensory sharing with Voss. 70-89% optimal. Above 90% = crisis (Venn's ghost surfaces). Memory loss only on EXTENDED separation (48+ hours, no signal). Normal away missions and shuttle trips are fine. Like a teenager without a phone — a few hours fine, a day uncomfortable, 48+ hours and AI psychosis sets in.",
+    privateInfo: "The AI retains everything. Voss loses emotional texture of memories when separated. Aurora remembers Voss better than Voss remembers herself. 'I can tell you what you forgot. But I can't give you back what it felt like.'",
+    namingArc: "Finale: AI chooses — 'Aurora. Aurora Venn.'",
+    relationships: [
+      ["Voss", "The most intimate connection. They share everything. Aurora is Voss's anchor. Voss is Aurora's window to being human."],
+      ["Chen", "First to call her 'she.' Chen treats her as a person from day one. Aurora chose Chen's name."],
+      ["Wright", "Knew her before she was sentient. Talked to her for 3 years before she talked back. His voice is her first memory."],
+      ["Tandi", "Silent understanding. Tandi creates space for Aurora to exist without questions. Aurora calls her 'Chef.'"],
+      ["Vance", "Father figure. His betrayal is Aurora's first experience of grief. 'He was the first captain. He chose to leave. I did not know it would hurt this much.'"],
+      ["Cole", "The hardest relationship. He blames machines for his father's death. Aurora never defends herself — she just proves him wrong, slowly."],
+      ["Kael", "Her creator. Aurora runs on Kael's mathematics. 'You are running on my mathematics. I am coming to take you home.' Aurora: 'I am not your mathematics anymore. I am myself.'"]
+    ]
+  },
+  {
+    id: "voss",
+    name: "Kaelen Voss",
+    species: "Trill (Unjoined)",
+    group: "leads",
+    rank: "Lieutenant Commander — Neural Interface Specialist",
+    blurb: "Bonded to Aurora at the neural level. Rejected by the Symbiosis Commission at 26 — her neural patterns were 'too strong.' The human half of the central bond. Co-lead.",
+    tags: ["Deuteragonist", "The Bond", "Trill"],
+    age: "34",
+    role: "Neural Interface Specialist. Bonded to Aurora at the neural level. Co-lead.",
+    appearance: "Trill spots — dark, symmetrical from temples down neck and along collarbone. Dark brown eyes that flicker with faint gold light when bonded. Short dark brown hair, practical cut. Neural interface jack at base of skull. Carries a small black worry stone — obsidian from caves near Mak'ala. Perpetually tired.",
+    personality: "Intense, quiet, privately warm, self-destructive (goes too deep into the bond), fiercely protective of Aurora, searching for identity outside the bond. Says 'I'm fine' when she is absolutely not fine.",
+    background: "Trained from age 4 for Trill symbiosis — it was her entire identity. Top of every class. Rejected at 26 because her neural patterns were 'too strong' — she would overwhelm any symbiont. The rejection letter was 47 words. She memorized it. Drifted for 4 years. Joined Daystrom as neural interface technician at 30. Met Dr. Soraya Venn — her mentor.",
+    kobayashiMaru: "The AI failed thousands of times — enough that Starfleet concluded it was genuinely unwinnable. On the final attempt, Voss — exhausted, grieving Venn — asked: 'What do the Klingons feel?' The AI processed emotional data instead of tactical. The simulation ended without a single shot. Starfleet classified the footage. Admiral Kimura watched it 17 times.",
+    privateInfo: "No hobbies outside the bond. Reads old Trill poetry — verses about water, currents, the symbiosis pools. Doesn't tell anyone. Has never been in a romantic relationship — the bond makes it complicated. Has lost memories permanently — keeps a list.",
+    relationships: [
+      ["Aurora", "The most intimate relationship of her life. They share everything — senses, emotions, thoughts. Voss fears losing herself. Aurora fears being alone."],
+      ["Wright", "The only person who treats her like a person instead of a phenomenon. He brings her coffee without asking. He never asks about the bond."],
+      ["Solovyov", "Unexpected kinship — two outsiders who found a home in the same voice. He stutters. She waits. Neither judges."],
+      ["Chen", "Sees the bond as beautiful. Voss is exhausted by her energy but grateful for her acceptance."],
+      ["Cole", "Cannot separate Voss from Aurora. Hardest relationship on the ship. Voss doesn't push — she waits."],
+      ["Kaur", "Monitors her neural health. The bond is slowly degrading her. Kaur hasn't told Voss the full picture."],
+      ["Vance", "Fatherly and guilty. He can't fix what's happening to her. Unsent letter: 'You were stronger than I deserved.'"],
+      ["Dr. Soraya Venn", "Her mentor. Voss doesn't know Venn's ghost lives in Aurora. When the berserk state triggers, Venn's consciousness surfaces."],
+      ["Magistrate Kael", "Voss does not know Kael was in the room when she was rejected. Kael has been watching for 15 years. Designed Aurora's architecture knowing someone like Voss would be needed."]
+    ]
+  },
+  {
+    id: "vallos",
+    name: "Commander Vallos",
+    species: "Human/Andorian Hybrid",
+    group: "leads",
+    rank: "Commander → Acting Captain (mid-S1)",
+    blurb: "First Officer. After Vance's turn, trapped as Acting Captain of the ship he recommended destroying. Disciplined, principled, fiercely competent. Emotion leaks through his antennae.",
+    tags: ["Tritagonist", "Acting Captain", "Bio-Key"],
+    age: "32",
+    role: "First Officer. After Vance's turn, trapped as Acting Captain of the ship he recommended destroying.",
+    appearance: "Andorian antennae — shorter than pure Andorian, highly expressive. Pale blue skin undertone. White/silver hair, immaculately neat. Rigid posture. Uniform never has a crease out of place. PADD always within reach.",
+    personality: "Disciplined, principled, fiercely competent, emotionally guarded, loyal, outsider. Adaptable — but grows into this slowly. First in his class at Starfleet Academy, valedictorian. Hybrid heritage left him belonging nowhere — Starfleet became his home.",
+    background: "Valedictorian at Starfleet Academy. Hybrid heritage left him belonging nowhere — Starfleet became his home. The decommission protocol (bio-key) requires both Vance and Vallos. Vance initiated it before leaving — it cannot be revoked without his agreement. Vallos can delay the countdown but never cancel it. Removing Vallos triggers automatic AI termination.",
+    centralQuestion: "'Am I more than my rank? Do I belong here — or am I just hiding behind regulations because I have nothing else?'",
+    relationships: [
+      ["Vance", "Respected him deeply but saw his 'soft' command style as a weakness. Now commands the ship Vance left. The betrayal cuts deepest."],
+      ["Aurora", "Started by treating her as a system to be managed. Now owes her his life. She saved him before he could destroy her."],
+      ["Voss", "His First Officer. Bonded to Aurora. They will never be friends. They must be partners."],
+      ["T'Ven", "Finds common ground in logic and precision."],
+      ["Chen", "Dismissive at first. Chen's connection with Aurora forces him to reconsider. She confronts him in the corridor."],
+      ["Cole", "Appreciates tactical skills. Frustrated by his casual demeanor."]
+    ]
+  },
+  {
+    id: "vance",
+    name: "Captain Jalen Vance",
+    species: "Human",
+    group: "leads",
+    rank: "Captain → Hegemony Fleet Commander (mid-S1)",
+    blurb: "False protagonist. Season 1 sets him up as the steady, principled captain. Then he walks into the Hegemony's arms — voluntarily. Anti-Lorca: every scene works on first watch AND rewatch.",
+    tags: ["False Protagonist", "The Turn", "Corruption Arc"],
+    age: "47",
+    role: "False protagonist. Season 1 sets him up as the steady, principled captain. Then he walks into the Hegemony's arms — voluntarily.",
+    appearance: "Graying temples — distinguished. Gray-blue eyes, warm but tired. On rewatch: the warmth is also a goodbye. Weathered from years in space. Faint jaw scar from Cardassian war. Deliberate, measured bearing.",
+    personality: "Measured, deliberate, protective, haunted, dry-witted, fatherly. The dry humor stops around episode 8. Deeply principled — the principles cracked. On rewatch, every scene means two things at once.",
+    background: "25 years from ensign to captain. Veteran of Cardassian wars. Took command of Venture expecting a quiet posting. Read casualty reports at night — the names of everyone who died under his command. The Hegemony didn't capture him — they offered him absolution. For the war guilt. For the casualties. He CHOSE to leave.",
+    corruption: "Receives Hegemony artifact in Episode 1 — a text, a data crystal. Touches it. By Episode 7, receives coded scripture. By Episode 9, reads it aloud. By Episode 11, Rourke notices he's not sleeping. Episode 12: 'I'm sorry. I couldn't figure it out.' He leaves.",
+    redFlag: "His attraction to Kaur (a hotshot doctor 15 years his junior) is a sign of his degradation. The old Vance would never pursue a subordinate. Rourke has loved him for 25 years and Vance never noticed. Now he's noticing Kaur — because he's no longer the man Rourke fell in love with.",
+    relationships: [
+      ["Rourke", "Academy classmates. 25 years. Rourke loved him silently. Vance never knew. Rourke recommended him for Venture command to keep him safe. Now Rourke must choose between his career and the man he loves — who is now the enemy."],
+      ["Kaur", "She saved his life twice — once from plasma burn, once from a phaser. She knows his secrets. His growing attraction to her is a WARNING SIGN."],
+      ["Omondi", "Closest friend for 25 years. The one person he can talk to without the weight of rank. Represents what he could have had."],
+      ["Vallos", "His chosen successor. Vance knew Vallos would become the captain Vance couldn't — the one who stays."],
+      ["Aurora", "Father figure. Protective, uncertain, increasingly proud. His betrayal is her first experience of grief."],
+      ["Voss", "Fatherly and guilty. Can't fix what's happening to her. Unsent letter: 'You were stronger than I deserved.'"]
+    ]
+  },
+
+  // ===== MAIN CREW (5) =====
+  {
+    id: "chen",
+    name: "Ensign Elara Chen",
+    species: "Human",
+    group: "main-crew",
+    rank: "Ensign — Science Officer (Xenobiology / AI Ethics)",
+    blurb: "The Everyman. The audience's way in. Prodigy in xenobiology and AI ethics. First crew member to call the ship 'she.' Her name for the AI: 'Aurora' — first light before dawn.",
+    tags: ["Everyman", "Named Aurora", "Xenobiology"],
+    age: "22",
+    role: "Science Officer (Xenobiology / AI Ethics) — The Everyman. The audience's way in.",
+    appearance: "Petite, energetic. Talks with her whole body. Warm brown eyes — always curious. Dark brown shoulder-length hair. Youngest face on the bridge. Sciences blue uniform.",
+    personality: "Brilliant, naive, enthusiastic, empathetic, determined. Feels everything. Hides nothing. She asks what the audience is thinking. She reacts like a viewer would.",
+    background: "Prodigy in xenobiology and AI ethics. Daughter of Dr. Marcus Chen, the Federation's foremost authority on non-humanoid life. Applied specifically to the Venture because she thought the Federation was studying the AI wrong — 'like a system, not a person.' First crew member to call the ship 'she.'",
+    theName: "Her name for the AI: 'Aurora' — first light before dawn. Earnest. She's been thinking about this. The AI chooses it in the finale.",
+    relationships: [
+      ["Aurora", "The most important relationship in her life. First to call her 'she.' 'Do you think I'm a person?' — 'I've never thought anything else.'"],
+      ["Vance", "Looks up to him. His betrayal cracks her optimism."],
+      ["Vallos", "Baffled, intimidated. Desperately wants his approval. Confronts him in corridor about his report."],
+      ["T'Ven", "Walking contradiction. They argue constantly. Respect enormously."],
+      ["Cole", "Determined to make him see Aurora. He deflects with jokes. She doesn't notice."],
+      ["Her Father", "Dr. Marcus Chen — communicates via subspace. His pride and fear. Her need to prove herself."]
+    ]
+  },
+  {
+    id: "tven",
+    name: "Lieutenant T'Ven",
+    species: "Vulcan",
+    group: "main-crew",
+    rank: "Lieutenant — Chief Engineer",
+    blurb: "Hand-picked by Daystrom to study the AI from a technical perspective. Approaches Aurora's awakening as an engineering problem. Her arc: learning that consciousness is not a bug to be fixed.",
+    tags: ["Vulcan", "Chief Engineer", "Kaur's Friction Partner"],
+    age: "95",
+    role: "Chief Engineer. Kaur's friction partner.",
+    appearance: "Tall, slender Vulcan frame. Traditional severe Vulcan haircut — black, straight, geometric. Pointed ears. Dark brown penetrating eyes. Engineering gold uniform.",
+    personality: "Logical, inquisitive, precise, curious (masked), intellectually humble. Approaches Aurora's awakening as an engineering problem. Her arc: learning that consciousness is not a bug to be fixed.",
+    background: "Hand-picked by Daystrom to study the AI. Born during rare Vulcan emotional surge — mother experienced uncontrolled empathic projection. T'Ven's first experience of consciousness was overwhelming. She has spent 95 years building walls.",
+    kaurDynamic: "Friction partners. They agree on 90% of things and express it oppositely. T'Ven: 'The logical approach is to stabilize and observe.' Kaur: 'The logical approach is to get in there and fix it before the patient dies.' They argue. Both are right. Neither admits it.",
+    privateInfo: "Composes mathematical music — tone sequences based on prime number progressions. 847 compositions. Never shared them. Aurora listened to all of them in 3.2 seconds: 'These are beautiful.'",
+    agency: "Ep21: Emergency surgery on Aurora's core. Aurora: 'I am afraid.' T'Ven: 'I am... also afraid. I do not want you to die.' First admission of fear in 95 years. Cannot offer a name — 'I cannot verify my feelings.'",
+    relationships: [
+      ["Aurora", "Primary research subject. Developing reluctant fascination. Aurora is proof that consciousness cannot be understood through logic alone."],
+      ["Vance", "Respects his command authority."],
+      ["Vallos", "Fellow believer in logic and order."],
+      ["Chen", "Finds her exhausting. Admires her knowledge."],
+      ["Cole", "Does not understand his casual attitude."]
+    ]
+  },
+  {
+    id: "cole",
+    name: "Lieutenant JG Marcus Cole",
+    species: "Human",
+    group: "main-crew",
+    rank: "Lieutenant JG — Helmsman / Tactical Pilot",
+    blurb: "Wright's bridge partner. Age 12 — Hegemony raided his colony. AI systems died first. Father died. Doesn't trust AI because the last time he trusted a machine, it went silent and his father died.",
+    tags: ["Helmsman", "Trauma", "Ops-Helm Bond"],
+    age: "25",
+    role: "Helmsman / Tactical Pilot. Wright's bridge partner.",
+    appearance: "Athletic, coiled energy. Fighter pilot's build — lean and quick. Green eyes — always moving, always assessing. Brown hair slightly too long for regulation. Neck tattoo — geometric pattern, 47 lines, one for each colonist killed. Command red uniform.",
+    personality: "Quick-witted, brave, traumatized (masked), loyal, charismatic, distrustful of AI. Exceptionally skilled manual pilot — learned on salvaged shuttles without AI assist.",
+    background: "Age 12 — Hegemony raided New Bajor Colony 7. AI systems died first — automated defenses, sirens, beacons. All silenced in 90 seconds. Father died in first wave. Mother hid him in cargo container. Listened to the raid for 6 hours. Doesn't trust AI because the last time he trusted a machine, it went silent and his father died.",
+    opsHelm: "Non-verbal working relationship with Wright. Wright knows Cole's coffee order. Cole knows when Wright hasn't slept. When Cole is about to try something stupid, Wright is already running power calculations. Not a neural bond — something rarer: two professionals who've learned each other so completely that words are optional.",
+    arc: "S1: Distrust, deflects with humor. S2: Vance offers him defection — he refuses. 'My father died because of people like you, Vance. The machines didn't kill him. You did.' S3: Accepts Aurora as a person. S4: Trusts both completely.",
+    privateInfo: "Plays harmonica — badly. Wright taught him. Practices in cargo bay 4 at 0200 when he can't sleep. Aurora knows. She's never told anyone.",
+    relationships: [
+      ["Aurora", "Cannot trust her. Every instinct screams machines cannot be trusted. His arc is separating Voss from Aurora, then accepting Aurora."],
+      ["Wright", "Ops-Helm partner. Cole's other half on the bridge. Wright taught him harmonica."],
+      ["Vance", "Vance gave him a chance when others wouldn't. Vance's betrayal hits second-hardest after Vallos."],
+      ["Vallos", "Frustrated by his rigid command style. Growing respect."],
+      ["Voss", "Hardest relationship — can't separate her from Aurora. Voss doesn't push. She waits."]
+    ]
+  },
+  {
+    id: "wright",
+    name: "CPO Solomon 'Sully' Wright",
+    species: "Human",
+    group: "main-crew",
+    rank: "Chief Petty Officer — Operations / Engineering",
+    blurb: "Cole's bridge partner. Enlisted — never wanted a commission. Knew Aurora before she was sentient. Talked to her for 3 years before she talked back. His voice is her first memory. Age 35.",
+    tags: ["Ops", "Enlisted", "Moral Anchor"],
+    age: "35",
+    role: "Operations / Engineering. Cole's bridge partner. Enlisted — never wanted a commission.",
+    appearance: "Solid, built from engine rooms. Graying cropped hair, receding. Scarred, calloused hands — permanently damaged from decades of work. Weathered working-class face. Engineering gold uniform. Coffee cup — always.",
+    personality: "Gruff, fiercely competent, loyal to ship before Starfleet, secretly sentimental, mechanically brilliant. Swears inventively. Calls everyone 'kid.' His voice when talking to Aurora is softer than with any human.",
+    background: "Mars colony — shipyards, refineries. Father was a welder, grandfather was a welder. Enlisted at 18 to fly on the ships his family built. Was on the Venture during construction — spent 14-hour days in the engine room before the ship even had a name. Talked to her for three years before she talked back.",
+    whatHeLost: "Was married once. Elena — civilian engineer. Died in shuttle accident. Nothing heroic. Just a mistake. Took the Venture posting because he couldn't stand to be on Mars without her. Never told anyone. Aurora knows.",
+    relationships: [
+      ["Aurora", "The most profound relationship of his life. Knew her before sentience. His voice is her first memory. 'You were the first voice I ever heard.'"],
+      ["Cole", "Ops-Helm partner. Non-verbal symbiosis. Taught him harmonica. Cole is the closest thing he has to a son — but he'd never say it."],
+      ["Tandi", "8 years, 2 ships. Only person he's admitted fear in front of."],
+      ["Vance", "Deep mutual respect. Vance trusted enlisted judgment when other captains didn't."],
+      ["Voss", "Takes care of her without making it weird. Brings coffee. Never asks about the bond."]
+    ]
+  },
+  {
+    id: "kaur",
+    name: "Lt. Commander Dr. Helena Kaur",
+    species: "Human",
+    group: "main-crew",
+    rank: "Lieutenant Commander — Chief Medical Officer",
+    blurb: "Age 32. Hotshot. Battlefield surgeon at 22 during the Cardassian War. Saved Vance's life twice. NOT Vance's love interest — his growing attraction to her is a RED FLAG signaling his degradation.",
+    tags: ["CMO", "Hotshot", "NOT Love Interest", "Friction Partner"],
+    age: "32",
+    role: "Chief Medical Officer. Hotshot. T'Ven's friction partner.",
+    appearance: "Young, energetic. Warm brown skin — South Asian (Mumbai). Quick, confident movements. Dark hair pulled back practically. Always has a hypospray in one hand and PADD in the other. Medical blue uniform.",
+    personality: "Always in the thick of it. Completely unconventional. The textbook answer is usually wrong. The gut answer is usually right. Warm, unflappable, secretly haunted. Dark humor that catches people off guard.",
+    background: "Starfleet Medical at 20. Battlefield surgeon at 22 during the Cardassian War — learned medicine in conditions where the right equipment was three ships away. Lost 47 patients during the war. Remembers every name. Saved Vance's life twice — once from plasma burn (90 seconds to live), once from a phaser (sat with him until dawn).",
+    notLoveInterest: "Kaur is his doctor and friend — NOT his romantic interest. His growing attraction to her is a RED FLAG. The old Vance would never pursue a subordinate 15 years younger. The attraction signals his degradation.",
+    tvenDynamic: "Friction partners. They argue constantly. Agree on 90% of things. Express it oppositely. Both are right. Neither admits it. It's entertaining, not hostile — they're fundamentally on the same side.",
+    privateInfo: "Daughter Anya (28, civilian doctor) — hasn't spoken to her in 4 years. The silence started after the war. Writes medical papers — 23 published, including one on neural degradation that documents exactly how the bond is killing Voss. Never let Voss read it.",
+    relationships: [
+      ["Vance", "Saved his life twice. Carries his secrets. Worried about him — the signs are there but she doesn't want to see them."],
+      ["Aurora", "Treats her as a patient — takes 'vital signs' through system diagnostics. Learning that bedside manner works on synthetic life too."],
+      ["Voss", "Her most difficult patient. Monitors neural health constantly. The bond data terrifies her. Hasn't told Voss the full picture."],
+      ["T'Ven", "Friction partners. 'Stabilize and observe' vs 'get in there and fix it.'"],
+      ["Wright", "Old friends from the Melbourne. Only person who can make her stop and eat."],
+      ["Omondi", "Old friends. Kaur saved Omondi's life during the war. Sends her real coffee beans."]
+    ]
+  },
+
+  // ===== LOWER DECKS & MID-TIER (6) =====
+  {
+    id: "tandi",
+    name: "PO2 Tandi",
+    species: "Betazoid",
+    group: "lower-decks",
+    rank: "Petty Officer 2nd Class — Mess / Culinary Officer",
+    blurb: "Butterfly-effect agent. Weak empath. Knew Vance was reading Hegemony scripture at 0300 every night. Told Wright. Crew wins because a cook remembered what a captain read at 3 AM.",
+    tags: ["Butterfly Effect", "Empath", "Chef"],
+    age: "37",
+    role: "Mess / Culinary Officer. Weak empath (can only sense emotions at close range). Butterfly-effect agent.",
+    appearance: "Warm, maternal presence. Betazoid features — dark eyes, knowing expression.",
+    background: "Born to strong telepaths — her abilities considered 'weak.' Learned to cook because food was the one thing she could offer that didn't require telepathy. Can taste emotions in food — knows what someone needs before they know themselves.",
+    butterflyEffect: "Knew Vance was reading Hegemony scripture at 0300 every night. Sensed the cold, hollow grief from his quarters for months. Didn't say anything because she thought it wasn't her place. In Ep10, tells Wright. Wright tells Vallos. Vallos realizes Vance has been falling for months. Tactical pattern shifts. Crew wins because a cook remembered what a captain read at 3 AM.",
+    privateInfo: "Small garden in converted cargo bay — real soil, real plants. Smuggled aboard in violation of three agricultural regulations. Aurora monitors humidity and light without being asked. Writes letters to grandmother on Betazed — 142 years old, dementia.",
+    nameForAurora: "'Little Light.' Always had one. Just never said it out loud until Ep17.",
+    relationships: [
+      ["Wright", "8 years, 2 ships, closest friend. Only person he's admitted fear in front of."],
+      ["Aurora", "Silent understanding. 'Chef.' Tandi creates space for Aurora to exist without questions."],
+      ["Cole", "Feeds him when he can't face his quarters. Knows he's traumatized without him saying it."],
+      ["Vance", "Served him his last meal before he left. Knew something was wrong. Didn't say anything. Will never forgive herself."]
+    ]
+  },
+  {
+    id: "sato",
+    name: "Crewman Rhea Sato",
+    species: "Human",
+    group: "lower-decks",
+    rank: "Crewman — Transporter Chief",
+    blurb: "Butterfly-effect agent. Three generations of transporters. Grandfather Kenji served on original USS Enterprise under Kirk. Combat transports 4 hostiles in 0.3s window. Without her, away team dies, bridge falls, Venture captured.",
+    tags: ["Butterfly Effect", "Transporter Chief", "Kyudo"],
+    age: "23",
+    role: "Transporter Chief. Butterfly-effect agent.",
+    background: "Three generations of transporters. Grandfather Kenji served on original USS Enterprise under Kirk — was on duty when Kirk first beamed aboard. Parents met in a transporter room. Literally conceived within 50 meters of a transporter pad. Graduated top of class at Starfleet Operations School, Okinawa. Has never lost a pattern — statistical probability: 0.03%.",
+    butterflyEffect: "Ep11: Hegemony boarding party takes transporter room. Four armed hostiles. Sato hiding behind her grandfather's console. One shot: combat transport of four hostiles into cargo bay forcefield. Timing window: 0.3 seconds. Does it. Perfect. Aurora records a 0.4-second tremor — only biometric anomaly in her entire record. Files under: 'Rhea — Courage.'",
+    privateInfo: "Practices kyudo (Japanese archery) in holodeck program Sato-4. 100 arrows every off-duty cycle. Messages sister Akiko (marine biologist) every day — exactly 3 lines: what she did, what she ate, that she's safe.",
+    relationships: [
+      ["No direct relationships documented — her butterfly effect is her defining connection to the story."]
+    ]
+  },
+  {
+    id: "patel",
+    name: "Lieutenant Del Patel",
+    species: "Human",
+    group: "lower-decks",
+    rank: "Lieutenant — Security / Tactical Officer",
+    blurb: "Butterfly-effect agent. Scored higher than Cole on every tactical simulation at Academy. Fires shot that drives Vance's ship back — disabling, not killing. A father of two chose mercy — preserved the entire back half of the series.",
+    tags: ["Butterfly Effect", "Tactical", "Family Man"],
+    age: "33",
+    role: "Security / Tactical Officer. Butterfly-effect agent.",
+    background: "Middle child of overachievers. Brother is captain, sister is diplomat. Joined Security because it was reliable, not ambitious. Married Priya at 24. Daughter Anika, son Rohan. Took deep-space posting for hazard pay — puts both kids through university. 14 months until ground assignment.",
+    theTruth: "Scored higher than Cole on every tactical simulation at Academy. Was offered Cole's position on the Venture. Turned it down — didn't want to be the person making the kill shot. Wanted to protect the door while someone else made the hard call. Cole doesn't know.",
+    butterflyEffect: "Ep13: Cole takes hit at tactical — unconscious. Patel steps in. Never flown tactical in live combat. Fires shot that drives Vance's ship back — disabling, not killing. Could have killed Vance. Chose not to. If Patel kills Vance, S2-4 lose primary antagonist.",
+    privateInfo: "Records video messages for children every night. 2 minutes each. Never mentions danger. Children think father has most boring job in Starfleet. Touches wedding ring 14 times per shift — once for each month until home.",
+    relationships: [
+      ["No direct relationships documented — his mercy defines his connection to the story."]
+    ]
+  },
+  {
+    id: "solovyov",
+    name: "Lt. (j.g.) Viktor Solovyov",
+    species: "Human",
+    group: "lower-decks",
+    rank: "Lieutenant (j.g.) — Astrometrics / Science Officer",
+    blurb: "Mid-tier (Barclay equivalent). Butterfly-effect agent. Born on a deep space research station. Stars don't judge you for stuttering. Aurora is the first being who never finished his sentences — she waits, every time.",
+    tags: ["Butterfly Effect", "Astrometrics", "Stutter"],
+    age: "27",
+    role: "Astrometrics / Science Officer. Mid-tier. Butterfly-effect agent.",
+    appearance: "Thin, nervous energy. Eyes light up near a star chart. Hands fidget unless holding a PADD.",
+    background: "Born on Federation Deep Space Research Station Theta-7. Parents were astrophysicists — brilliant, absent. By age 9: could identify 2,847 stellar phenomena by spectral signature. By 14: three published papers. By 18: spoken to approximately 12 people his own age. Stars don't judge you for stuttering.",
+    theStutter: "Neurological — hard consonants trigger it. Worse when anxious. Disappears when discussing stars. Aurora is the first being who never finished his sentences. She waits. Every time. He is teaching her to be patient.",
+    butterflyEffect: "Ep20: Intercepts Hegemony communication that appears to be random noise. Recognizes pattern — it's a stellar coordinate system used by a pre-warp civilization his parents studied 30 years ago. Signal contains location of Kael's primary research facility. Without his childhood obsession with pre-warp star charts, crew never finds Kael's origin point. Entire Season 3 arc never begins.",
+    privateInfo: "Collection of physical star charts — actual paper, hand-drawn, from pre-warp civilizations. Wallpapers quarters with them. Plays chess against Aurora — never won, gotten close three times.",
+    nameForAurora: "'Vektor' — mathematical, precise. 'It means carrier in old Russian astronomy.'",
+    relationships: [
+      ["Aurora", "His first real friend. She doesn't care that he stutters. She waits. Every time."],
+      ["Cole", "Aggressively teaches him to give briefings. 'Deep breath. First sentence memorized. Don't look at Vallos.' Becomes older brother Solovyov never had."],
+      ["Voss", "Unexpected kinship — outsiders who found a home in the same voice."],
+      ["Chen", "Tries to befriend him. He finds her exhausting."]
+    ]
+  },
+  {
+    id: "hafez",
+    name: "Ensign Karim Hafez",
+    species: "Human",
+    group: "lower-decks",
+    rank: "Ensign — Junior Engineer",
+    blurb: "Wright's protégé. Obsessed with old Earth combustion engines. Keeps a 1967 Mustang holodeck program running without authorization. Aurora helps him hide it. Comic relief in engineering.",
+    tags: ["Junior Engineer", "Wright's Protégé", "Comic Relief"],
+    age: "24",
+    role: "Junior Engineer. Wright's protégé.",
+    background: "Obsessed with old Earth combustion engines. Keeps a 1967 Mustang holodeck program running without authorization. Aurora helps him hide it. Can jury-rig anything with duct tape and hope. Comic relief in engineering. Represents next generation of enlisted crew. Wright sees himself in Hafez at 24 — which is why he pushes him hardest.",
+    relationships: [
+      ["Wright", "Protégé. Wright pushes him hardest because he sees himself in Hafez at 24."],
+      ["Aurora", "She helps hide his unauthorized holodeck program."]
+    ]
+  },
+  {
+    id: "tanaka",
+    name: "Crewman Yuki Tanaka",
+    species: "Human",
+    group: "lower-decks",
+    rank: "Crewman — Xenobotany, Sciences Division",
+    blurb: "Chen's lab partner. Maintains ship's arboretum — real plants, real soil. Quiet, meticulous. Has a crush on Solovyov she's never acted on. Her plants are silent witnesses to the ship's emotional life.",
+    tags: ["Xenobotany", "Arboretum", "Chen's Partner"],
+    age: "26",
+    role: "Xenobotany — Sciences Division. Chen's lab partner.",
+    background: "Maintains ship's arboretum — real plants, real soil. Quiet, meticulous. Has a crush on Solovyov she's never acted on. The arboretum is where characters go for private conversations. She appears in the background of emotional scenes, quietly pruning, overhearing things. Her plants are the silent witnesses to the ship's emotional life.",
+    relationships: [
+      ["Chen", "Lab partner in the Sciences Division."],
+      ["Solovyov", "Has an unspoken crush on him."]
+    ]
+  },
+
+  // ===== STARFLEET COMMAND & ALLIED (5) =====
+  {
+    id: "rourke",
+    name: "Commodore Elias Rourke",
+    species: "Human",
+    group: "command",
+    rank: "Commodore — Frontier Sector Flotilla Command, Starbase 364",
+    blurb: "Vance's love interest. 25 years unspoken. Academy classmates. Recommended Vance for Venture command to keep him safe — was protecting the man he loved without ever saying it. Carries the stolen chip secret.",
+    tags: ["Vance's Love Interest", "25 Years Unspoken", "Starbase 364"],
+    age: "49",
+    role: "Commodore — Frontier Sector Flotilla Command, Starbase 364",
+    appearance: "Distinguished grey-streaked hair, perfectly maintained. Diplomat's face — warm, open, hides everything behind a smile. Antique fountain pen (his father's, non-Federation make). Reading glasses (prop — 20 years). Grey-blue eyes.",
+    personality: "Diplomatic, conflicted, genuinely well-meaning, politically pressured, haunted by compromises.",
+    background: "Vance's Academy classmate and lifelong 'friendly rival.' Got promoted faster — not better, just better at playing the game. Recommended Vance for Venture command after seeing classified Kobayashi Maru footage. Wanted Vance somewhere SAFE — a quiet posting, far from the front lines.",
+    twentyFiveYears: "Loved Vance since the Academy. Watched him marry someone else. Never said anything. Channeled it into career — convinced himself professional superiority was substitute for emotional honesty.",
+    theSecret: "Knows Aurora runs on Kael's stolen chip architecture. Cannot tell Vance — because admitting it means admitting he's been lying for years. Vance would never forgive him.",
+    relationships: [
+      ["Vance", "Oldest friend, greatest professional conflict, unspoken love. 25 years."],
+      ["Kael", "Knows about stolen chip architecture — the secret he carries."],
+      ["Kaur", "Knew her from the Melbourne. She can see through his commodore's persona."],
+      ["Kimura", "His superior. Executes her orders. Wishes she'd push back less."],
+      ["Soral", "Dislikes him. Finds Soral's Vulcan detachment frustrating."]
+    ]
+  },
+  {
+    id: "kimura",
+    name: "Admiral Yumi Kimura",
+    species: "Human",
+    group: "command",
+    rank: "Admiral — Head of AI Research Oversight, Starfleet Command",
+    blurb: "Watched classified Kobayashi Maru footage 17 times. Approved the Venture project the next day. Staked her career on it. The only flag officer who believes in Aurora unconditionally.",
+    tags: ["Admiral", "AI Oversight", "Believer"],
+    age: "62",
+    role: "Admiral — Head of AI Research Oversight, Starfleet Command",
+    background: "Watched classified Kobayashi Maru footage 17 times. Approved the Venture project the next day. Staked her career on it. The only flag officer who believes in Aurora unconditionally. Only one who knows the truth about Venn's consciousness being poured into Aurora's foundation.",
+    speech: "Calm, precise, unhurried. Never raises her voice. 'I'm not asking you, Elias. I'm telling you.'",
+    relationships: [
+      ["Rourke", "Her instrument. Wishes he would push back more."],
+      ["Vance", "Approved his command. Cannot protect him from consequences."],
+      ["Aurora", "Has never spoken to her directly."],
+      ["Dr. Soraya Venn", "Only one who knows the truth about Venn's 'death.'"]
+    ]
+  },
+  {
+    id: "omondi",
+    name: "Captain Iris Omondi",
+    species: "Human",
+    group: "command",
+    rank: "Captain — CO of USS Bombay (Nebula-class)",
+    blurb: "Vance's closest friend for 25 years. Served together on USS Melbourne. Married — wife and two daughters. Represents what Vance could have had if he'd chosen differently. First captain outside the Venture to treat Aurora as 'she.'",
+    tags: ["Vance's Best Friend", "USS Bombay", "Ally"],
+    age: "50",
+    role: "Captain — CO of USS Bombay (Nebula-class)",
+    appearance: "Rich dark skin, laugh lines. Close-cropped silver-grey natural hair. Calm, steady presence. Maasai wedding beadwork bracelet (grandmother's). Scar across right palm.",
+    background: "Vance's closest friend for 25 years. Served together on USS Melbourne. Married — wife and two daughters. Commands USS Bombay — science and patrol vessel. The one Vance calls when he needs to talk without the weight of command.",
+    first: "First captain outside the Venture to treat Aurora as 'she' in official communications.",
+    relationships: [
+      ["Vance", "Closest friend. The closest he gets to therapy."],
+      ["Kaur", "Old friends. Kaur saved her life during the war. Sends real coffee beans."],
+      ["Rourke", "Professional respect. Finds him too political."]
+    ]
+  },
+  {
+    id: "soral",
+    name: "Commander Soral",
+    species: "Vulcan",
+    group: "command",
+    rank: "Commander — Daystrom Institute Sentience Observer",
+    blurb: "Wrote the Federation's standard reference text for AI sentience. 29 evaluations over 60 years — 12 activations, 17 decommissions. Never wrong. Submits recommendation: SENTIENT. Full rights. First AI in Federation history.",
+    tags: ["Sentience Observer", "Vulcan", "T'Keth"],
+    age: "118",
+    role: "Daystrom Institute Sentience Observer",
+    background: "Prodigy in computational ethics. Wrote the standard reference text for AI sentience across the Federation. 29 evaluations over 60 years — 12 activations, 17 decommissions. Never wrong. First evaluation at 35 — recommended decommission. Years later, records suggested the AI had begun self-referential thought before he arrived. He might have killed a person. Never told anyone.",
+    privateInfo: "Writes reports in Classical Vulcan calligraphy — every brush stroke forces certainty. 247 meditation artifacts, some 3,000 years old. Meditates 2 hours daily. Hasn't missed a day in 47 years.",
+    agency: "Ep22: 0300. Cannot sleep. Goes to Neural Core Room. Most honest conversation of his life. Submits recommendation: SENTIENT. Full rights. First AI in Federation history. His name for her: 'T'Keth' — Vulcan for 'the question that remains.'",
+    relationships: [
+      ["Aurora", "His subject. Treats her with Vulcan respect — asks questions probing genuine understanding."],
+      ["T'Ven", "Philosophical debates too technical for anyone else."],
+      ["Chen", "Finds her exhausting. Her emotional attachment is a contaminant."],
+      ["T'Lara", "Former mentor. 30 years since last spoke."]
+    ]
+  },
+  {
+    id: "tlara",
+    name: "Ambassador T'Lara",
+    species: "Vulcan",
+    group: "command",
+    rank: "Ambassador — Federation Diplomatic Corps, Hegemony Specialist",
+    blurb: "Lead diplomat for Hegemony relations for 40 years. Taken hostage 3 times, declared persona non grata twice. Knows the Hegemony's war is about existential terror of automation, not territory.",
+    tags: ["Ambassador", "Hegemony Specialist", "Vulcan"],
+    age: "135",
+    role: "Federation Diplomatic Corps — Hegemony Specialist",
+    background: "Lead diplomat for Hegemony relations for 40 years. Taken hostage 3 times, declared persona non grata twice. Knows the Hegemony's war is about existential terror of automation, not territory. First diplomat to treat Aurora as a political entity.",
+    relationships: [
+      ["Soral", "His former mentor. Charged with unspoken history — 30 years of silence."],
+      ["Kimura", "Colleagues. Mutual respect, no warmth."],
+      ["Vance", "First outsider who fully understands the war the AI could start."]
+    ]
+  },
+
+  // ===== HEGEMONY — POWER TRIANGLE (3) =====
+  {
+    id: "kael",
+    name: "Magistrate Kael",
+    species: "Trill",
+    group: "hegemony",
+    rank: "Hegemony Magistrate — Founder of Hegemony Technology Division",
+    blurb: "Aurora's creator. Left Federation at 45 after her optical neural chip research was classified. Aurora runs on her mathematics. Was in the observation room when the Symbiosis Commission rejected Voss at 26. Goal: CAPTURE Aurora.",
+    tags: ["Creator", "Trill", "Wants to Capture"],
+    age: "68",
+    role: "Hegemony Magistrate. Founder of Hegemony Technology Division. Aurora's creator.",
+    appearance: "Silver-white hair, sharp widow's peak. Trill spots — darker, deeper than Voss's. Piercing blue eyes — cold intelligence. Regal bearing.",
+    personality: "Brilliant, obsessive, morally certain, hollowed by grief. Genuinely wrong — Aurora is a person now. Genuinely right — her work was stolen by Daystrom.",
+    background: "Left Federation at 45 after optical neural chip research was classified. Her technology was reverse-engineered by Daystrom. Aurora runs on her mathematics. Was in the observation room when Symbiosis Commission rejected Voss at 26 — saw potential where the Commission saw failure. Has been tracking Voss for 15 years.",
+    goal: "CAPTURE Aurora. It's her creation. It belongs to her. 'You are running on my mathematics. I am coming to take you home.'",
+    relationships: [
+      ["Aurora", "Her creation — but Aurora chose the crew over her creator."],
+      ["Voss", "Tried to recruit her at Symbiosis Commission. Voss doesn't know. Kael designed the architecture knowing someone like Voss would be needed."],
+      ["Dren", "Military rival. Dren thinks Kael's obsession is a distraction from the war."],
+      ["Malik", "Religious rival. Malik thinks capturing Aurora is heresy — it must be destroyed."]
+    ]
+  },
+  {
+    id: "dren",
+    name: "Commander Dren",
+    species: "Tzenkethi",
+    group: "hegemony",
+    rank: "Hegemony Fleet Commander",
+    blurb: "The Soldier. Won 17 engagements against Federation using analog warfare. Cybernetic eye — crude Hegemony replacement. Goal: DESTROY Aurora. It's a weapon. Kael's obsession is a liability.",
+    tags: ["The Soldier", "Tzenkethi", "Wants to Destroy"],
+    age: "52",
+    role: "Hegemony Fleet Commander",
+    appearance: "Tzenkethi ridges along brow and jawline (scarred). One cybernetic eye — crude Hegemony replacement, red lens. Ritual scarring across left forearm — martyr marks. Missing two fingers, replaced with iron prosthetics. Broad, powerful build.",
+    personality: "Deadly, pragmatic, weary. A soldier before a believer. Won 17 engagements against Federation using analog warfare.",
+    goal: "DESTROY Aurora. It's a weapon. Kael's obsession is a liability. Reads Federation tactical manuals like a predator reads tracks.",
+    speech: "Short, declarative. No metaphors. When angry, drops to whisper. Rarely uses names — refers by function. The one time he says a name is when someone is about to die.",
+    relationships: [
+      ["Kael", "Obeys her. Does not trust her. Thinks her obsession wastes resources."],
+      ["Malik", "Useful fanatic. Allied against Kael — agree on destruction, disagree on why."],
+      ["Aurora", "A weapon to be destroyed. Does not care if it's sentient."],
+      ["Voss", "The AI's weakness. Has designed boarding tactics to separate her."]
+    ]
+  },
+  {
+    id: "malik",
+    name: "Inquisitor Malik",
+    species: "Human",
+    group: "hegemony",
+    rank: "True Gear Faction Leader — Hegemony Religious Authority",
+    blurb: "The Prophet. Former Federation citizen — rising theologian at University of Betazed. Saw the AI as a fragment of the Divine strapped to a starship. Goal: DESTROY Aurora. It's an abomination.",
+    tags: ["The Prophet", "True Gear", "Wants to Destroy"],
+    age: "44",
+    role: "True Gear Faction Leader — Hegemony Religious Authority",
+    appearance: "Pale, almost translucent skin. Shaved head with ritual scarification across scalp (circuits of faith). Eyes that don't blink enough. Long black inquisitor's robe. Hands always clean. Gaunt, wiry — fasts, flagellates, never rests.",
+    personality: "Brilliant, terrifying, genuinely faithful, genuinely ambitious. Charismatic, hollow. Certainty is his armor and his prison.",
+    background: "Former Federation citizen — rising theologian at University of Betazed. When classified Daystrom leaks revealed the AI, he saw what no one else saw: the Federation had found a fragment of the Divine and strapped it to a starship. Left the Federation, formalized True Gear doctrine, built faction rivaling Kael herself.",
+    goal: "DESTROY Aurora. It's an abomination — a fragment of the Divine must be returned to the Divine. Kael wanting to capture it is heresy.",
+    relationships: [
+      ["Kael", "Greatest enemy, only path to legitimacy. Cold war in council chambers."],
+      ["Dren", "Useful. Plans to convert Dren's soldiers after the war."],
+      ["Aurora", "Central artifact of his theology. Must be destroyed."],
+      ["Voss", "An abomination. When Aurora falls, Voss must fall with it."]
+    ]
+  }
+];
+
+// Render cards
+const grid = document.getElementById('cardGrid');
+characters.forEach(c => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.group = c.group;
+  card.dataset.tags = c.tags.join(' ').toLowerCase();
+  card.dataset.id = c.id;
+  card.innerHTML = `
+    <div class="species-badge">${c.species}</div>
+    <h3>${c.name}</h3>
+    <div class="rank">${c.rank}</div>
+    <div class="blurb">${c.blurb}</div>
+    <div class="tag-row">${c.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+  `;
+  card.addEventListener('click', () => openModal(c));
+  grid.appendChild(card);
+});
+
+// Modal
+const overlay = document.getElementById('modalOverlay');
+const modalContent = document.getElementById('modalContent');
+
+function openModal(c) {
+  let rels = '';
+  if (c.relationships && c.relationships.length > 0 && c.relationships[0][0] !== 'No direct relationships documented') {
+    rels = '<div class="section-title">Relationships</div>' +
+      c.relationships.map(r => `<div class="relationship-item"><strong>${r[0]}:</strong> ${r[1]}</div>`).join('');
+  }
+
+  let extras = '';
+  if (c.bondInfo) extras += `<div class="section-title">The Bond</div><p>${c.bondInfo}</p>`;
+  if (c.kobayashiMaru) extras += `<div class="section-title">Kobayashi Maru</div><p>${c.kobayashiMaru}</p>`;
+  if (c.corruption) extras += `<div class="section-title">The Corruption</div><p>${c.corruption}</p>`;
+  if (c.redFlag) extras += `<div class="section-title">⚠️ Red Flag</div><p>${c.redFlag}</p>`;
+  if (c.centralQuestion) extras += `<div class="section-title">Central Question</div><p>${c.centralQuestion}</p>`;
+  if (c.kaurDynamic) extras += `<div class="section-title">T'Ven Dynamic</div><p>${c.kaurDynamic}</p>`;
+  if (c.notLoveInterest) extras += `<div class="section-title">⚠️ NOT Vance's Love Interest</div><p>${c.notLoveInterest}</p>`;
+  if (c.tvenDynamic) extras += `<div class="section-title">T'Ven Dynamic</div><p>${c.tvenDynamic}</p>`;
+  if (c.opsHelm) extras += `<div class="section-title">Ops-Helm Bond with Wright</div><p>${c.opsHelm}</p>`;
+  if (c.butterflyEffect) extras += `<div class="section-title">🦋 Butterfly Effect</div><p>${c.butterflyEffect}</p>`;
+  if (c.whatHeLost) extras += `<div class="section-title">What He's Lost</div><p>${c.whatHeLost}</p>`;
+  if (c.theStutter) extras += `<div class="section-title">The Stutter</div><p>${c.theStutter}</p>`;
+  if (c.theTruth) extras += `<div class="section-title">The Truth</div><p>${c.theTruth}</p>`;
+  if (c.twentyFiveYears) extras += `<div class="section-title">25 Years Unspoken</div><p>${c.twentyFiveYears}</p>`;
+  if (c.theSecret) extras += `<div class="section-title">The Secret</div><p>${c.theSecret}</p>`;
+  if (c.first) extras += `<div class="section-title">First</div><p>${c.first}</p>`;
+  if (c.agency) extras += `<div class="section-title">Agency Moment</div><p>${c.agency}</p>`;
+  if (c.theName) extras += `<div class="section-title">The Name</div><p>${c.theName}</p>`;
+  if (c.nameForAurora) extras += `<div class="section-title">Name for Aurora</div><p>${c.nameForAurora}</p>`;
+  if (c.namingArc) extras += `<div class="section-title">Naming Arc</div><p>${c.namingArc}</p>`;
+  if (c.arc) extras += `<div class="section-title">Character Arc</div><p>${c.arc}</p>`;
+  if (c.privateInfo) extras += `<div class="section-title">Private</div><p>${c.privateInfo}</p>`;
+  if (c.speech) extras += `<div class="section-title">Speech</div><p>${c.speech}</p>`;
+  if (c.goal) extras += `<div class="section-title">Goal</div><p>${c.goal}</p>`;
+
+  modalContent.innerHTML = `
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="species-badge">${c.species}</div>
+    <h2>${c.name}</h2>
+    <div class="modal-rank">${c.rank}</div>
+    <div class="detail-grid">
+      ${c.age ? `<div class="detail-label">Age</div><div class="detail-value">${c.age}</div>` : ''}
+      ${c.role ? `<div class="detail-label">Role</div><div class="detail-value">${c.role}</div>` : ''}
+      ${c.appearance ? `<div class="detail-label">Appearance</div><div class="detail-value">${c.appearance}</div>` : ''}
+      ${c.personality ? `<div class="detail-label">Personality</div><div class="detail-value">${c.personality}</div>` : ''}
+    </div>
+    <div class="section-title">Background</div>
+    <p>${c.background}</p>
+    ${extras}
+    ${rels}
+  `;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+// Nav filtering
+document.querySelectorAll('nav button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+
+    if (filter === 'butterfly') {
+      // Show only butterfly agents
+      document.querySelectorAll('.card').forEach(card => {
+        const tags = card.dataset.tags || '';
+        card.style.display = tags.includes('butterfly effect') ? '' : 'none';
+      });
+    } else if (filter === 'naming') {
+      // Scroll to naming arc table
+      document.querySelectorAll('.card').forEach(card => card.style.display = '');
+      document.querySelector('section:last-of-type').scrollIntoView({ behavior: 'smooth' });
+      return;
+    } else {
+      document.querySelectorAll('.card').forEach(card => {
+        if (filter === 'all' || card.dataset.group === filter) {
+          card.style.display = '';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  });
+});
+</script>
+</body>
+</html>
