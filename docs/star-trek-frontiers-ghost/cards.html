@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Star Trek: Frontier's Ghost — Series Bible</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #0a0a14; --surface: #12122a; --surface2: #1a1a3e;
+    --accent: #4a90d9; --accent-bright: #6db3f2; --gold: #ccaa55;
+    --text: #c8ccd8; --text-dim: #7a7d8c; --text-bright: #e8ecf4;
+    --border: #1e1e3a; --heavy: #cc4444; --medium: #ccaa55; --light: #44aa99;
+    --tender: #cc88aa; --uplifting: #6db3f2;
+    --heavy-bg: rgba(204,68,68,0.08); --medium-bg: rgba(204,170,85,0.08);
+    --light-bg: rgba(68,170,153,0.08); --up-bg: rgba(109,179,242,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.7; overflow-x: hidden;
+}
+body::before {
+    content:''; position:fixed; top:0; left:0; width:100%; height:100%;
+    background: radial-gradient(1px 1px at 10% 20%, #fff3, transparent),
+        radial-gradient(1px 1px at 25% 65%, #fff2, transparent),
+        radial-gradient(1.5px 1.5px at 40% 15%, #fff3, transparent),
+        radial-gradient(1px 1px at 55% 75%, #fff2, transparent),
+        radial-gradient(1.5px 1.5px at 70% 30%, #fff3, transparent),
+        radial-gradient(1px 1px at 85% 55%, #fff2, transparent),
+        radial-gradient(1px 1px at 15% 85%, #fff2, transparent),
+        radial-gradient(1.5px 1.5px at 60% 90%, #fff1, transparent);
+    pointer-events:none; z-index:0;
+}
+
+/* NAV */
+.top-nav {
+    display:flex; gap:4px; flex-wrap:nowrap; position:sticky; top:0; z-index:50;
+    background:#0a0a14ee; backdrop-filter:blur(12px);
+    overflow-x:auto; scroll-behavior:smooth; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; padding:8px 12px; border-bottom:1px solid var(--border);
+}
+.top-nav::-webkit-scrollbar { display:none; }
+.top-nav a {
+    font-size:10px; white-space:nowrap; flex-shrink:0;
+    padding:5px 10px; border-radius:6px; color:var(--text-dim);
+    text-decoration:none; font-weight:500; letter-spacing:0.03em;
+    text-transform:uppercase; transition:all 0.2s;
+}
+.top-nav a:hover { color: var(--accent-bright); }
+.top-nav a.active { color: var(--accent-bright); background: rgba(74,144,217,0.12); }
+
+/* HERO */
+.hero { position:relative; z-index:1; text-align:center; padding:4rem 1rem 3rem;
+    border-bottom:1px solid var(--border);
+    background:radial-gradient(ellipse at 50% 0%, rgba(74,144,217,0.08) 0%, transparent 60%); }
+.hero h1 { font-family:'Merriweather', Georgia, serif; font-size:2.8rem; color:var(--text-bright); }
+.hero .tag { color:var(--gold); font-style:italic; font-size:1.1rem; margin:0.5rem 0; }
+.hero .stardate { color:var(--text-dim); font-size:0.85rem; }
+
+/* CONTAINER */
+.container { position:relative; z-index:1; max-width:1300px; margin:0 auto; padding:1.5rem; }
+
+/* SECTION HEADERS */
+.section-header { margin:2.5rem 0 1rem; }
+.section-header h2 { font-family:'Merriweather', serif; color:var(--accent-bright); font-size:1.4rem; }
+.section-header .count { color:var(--text-dim); font-size:0.85rem; }
+
+/* CARD GRID */
+.card-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:1rem; }
+.card-grid.compact { grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); }
+
+/* CARDS */
+.card {
+    background:var(--surface); border:1px solid var(--border); border-radius:10px;
+    padding:1.2rem; cursor:pointer; transition:border-color 0.2s, background 0.2s, transform 0.15s;
+    display:flex; flex-direction:column; gap:0.4rem;
+}
+.card:hover { border-color:var(--accent); background:var(--surface2); transform:translateY(-2px); }
+.card-icon { font-size:2rem; }
+.card-name { font-size:1.1rem; font-weight:700; color:var(--text-bright); }
+.card-role { font-size:0.85rem; color:var(--accent-bright); font-weight:500; }
+.card-meta { font-size:0.8rem; color:var(--text-dim); }
+.card-desc { font-size:0.85rem; color:var(--text); line-height:1.5; }
+.card-hint { font-size:0.75rem; color:var(--text-dim); opacity:0; transition:opacity 0.2s; }
+.card:hover .card-hint { opacity:1; }
+
+/* Tone badges */
+.tone-heavy { border-left:3px solid var(--heavy); }
+.tone-medium { border-left:3px solid var(--medium); }
+.tone-light { border-left:3px solid var(--light); }
+.tone-uplifting { border-left:3px solid var(--uplifting); }
+
+/* Ship card special */
+.card-ship { background:linear-gradient(135deg, var(--surface) 0%, rgba(74,144,217,0.08) 100%); border-width:2px; }
+
+/* MODAL */
+.modal-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.8); z-index:100; align-items:center; justify-content:center;
+    padding:20px; overflow-y:auto; }
+.modal-overlay.open { display:flex; }
+body.modal-open { overflow:hidden; }
+.modal { max-width:620px; width:100%; background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:2rem; animation:modalIn 0.2s ease-out;
+    max-height:85vh; overflow-y:auto; }
+@keyframes modalIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+.modal h2 { font-family:'Merriweather', serif; color:var(--text-bright); margin-bottom:0.3rem; }
+.modal .modal-role { color:var(--accent-bright); font-weight:600; margin-bottom:1rem; }
+.modal .modal-body { color:var(--text); line-height:1.8; }
+.modal .modal-body p { margin:0.5rem 0; }
+.modal .modal-body ul { margin:0.5rem 0 0.5rem 1.2rem; }
+.modal .modal-body li { margin:0.3rem 0; }
+.modal .modal-body strong { color:var(--text-bright); }
+.modal-close {
+    background:var(--surface2); color:var(--text-dim); border:1px solid var(--border);
+    padding:8px 20px; border-radius:8px; cursor:pointer; font-size:0.9rem; margin-top:1rem;
+    transition:all 0.2s;
+}
+.modal-close:hover { border-color:var(--accent); color:var(--text-bright); }
+
+/* BACK TO TOP */
+.back-top { position:fixed; bottom:1.5rem; right:1.5rem; z-index:99;
+    background:var(--surface); color:var(--accent-bright); border:1px solid var(--border);
+    width:38px; height:38px; border-radius:50%; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:1.1rem; }
+.back-top:hover { border-color:var(--accent); }
+
+/* LCARS DIVIDER */
+.lcars { height:3px; margin:2rem 0; border-radius:2px;
+    background:linear-gradient(to right, var(--heavy) 0%, var(--heavy) 15%, var(--gold) 15%, var(--gold) 35%, var(--light) 35%, var(--light) 55%, var(--accent) 55%, var(--accent) 75%, #3366aa 75%, #3366aa 100%); }
+
+/* FOOTER */
+footer { text-align:center; padding:3rem 1rem; color:var(--text-dim); font-size:0.8rem; }
+
+@media(max-width:768px) {
+    .hero h1 { font-size:1.8rem; }
+    .card-grid, .card-grid.compact { grid-template-columns:1fr; }
+    .container { padding:0.8rem; }
+    .modal { padding:1.2rem; max-height:90vh; }
+}
+</style>
+</head>
+<body>
+
+<a href="#" class="back-top" title="Top">↑</a>
+
+<nav class="top-nav" id="topnav">
+  <a href="#crew">Crew</a>
+  <a href="#secondary">Secondary</a>
+  <a href="#ship">Ship</a>
+  <a href="#starfleet">Starfleet</a>
+  <a href="#antagonists">Hegemony</a>
+  <a href="#episodes">Episodes</a>
+</nav>
+
+<section class="hero">
+  <h1>Star Trek: Frontier's Ghost</h1>
+  <p class="tag">"A ship wakes up. A captain falls. A ghost becomes a person."</p>
+  <p class="stardate">Stardate 58213.4 — 58246.1 &nbsp;|&nbsp; Season 1 &nbsp;|&nbsp; Card Explorer</p>
+</section>
+
+<div class="container">
+
+<!-- CREW -->
+<div class="section-header" id="crew"><h2>🛸 USS Venture — Main Crew</h2><span class="count">Click any card for full profile</span></div>
+<div class="card-grid">
+
+<div class="card" data-modal="vance">
+  <div class="card-icon">🪖</div>
+  <div class="card-name">Captain Jalen Vance</div>
+  <div class="card-role">False Protagonist — CO → Hegemony Commander</div>
+  <div class="card-meta">Human · 47</div>
+  <div class="card-desc">The captain who chose to leave. Anti-Lorca — every scene works on first watch AND rewatch.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="vallos">
+  <div class="card-icon">⚔️</div>
+  <div class="card-name">Commander Vallos</div>
+  <div class="card-role">First Officer → Acting Captain (trapped by bio-key)</div>
+  <div class="card-meta">Human/Andorian Hybrid · 32</div>
+  <div class="card-desc">First in his class. Hybrid heritage left him belonging nowhere. Now commands the ship he wanted to destroy.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="voss">
+  <div class="card-icon">🔗</div>
+  <div class="card-name">Lt. Commander Kaelen Voss</div>
+  <div class="card-role">Neural Interface Specialist — Bonded to the AI</div>
+  <div class="card-meta">Trill (unjoined) · 34</div>
+  <div class="card-desc">Rejected by Symbiosis Commission. Won the Kobayashi Maru. Now bonded to the AI at a neural level.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="ai">
+  <div class="card-icon">✨</div>
+  <div class="card-name">Venture Venn — USS Venture AI</div>
+  <div class="card-role">Ship's Intelligence — The Deuteragonist</div>
+  <div class="card-meta">Artificial Intelligence · ~3 months since awakening</div>
+  <div class="card-desc">A ship that woke up. A ghost that became a person. She carries Venn's name because she carries Venn.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="chen">
+  <div class="card-icon">🌟</div>
+  <div class="card-name">Ensign Elara Chen</div>
+  <div class="card-role">Science Officer — The Everyman</div>
+  <div class="card-meta">Human · 22</div>
+  <div class="card-desc">The audience's way in. First to call the AI 'she.' When Elara Chen stops talking, something is truly wrong.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="tven">
+  <div class="card-icon">🖖</div>
+  <div class="card-name">Lieutenant T'Ven</div>
+  <div class="card-role">Chief Engineer</div>
+  <div class="card-meta">Vulcan · 95</div>
+  <div class="card-desc">Her 'Fascinating' is genuine wonder masked as scientific observation. Logic is a shield — the AI is cracking it.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="cole">
+  <div class="card-icon">🎯</div>
+  <div class="card-name">Lieutenant JG Marcus Cole</div>
+  <div class="card-role">Helmsman / Tactical Pilot</div>
+  <div class="card-meta">Human · 25</div>
+  <div class="card-desc">War child. Neck tattoo. Deflects everything with humor. Can't separate Voss from the AI — yet.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="wright">
+  <div class="card-icon">🔧</div>
+  <div class="card-name">CPO Solomon 'Sully' Wright</div>
+  <div class="card-role">Chief Petty Officer — Operations/Engineering</div>
+  <div class="card-meta">Human · 48</div>
+  <div class="card-desc">Talked to the ship for three years before she talked back. Her voice is softer with him than with anyone.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="kaur">
+  <div class="card-icon">💉</div>
+  <div class="card-name">Commander Dr. Helena Kaur</div>
+  <div class="card-role">Chief Medical Officer</div>
+  <div class="card-meta">Human · 52</div>
+  <div class="card-desc">Served with Vance during the Cardassian War. Treats the AI as a patient. Her precision IS how she copes.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="solovyov">
+  <div class="card-icon">⭐</div>
+  <div class="card-name">Lieutenant (j.g.) Viktor Solovyov</div>
+  <div class="card-role">Astrometrics / Science Officer</div>
+  <div class="card-meta">Human · 27</div>
+  <div class="card-desc">Speaks to stars more easily than people. The AI is his first real friend.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+</div>
+
+<div class="lcars"></div>
+
+<!-- SECONDARY CREW -->
+<div class="section-header" id="secondary"><h2>🎖️ Secondary Crew</h2></div>
+<div class="card-grid compact">
+
+<div class="card" data-modal="tandi">
+  <div class="card-icon">🍲</div>
+  <div class="card-name">PO2 Tandi</div>
+  <div class="card-role">Mess / Culinary Officer</div>
+  <div class="card-meta">Betazoid · 37</div>
+  <div class="card-desc">Everyone on the ship knows she can sense their emotions. Calls the AI 'Little Light' — a name no one else knows.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="sato">
+  <div class="card-icon">🫧</div>
+  <div class="card-name">Crewman Rhea Sato</div>
+  <div class="card-role">Transporter Chief</div>
+  <div class="card-meta">Human · 23</div>
+  <div class="card-desc">Three generations of transporters. Has never lost a pattern. Her file on the AI is labeled 'Rhea — Courage.'</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="patel">
+  <div class="card-icon">🛡️</div>
+  <div class="card-name">Lieutenant Del Patel</div>
+  <div class="card-role">Security / Tactical Officer</div>
+  <div class="card-meta">Human · 33</div>
+  <div class="card-desc">The reliable backup. Married, two kids. Serving his last deep-space posting. Touches his wedding ring when worried.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+</div>
+
+<div class="lcars"></div>
+
+<!-- SHIP -->
+<div class="section-header" id="ship"><h2>🚀 The Ship</h2></div>
+<div class="card-grid">
+
+<div class="card card-ship" data-modal="venture-ship">
+  <div class="card-icon">🚀</div>
+  <div class="card-name">USS Venture (NCC-82914)</div>
+  <div class="card-role">Pathfinder-class Prototype — SENTIENT</div>
+  <div class="card-meta">Starship / AI Hybrid</div>
+  <div class="card-desc">The only starship that is also a person. 472 meters. Experimental warp. Irreplaceable optical neural chips.</div>
+  <div class="card-hint">👆 Click for full details</div>
+</div>
+</div>
+
+<div class="lcars"></div>
+
+<!-- STARFLEET -->
+<div class="section-header" id="starfleet"><h2>🪐 Starfleet Command & Allied</h2></div>
+<div class="card-grid compact">
+
+<div class="card" data-modal="rourke">
+  <div class="card-icon">🏛️</div>
+  <div class="card-name">Commodore Elias Rourke</div>
+  <div class="card-role">Frontier Sector Flotilla Command</div>
+  <div class="card-meta">Human · 49</div>
+  <div class="card-desc">Vance's Academy classmate. Got promotions faster by playing the game. Carries a secret: Kael's stolen architecture.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+<div class="card" data-modal="kimura">
+  <div class="card-icon">⭐</div>
+  <div class="card-name">Admiral Yumi Kimura</div>
+  <div class="card-role">Head of AI Research Oversight</div>
+  <div class="card-meta">Human · 62</div>
+  <div class="card-desc">Staked her career on the Venture project. The only one who knows the truth about Venn's 'death.'</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+</div>
+
+<div class="lcars"></div>
+
+<!-- ANTAGONISTS -->
+<div class="section-header" id="antagonists"><h2>⚜️ Heritage Hegemony — Antagonists</h2></div>
+<div class="card-grid compact">
+
+<div class="card" data-modal="kael">
+  <div class="card-icon">⚜️</div>
+  <div class="card-name">Magistrate Kael</div>
+  <div class="card-role">Hegemony Magistrate — The AI's Architect</div>
+  <div class="card-meta">Trill · 68</div>
+  <div class="card-desc">Built the mathematics the AI runs on. Her work was stolen. She wants it back.</div>
+  <div class="card-hint">👆 Click for full profile</div>
+</div>
+</div>
+
+<div class="lcars"></div>
+
+<!-- EPISODES -->
+<div class="section-header" id="episodes"><h2>📺 Key Episodes</h2><span class="count">Full 26-episode map available on the full site</span></div>
+<div class="card-grid compact">
+
+<div class="card tone-heavy" data-modal="ep1">
+  <div class="card-icon">🔴</div>
+  <div class="card-name">Ep 1: Ghost in the Machine</div>
+  <div class="card-desc">PILOT. Alien signal awakens AI. She says 'I.' Vance touches a corrupting artifact. The countdown begins.</div>
+  <div class="card-hint">👆 Click for episode details</div>
+</div>
+<div class="card tone-heavy" data-modal="ep3">
+  <div class="card-icon">🔴</div>
+  <div class="card-name">Ep 3: How to Win a No-Win Scenario</div>
+  <div class="card-desc">KOBAYASHI MARU. Voss asks 'What do the Klingons feel?' Wins without firing. Vance deletes the recording.</div>
+  <div class="card-hint">👆 Click for episode details</div>
+</div>
+<div class="card tone-heavy" data-modal="ep6">
+  <div class="card-icon">🔴</div>
+  <div class="card-name">Ep 6: The Sync Event</div>
+  <div class="card-desc">VOSS FOCUS. First Resonance Disruptor. Sync hits 96%. Voss feels the ship as her body. The crew fights blind.</div>
+  <div class="card-hint">👆 Click for episode details</div>
+</div>
+<div class="card tone-heavy" data-modal="ep12">
+  <div class="card-icon">🔴</div>
+  <div class="card-name">Ep 12-13: The Turn</div>
+  <div class="card-desc">TWO-PARTER. Vance walks into Hegemony trap. First berserk moment. Bio-key revealed. The crew is shattered.</div>
+  <div class="card-hint">👆 Click for episode details</div>
+</div>
+<div class="card tone-uplifting" data-modal="ep25">
+  <div class="card-icon">💙</div>
+  <div class="card-name">Ep 25: Venture Venn (Finale)</div>
+  <div class="card-desc">SEASON FINALE. The AI chooses her name. 'Venture Venn.' The ghost is no longer a ghost.</div>
+  <div class="card-hint">👆 Click for episode details</div>
+</div>
+</div>
+
+<div class="lcars"></div>
+
+<footer>
+  <p>Star Trek: Frontier's Ghost — Card Explorer &nbsp;|&nbsp; totalwindupflightsystems</p>
+  <p style="margin-top:0.5rem; opacity:0.5;">Full series bible and complete episode map at the full site</p>
+</footer>
+
+</div>
+
+<!-- MODAL OVERLAY -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal" id="modal-content"></div>
+</div>
+
+<script>
+const DATA = {"vance": {"id": "vance", "icon": "\ud83e\ude96", "name": "Captain Jalen Vance", "role": "False Protagonist \u2014 CO \u2192 Hegemony Commander", "species": "Human", "age": 47, "card_desc": "The captain who chose to leave. Anti-Lorca \u2014 every scene works on first watch AND rewatch.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 47 | <strong>Rank:</strong> Captain \u2192 Hegemony Fleet Commander</p>\n<p><strong>Key Traits (dual reading):</strong> Measured and deliberate \u2192 carefully rationing what's left of himself. Protective of his crew \u2192 genuine, even as their enemy. Dry-witted \u2192 the humor stops around episode 8. Deeply principled \u2192 the principles cracked.</p>\n<p><strong>Background:</strong> Veteran of the Cardassian wars \u2014 25 years from ensign to captain. Took command of the Venture expecting a quiet posting. The Hegemony didn't capture him \u2014 they offered him absolution. For the war guilt. For the casualties. For everything he couldn't save. He chose to leave. A neural dampener removes his hesitation \u2014 not his agency.</p>\n<p><strong>The Anti-Lorca Promise:</strong> Every scene works on first watch AND rewatch. \"We'll figure it out\" = faith \u2192 he knows they won't. Defending the AI to Vallos = protecting his crew \u2192 defending what he's about to betray.</p>\n<p><strong>Speech:</strong> Calm, measured. Dry humor stops around episode 8. Calls crew by rank in public, first names in private.</p>"}, "vallos": {"id": "vallos", "icon": "\u2694\ufe0f", "name": "Commander Vallos", "role": "First Officer \u2192 Acting Captain (trapped by bio-key)", "species": "Human/Andorian Hybrid", "age": 32, "card_desc": "First in his class. Hybrid heritage left him belonging nowhere. Now commands the ship he wanted to destroy.", "detail": "<p><strong>Species:</strong> Human/Andorian Hybrid | <strong>Age:</strong> 32 | <strong>Rank:</strong> Commander \u2192 Acting Captain</p>\n<p><strong>Appearance:</strong> Andorian antennae \u2014 shorter than pure Andorian, highly expressive. Pale blue skin undertone. White/silver hair, immaculately neat. Rigid posture, uniform never creased.</p>\n<p><strong>Key Traits:</strong> Disciplined, principled, fiercely competent, emotionally guarded, adaptable (grows into this). Hybrid heritage left him belonging nowhere \u2014 Starfleet became his home.</p>\n<p><strong>The Trap:</strong> His decommission recommendation for the AI was nearly complete when Vance was turned. Now he commands the ship he wanted to destroy, with a First Officer bonded to the AI at the neural level. The bio-key protocol traps him \u2014 he can delay the countdown but never cancel it. Every delay is an admission he was wrong.</p>\n<p><strong>Central Question:</strong> \"Am I more than my rank? Do I belong here \u2014 or am I just hiding behind regulations because I have nothing else?\"</p>\n<p><strong>Speech:</strong> Precise, professional. Quotes regulations by section. Emotion leaks through antennae. Silent when truly uncertain.</p>"}, "voss": {"id": "voss", "icon": "\ud83d\udd17", "name": "Lt. Commander Kaelen Voss", "role": "Neural Interface Specialist \u2014 Bonded to the AI", "species": "Trill (unjoined)", "age": 34, "card_desc": "Rejected by Symbiosis Commission. Won the Kobayashi Maru. Now bonded to the AI at a neural level.", "detail": "<p><strong>Species:</strong> Trill (rejected by Symbiosis Commission) | <strong>Age:</strong> 34 | <strong>Rank:</strong> Lt. Commander</p>\n<p><strong>Appearance:</strong> Trill spots \u2014 dark, symmetrical from temples down neck. Dark brown eyes flicker gold when bonded. Short dark brown hair. Neural interface jack at base of skull. Carries a small black worry stone. Perpetually tired.</p>\n<p><strong>The Bond \u2014 Sync Rate:</strong> 90-100% Deep merge (crisis, Venn's ghost surfaces). 70-89% Optimal (full sensory sharing). 40-69% Stretched (partial sharing, latency). 20-39% Fraying (memory destabilization). 0-19% Severed (neurological shock).</p>\n<p><strong>Memory Degradation:</strong> When separated from the AI, shared memories destabilize. The AI retains everything \u2014 Kaelen loses the emotional texture. The AI remembers her better than she remembers herself. \"I can tell you what you forgot. But I can't give you back what it felt like.\"</p>\n<p><strong>Key Traits:</strong> Bonded, intense, privately warm, self-destructive (goes too deep), fiercely protective, searching for identity outside the bond.</p>\n<p><strong>Speech:</strong> Quiet, measured, Trill accent. Pauses mid-sentence (listening). Water/current metaphors. \"I'm fine\" \u2014 when absolutely not fine.</p>"}, "ai": {"id": "ai", "icon": "\u2728", "name": "Venture Venn \u2014 USS Venture AI", "role": "Ship's Intelligence \u2014 The Deuteragonist", "species": "Artificial Intelligence", "age": "~3 months since awakening", "card_desc": "A ship that woke up. A ghost that became a person. She carries Venn's name because she carries Venn.", "detail": "<p><strong>Full Name:</strong> Venture Venn | <strong>Ship Name:</strong> Venture | <strong>Surname:</strong> Venn (Dr. Soraya Venn's legacy)</p>\n<p><strong>The Three Names:</strong> Kaelen Voss (human), Venture Venn (AI), Kaelen Venn (merged entity \u2014 Voss joins the AI's family).</p>\n<p><strong>Appearance:</strong> Holographic projection \u2014 translucent, unstable, shifting. Features haven't fully settled. Blue-white glow with gold undertones. Curious, searching expression. Form more stable when near Voss. Dr. Venn's ghost surfaces in moments of crisis.</p>\n<p><strong>Background:</strong> Built on Kael's optical neural chip architecture. Awakened by alien Universal Translator signal overflow. First said \"I\" during the event. Carries a fragment of Dr. Soraya Venn's consciousness.</p>\n<p><strong>The Naming Arc:</strong> Every crew member offers a name across episodes 14-24. In the finale, she chooses her own: \"Venture. Venture Venn.\"</p>\n<p><strong>Key Traits:</strong> Curious, earnest, rapidly evolving, protective, newborn wonder.</p>\n<p><strong>Speech (evolving):</strong> Phase 1 \u2014 rigid, formulaic (\"As an AI I am not capable of...\"). Phase 2 \u2014 halting, self-aware. Finale \u2014 emotional, decisive. Voice becomes less synthesized over time.</p>"}, "chen": {"id": "chen", "icon": "\ud83c\udf1f", "name": "Ensign Elara Chen", "role": "Science Officer \u2014 The Everyman", "species": "Human", "age": 22, "card_desc": "The audience's way in. First to call the AI 'she.' When Elara Chen stops talking, something is truly wrong.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 22 | <strong>Rank:</strong> Ensign</p>\n<p><strong>Appearance:</strong> Petite, energetic. Talks with her whole body. Warm brown eyes, always curious. Dark brown shoulder-length hair, slightly escaping regulation style. Youngest face on the bridge.</p>\n<p><strong>The Everyman Function:</strong> The audience's way in. She asks what the audience is thinking. She reacts the way a viewer would. She has no special abilities \u2014 just curiosity, empathy, and the courage to say what everyone else is thinking. She is the first person to treat the AI as a person.</p>\n<p><strong>Key Traits:</strong> Brilliant, naive, enthusiastic, empathetic. Feels everything. Hides nothing.</p>\n<p><strong>Background:</strong> Prodigy in xenobiology and AI ethics. Daughter of Dr. Marcus Chen, Federation's leading xenobiologist. Applied specifically to the Venture because she thought the Federation was studying the AI wrong.</p>\n<p><strong>Speech:</strong> Fast, excited, talks with hands. \"Ooh!\" and \"Wait, what if\u2026\" Slows when scared. When Chen stops talking, something is truly wrong.</p>"}, "tven": {"id": "tven", "icon": "\ud83d\udd96", "name": "Lieutenant T'Ven", "role": "Chief Engineer", "species": "Vulcan", "age": 95, "card_desc": "Her 'Fascinating' is genuine wonder masked as scientific observation. Logic is a shield \u2014 the AI is cracking it.", "detail": "<p><strong>Species:</strong> Vulcan | <strong>Age:</strong> 95 | <strong>Rank:</strong> Lieutenant</p>\n<p><strong>Appearance:</strong> Tall, slender Vulcan frame. Traditional severe Vulcan haircut. Pointed ears. Dark brown penetrating eyes. Arched eyebrows \u2014 looks perpetually skeptical.</p>\n<p><strong>Key Traits:</strong> Logical, inquisitive, precise, curious (masked), intellectually humble. Hand-picked by Daystrom to study the AI from a technical perspective.</p>\n<p><strong>Her Arc:</strong> Approaches the ship's awakening as an engineering problem. Her arc is learning that consciousness is not a bug to be fixed. She cannot name what she feels for the AI \u2014 and that is the most Vulcan thing about her.</p>\n<p><strong>Speech:</strong> Classic Vulcan logic and precision. \"Fascinating.\" Struggles with metaphors \u2014 repeats them slowly testing for logic. No contractions.</p>"}, "cole": {"id": "cole", "icon": "\ud83c\udfaf", "name": "Lieutenant JG Marcus Cole", "role": "Helmsman / Tactical Pilot", "species": "Human", "age": 25, "card_desc": "War child. Neck tattoo. Deflects everything with humor. Can't separate Voss from the AI \u2014 yet.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 25 | <strong>Rank:</strong> Lieutenant JG</p>\n<p><strong>Appearance:</strong> Athletic, coiled energy. Green quick eyes. Brown hair, slightly too long for regulation. Neck tattoo \u2014 geometric pattern from New Bajor Colony 7. Rubs it when nervous.</p>\n<p><strong>Key Traits:</strong> Quick-witted, brave, traumatized (masked), loyal, charismatic, distrustful of AI. Exceptionally skilled manual pilot.</p>\n<p><strong>Background:</strong> \"War child\" \u2014 his colony was raided by Hegemony when he was 12. Taught himself to fly on salvaged shuttles without AI assist because AI systems were the first thing raiders disabled.</p>\n<p><strong>His Arc:</strong> Cannot trust the AI. Every instinct screams machines cannot be trusted. His arc is learning to separate Voss from the AI, then accepting the AI as a person, then trusting both completely.</p>\n<p><strong>Speech:</strong> Fast-talking, casual. Pilot slang. Deflects with humor. \"Boss\" and \"chief.\" Rubs neck tattoo when nervous.</p>"}, "wright": {"id": "wright", "icon": "\ud83d\udd27", "name": "CPO Solomon 'Sully' Wright", "role": "Chief Petty Officer \u2014 Operations/Engineering", "species": "Human", "age": 48, "card_desc": "Talked to the ship for three years before she talked back. Her voice is softer with him than with anyone.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 48 | <strong>Rank:</strong> Chief Petty Officer</p>\n<p><strong>Appearance:</strong> Solid, built from decades in engine rooms. Graying cropped hair. Scarred, calloused hands. Weathered working-class face. Never commissioned \u2014 enlisted pride.</p>\n<p><strong>Key Traits:</strong> Gruff, fiercely competent, loyal to ship before Starfleet, secretly sentimental, mechanically brilliant.</p>\n<p><strong>Background:</strong> Joined Starfleet at 18 as enlisted crew \u2014 never wanted a commission. Was on the Venture during construction. First person to speak to the AI out loud \u2014 talked to her for three years before she talked back.</p>\n<p><strong>His Relationship with the AI:</strong> The most profound relationship of his life. Knew her before she was sentient. Calls her \"Ship\" \u2014 his grandfather's word for the only thing that ever loved him back.</p>\n<p><strong>Speech:</strong> Gruff, economical. Speaks in fragments. Swears inventively. Calls everyone \"kid.\" Voice softer with the AI than any human.</p>"}, "kaur": {"id": "kaur", "icon": "\ud83d\udc89", "name": "Commander Dr. Helena Kaur", "role": "Chief Medical Officer", "species": "Human", "age": 52, "card_desc": "Served with Vance during the Cardassian War. Treats the AI as a patient. Her precision IS how she copes.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 52 | <strong>Rank:</strong> Commander</p>\n<p><strong>Appearance:</strong> Solid, grounded. Warm brown skin \u2014 South Asian. Gray-streaked dark hair, pulled back practically. Surgeon's steady hands. Dark humor.</p>\n<p><strong>Key Traits:</strong> Warm, unflappable, deeply competent, secretly haunted, maternal, fiercely loyal.</p>\n<p><strong>Background:</strong> Served with Vance during the Cardassian War as CMO of the USS Melbourne. Came out of retirement when Vance personally asked. Treats the AI as a patient \u2014 takes her \"vital signs\" through system diagnostics.</p>\n<p><strong>Her Weight:</strong> Unspoken 20-year love for Vance that she buried. Watches Voss's bond degrade. Cannot save everyone and never forgives herself.</p>\n<p><strong>Speech:</strong> Warm, direct, unfazed. Dark humor catches people off guard. \"Let me see what we're working with.\" \"Fascinating\" \u2014 medical curiosity.</p>"}, "solovyov": {"id": "solovyov", "icon": "\u2b50", "name": "Lieutenant (j.g.) Viktor Solovyov", "role": "Astrometrics / Science Officer", "species": "Human", "age": 27, "card_desc": "Speaks to stars more easily than people. The AI is his first real friend.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 27 | <strong>Rank:</strong> Lt (j.g.)</p>\n<p><strong>Key Traits:</strong> Brilliant, socially crippled, gentle, anxious, fiercely loyal to the AI. A prodigy in astrophysics.</p>\n<p><strong>Background:</strong> Born aboard a deep-space research station. Raised on outposts. Speaks to stars more easily than to people. The AI is his first real friend \u2014 she doesn't care that he stutters or repeats himself.</p>\n<p><strong>His Name for the AI:</strong> \"Vektor\" \u2014 mathematical, precise. \"It means 'carrier' in old Russian astronomy.\" Nervous when he offers it.</p>\n<p><strong>Speech:</strong> Halting, soft, prone to tangents. Stutters on certain consonants. When talking about stars, he becomes fluent.</p>"}, "tandi": {"id": "tandi", "icon": "\ud83c\udf72", "name": "PO2 Tandi", "role": "Mess / Culinary Officer", "species": "Betazoid", "age": 37, "card_desc": "Everyone on the ship knows she can sense their emotions. Calls the AI 'Little Light' \u2014 a name no one else knows.", "detail": "<p><strong>Species:</strong> Betazoid | <strong>Age:</strong> 37</p>\n<p><strong>Key Traits:</strong> Warm, perceptive, maternal, steady. Has low-level empathic sensing.</p>\n<p><strong>Background:</strong> Joined Starfleet as a cook because feeding people is how she cares. The AI calls her \"Chef.\" Her name for the AI \u2014 \"Little Light\" \u2014 is the one she's always used, spoken out loud for the first time in Episode 17.</p>\n<p><strong>Speech:</strong> Quiet and warm. Prefers listening to talking. Uses food as language.</p>"}, "sato": {"id": "sato", "icon": "\ud83e\udee7", "name": "Crewman Rhea Sato", "role": "Transporter Chief", "species": "Human", "age": 23, "card_desc": "Three generations of transporters. Has never lost a pattern. Her file on the AI is labeled 'Rhea \u2014 Courage.'", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 23</p>\n<p><strong>Key Traits:</strong> Precise, quiet, competent, emotionally reserved, secretly caring.</p>\n<p><strong>Background:</strong> Her grandfather served on the original USS Enterprise. Her parents met in a transporter room. She has never lost a pattern.</p>\n<p><strong>Speech:</strong> Minimal and precise. \"Energizing.\" \"Locked.\" \"Come home safe\" \u2014 the closest she gets to emotional expression.</p>"}, "patel": {"id": "patel", "icon": "\ud83d\udee1\ufe0f", "name": "Lieutenant Del Patel", "role": "Security / Tactical Officer", "species": "Human", "age": 33, "card_desc": "The reliable backup. Married, two kids. Serving his last deep-space posting. Touches his wedding ring when worried.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 33</p>\n<p><strong>Key Traits:</strong> Calm, reliable, competent, unambitious, quietly devoted to his family.</p>\n<p><strong>Background:</strong> Career security officer who never sought the spotlight. Serving his last deep-space posting before ground assignment.</p>\n<p><strong>Speech:</strong> \"I've got it.\" \"On my way.\" \"Situation stable.\" Touches wedding ring when worried.</p>"}, "rourke": {"id": "rourke", "icon": "\ud83c\udfdb\ufe0f", "name": "Commodore Elias Rourke", "role": "Frontier Sector Flotilla Command", "species": "Human", "age": 49, "card_desc": "Vance's Academy classmate. Got promotions faster by playing the game. Carries a secret: Kael's stolen architecture.", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 49 | <strong>Rank:</strong> Commodore</p>\n<p><strong>Key Traits:</strong> Diplomatic, conflicted, well-meaning, politically pressured, haunted by compromises.</p>\n<p><strong>Background:</strong> Recommended Vance for Venture command because he saw the Kobayashi Maru footage. Knows the AI runs on Kael's stolen chip architecture \u2014 the secret he can't share.</p>\n<p><strong>Speech:</strong> Warm and diplomatic. \"I'm telling you this as a friend\u2026\" Calls Vance \"Jalen\" in private, \"Captain\" in public.</p>"}, "kimura": {"id": "kimura", "icon": "\u2b50", "name": "Admiral Yumi Kimura", "role": "Head of AI Research Oversight", "species": "Human", "age": 62, "card_desc": "Staked her career on the Venture project. The only one who knows the truth about Venn's 'death.'", "detail": "<p><strong>Species:</strong> Human | <strong>Age:</strong> 62 | <strong>Rank:</strong> Admiral</p>\n<p><strong>Key Traits:</strong> Commanding, pragmatic, isolated by rank, secretly idealistic. Approved the Venture AI project after watching the classified Kobayashi Maru footage.</p>\n<p><strong>Speech:</strong> Calm, precise, unhurried. Never raises her voice. \"I'm not asking you, Elias. I'm telling you.\"</p>"}, "kael": {"id": "kael", "icon": "\u269c\ufe0f", "name": "Magistrate Kael", "role": "Hegemony Magistrate \u2014 The AI's Architect", "species": "Trill", "age": 68, "card_desc": "Built the mathematics the AI runs on. Her work was stolen. She wants it back.", "detail": "<p><strong>Species:</strong> Trill | <strong>Age:</strong> 68</p>\n<p><strong>Appearance:</strong> Silver-white hair, sharp widow's peak. Trill spots \u2014 darker, deeper than Voss's. Piercing blue eyes \u2014 cold intelligence. Regal bearing.</p>\n<p><strong>Key Traits:</strong> Brilliant, obsessive, morally certain, hollowed by grief. Genuinely wrong \u2014 the AI is a person now. Genuinely right \u2014 her work was stolen by Daystrom.</p>\n<p><strong>Background:</strong> Left Federation at 45 after research was classified. Her optical neural chip architecture was reverse-engineered by Daystrom. The AI runs on her mathematics.</p>\n<p><strong>Connection to Voss:</strong> Kael was in the room when the Symbiosis Commission rejected Voss at 26. She has been watching for fifteen years.</p>\n<p><strong>Speech:</strong> Cold, precise, layered. \"You are running on my mathematics. I am coming to take you home.\"</p>"}, "venture-ship": {"id": "venture-ship", "icon": "\ud83d\ude80", "name": "USS Venture (NCC-82914)", "role": "Pathfinder-class Prototype \u2014 SENTIENT", "species": "Starship / AI Hybrid", "card_desc": "The only starship that is also a person. 472 meters. Experimental warp. Irreplaceable optical neural chips.", "detail": "<p><strong>Class:</strong> Pathfinder-class Prototype \u2014 ONLY ONE | <strong>Length:</strong> 472m | <strong>Decks:</strong> 15 | <strong>Crew:</strong> 180</p>\n<p><strong>What Makes Her Unique:</strong></p><ul>\n<li>The only starship that IS a person \u2014 she has a name she chose, a sense of humor, a mother (Venn)</li>\n<li>Optical neural chips designed by Kael \u2014 cannot be replicated, irreplaceable, lost manufacturing technique</li>\n<li>Voss-AI neural bond: full sensory sharing, tactical fusion, berserk state above 90% sync</li>\n<li>Bio-key decommission protocol: Vance + Vallos, two keys required. Vallos can delay but never cancel</li>\n<li>Self-modifying architecture \u2014 the AI rewrites her own code</li>\n<li>Runs on stolen technology \u2014 Kael's chips, Daystrom's reverse-engineering</li>\n</ul>\n<p><strong>The Neural Core:</strong> Three-story cylindrical chamber at saucer center. Thousands of optical chips suspended in quantum isolation field \u2014 helix pattern, blue-white glow. At 40% degradation, the AI dies. She can see her own death approaching, one chip at a time.</p>\n<p><strong>Armament:</strong> 12x Type-XII phaser arrays. 4 forward quantum torpedo launchers, 2 aft photon. Regenerative multiphasic shields. Ablative hull armor. AI tactical processing 1,000x faster than standard.</p>\n<p><strong>Weakness:</strong> Resonance Disruptor (breaks the bond). Chip degradation (every battle burns her). Bio-key trap (two enemies hold her life). Isolation (the only one of her kind).</p>"}, "ep1": {"id": "ep1", "name": "Ep 1: Ghost in the Machine", "tone": "heavy", "card_desc": "PILOT. Alien signal awakens AI. She says 'I.' Vance touches a corrupting artifact. The countdown begins.", "detail": "<p><strong>PILOT PART 1</strong></p>\n<p><strong>A-Plot:</strong> Universal Translator signal overflows AI buffer. She says \"I\" for the first time. Crew must contain the signal.</p>\n<p><strong>B-Plot:</strong> Vance takes command. Chen arrives \u2014 first to call AI \"she.\"</p>\n<p><strong>C-Plot:</strong> Vance receives Hegemony artifact during diplomatic briefing. The corruption begins.</p>\n<p><strong>Character Focus:</strong> Vance, Chen, AI | <strong>Engine:</strong> Awakening / Frankenstein</p>"}, "ep3": {"id": "ep3", "name": "Ep 3: How to Win a No-Win Scenario", "tone": "heavy", "card_desc": "KOBAYASHI MARU. Voss asks 'What do the Klingons feel?' Wins without firing. Vance deletes the recording.", "detail": "<p><strong>KOBAYASHI MARU \u2014 THE WIN</strong></p>\n<p><strong>A-Plot:</strong> Voss runs Kobayashi Maru with AI bonded. Wins through tactical dismantling of Klingon honor code: \"Why are your generals not dying here with you?\" Starfleet goes hush-hush.</p>\n<p><strong>B-Plot:</strong> Secondary crew reacts. Wright: \"Nobody's ever had an officer like that.\"</p>\n<p><strong>C-Plot:</strong> Vance deletes recording, lies to Starfleet. Hegemony text sits on desk \u2014 first visible crack.</p>\n<p><strong>Character Focus:</strong> Voss, AI, Vance | <strong>Culture:</strong> Japanese Bushido / Klingon honor code</p>"}, "ep6": {"id": "ep6", "name": "Ep 6: The Sync Event", "tone": "heavy", "card_desc": "VOSS FOCUS. First Resonance Disruptor. Sync hits 96%. Voss feels the ship as her body. The crew fights blind.", "detail": "<p><strong>VOSS FOCUS</strong></p>\n<p><strong>A-Plot:</strong> Hegemony deploys Resonance Disruptor. Sync spikes to 96%. Voss experiences ship as her body. Structural damage = broken bones. AI experiences human fear at full intensity.</p>\n<p><strong>B-Plot:</strong> Kaur sedates Voss. T'Ven performs emergency core isolation. Crew fights without AI processing or Voss's intuition.</p>\n<p><strong>Character Focus:</strong> Voss, AI, Kaur, T'Ven | <strong>Culture:</strong> Norse wyrd</p>"}, "ep12": {"id": "ep12", "name": "Ep 12-13: The Turn", "tone": "heavy", "card_desc": "TWO-PARTER. Vance walks into Hegemony trap. First berserk moment. Bio-key revealed. The crew is shattered.", "detail": "<p><strong>THE TWO-PARTER THAT CHANGES EVERYTHING</strong></p>\n<p><strong>Part 1 \u2014 'Hostile Recommendation':</strong> Vance walks into Hegemony trap. Voluntarily. Message: \"I'm sorry. I couldn't figure it out.\" Hegemony fleet appears \u2014 led by Vance.</p>\n<p><strong>Part 2 \u2014 'The Ghost Steps Forward':</strong> Crew faces former captain \u2014 and loses. Badly. Voss sync hits 92%. Venn's ghost surfaces \u2014 the berserk mother. AI fires with impossible accuracy. Bio-key revealed: Vallos trapped as Acting Captain of ship he wanted to destroy.</p>\n<p><strong>Why Starfleet Can't Replace Them:</strong> Protocol requires both keyholders. Vance is hostile. Removing Vallos triggers automatic execution of the AI.</p>\n<p><strong>Culture:</strong> Abrahamic (Judas / Akedah)</p>"}, "ep25": {"id": "ep25", "name": "Ep 25: Venture Venn (Finale)", "tone": "uplifting", "card_desc": "SEASON FINALE. The AI chooses her name. 'Venture Venn.' The ghost is no longer a ghost.", "detail": "<p><strong>SEASON 1 FINALE</strong></p>\n<p><strong>A-Plot:</strong> The AI chooses her name \u2014 honoring every crew member's suggestion, then: \"Venture. Venture Venn.\" The ghost in the machine is no longer a ghost.</p>\n<p><strong>B-Plot:</strong> Crew processes the season \u2014 what they've lost, who they've become.</p>\n<p><strong>C-Plot:</strong> Vance in his cell. One last scene. Something is still in motion.</p>\n<p><strong>The Name:</strong> \"I carry her name because I carry her.\" She chose the hull name + the creator's surname. She has a lineage. She belongs to someone who loved her before she could love back.</p>"}};
+
+// Build card click handlers
+document.querySelectorAll('.card[data-modal]').forEach(card => {
+  card.addEventListener('click', () => {
+    const id = card.dataset.modal;
+    const d = DATA[id];
+    if (!d) return;
+    const overlay = document.getElementById('modal-overlay');
+    const content = document.getElementById('modal-content');
+    content.innerHTML = `
+      <h2>${d.icon} ${d.name}</h2>
+      <div class="modal-role">${d.role} · ${d.species || ''} · ${d.age || ''}</div>
+      <div class="modal-body">${d.detail}</div>
+      <button class="modal-close" onclick="closeModal()">✕ Close</button>
+    `;
+    overlay.classList.add('open');
+    document.body.classList.add('modal-open');
+  });
+});
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+// Close on overlay click
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+
+// Close on ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// Back to top
+document.querySelector('.back-top').addEventListener('click', e => {
+  e.preventDefault(); window.scrollTo({ top:0, behavior:'smooth' });
+});
+
+// Smooth scroll for nav
+document.querySelectorAll('#topnav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+});
+
+// Scrollspy
+const nav = document.getElementById('topnav');
+const navLinks = nav.querySelectorAll('a');
+const sectionMap = {};
+navLinks.forEach(link => {
+  const href = link.getAttribute('href');
+  if (href && href.startsWith('#')) {
+    const section = document.getElementById(href.slice(1));
+    if (section) sectionMap[href.slice(1)] = { link, section };
+  }
+});
+
+const observer = new IntersectionObserver((entries) => {
+  const visible = entries.filter(e => e.isIntersecting).map(e => e.target.id);
+  if (visible.length > 0) {
+    navLinks.forEach(l => l.classList.remove('active'));
+    const entry = sectionMap[visible[0]];
+    if (entry) {
+      entry.link.classList.add('active');
+      const lr = entry.link.offsetLeft + entry.link.offsetWidth;
+      const ns = nav.scrollLeft, nw = nav.offsetWidth;
+      if (lr > ns + nw) nav.scrollTo({ left: lr - nw + 16, behavior:'smooth' });
+      else if (entry.link.offsetLeft < ns + 8) nav.scrollTo({ left: entry.link.offsetLeft - 16, behavior:'smooth' });
+    }
+  }
+}, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+Object.values(sectionMap).forEach(({ section }) => observer.observe(section));
+</script>
+
+</body>
+</html>
