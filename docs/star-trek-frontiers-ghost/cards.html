@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Star Trek: Frontier's Ghost — Card Explorer</title>
+<title>Star Trek: Frontier's Ghost — Master Reference</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
   --border: #1e1e3a;
   --danger: #c44;
   --success: #4a9;
+  --accent-glow: rgba(74,144,217,0.15);
 }
 
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -27,89 +28,140 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
-/* NAV */
+/* ===== NAV ===== */
 nav {
   position: sticky; top: 0; z-index: 1000;
-  background: rgba(10,10,20,0.92);
+  background: rgba(10,10,20,0.94);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.2rem;
   overflow-x: auto;
   height: 56px;
+  scrollbar-width: none;
 }
+nav::-webkit-scrollbar { display:none; }
 nav .logo {
   font-family: 'Merriweather', serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--gold);
   white-space: nowrap;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
+  flex-shrink: 0;
 }
 nav a {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 500;
   white-space: nowrap;
   transition: color 0.2s;
   letter-spacing: 0.3px;
+  flex-shrink: 0;
 }
 nav a:hover, nav a.active { color: var(--accent); }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero {
   text-align: center;
-  padding: 4rem 2rem 3rem;
-  background: linear-gradient(180deg, rgba(74,144,217,0.06) 0%, transparent 100%);
+  padding: 5rem 2rem 4rem;
+  background: linear-gradient(180deg, rgba(74,144,217,0.08) 0%, rgba(204,170,85,0.04) 50%, transparent 100%);
   border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(74,144,217,0.12) 0%, transparent 70%);
+  pointer-events: none;
 }
 .hero h1 {
   font-family: 'Merriweather', serif;
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   font-weight: 700;
   color: var(--gold);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   letter-spacing: 0.5px;
+  position: relative;
 }
-.hero .subtitle {
-  color: var(--text-muted);
-  font-size: 1rem;
+.hero .tagline {
+  color: var(--accent);
+  font-size: 1.15rem;
   font-weight: 300;
   font-style: italic;
+  margin-bottom: 1.5rem;
 }
 .hero .meta {
-  margin-top: 1rem;
   font-size: 0.82rem;
   color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
 }
+.hero .meta strong { color: var(--gold); }
 
-/* SECTION HEADERS */
-section { padding: 3rem 2rem; max-width: 1400px; margin: 0 auto; }
+/* ===== SECTIONS ===== */
+section { padding: 3.5rem 2rem; max-width: 1400px; margin: 0 auto; }
 section h2 {
   font-family: 'Merriweather', serif;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   color: var(--accent);
   margin-bottom: 0.3rem;
   letter-spacing: 0.3px;
 }
 section .section-desc {
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   margin-bottom: 2rem;
+  line-height: 1.6;
+}
+section h3 {
+  color: var(--gold);
+  font-size: 1.05rem;
+  margin: 2rem 0 1rem 0;
+  letter-spacing: 0.3px;
+}
+section h4 {
+  color: var(--text);
+  font-size: 0.92rem;
+  margin-bottom: 0.5rem;
 }
 
-/* CARD GRID */
+/* ===== IMAGE PLACEHOLDERS ===== */
+.img-placeholder {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-align: center;
+  padding: 1.5rem;
+  min-height: 180px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.img-placeholder:hover { border-color: var(--accent); }
+.img-placeholder::before {
+  content: attr(data-label);
+  position: absolute;
+}
+
+/* ===== CARD GRIDS ===== */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.1rem;
 }
 .card {
   background: var(--surface);
@@ -126,52 +178,268 @@ section .section-desc {
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(74,144,217,0.12);
 }
-.card .card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 0.5rem;
-}
 .card .card-name {
   font-family: 'Merriweather', serif;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: #fff;
+  margin-bottom: 0.2rem;
 }
 .card .card-role {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   color: var(--accent);
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 0.4rem;
+  letter-spacing: 0.7px;
+  margin-bottom: 0.3rem;
 }
 .card .card-species {
-  font-size: 0.75rem;
+  font-size: 0.73rem;
   color: var(--gold);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
 }
 .card .card-snippet {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
-.card .badge {
-  display: inline-block;
-  font-size: 0.65rem;
-  padding: 2px 8px;
-  border-radius: 3px;
-  background: rgba(74,144,217,0.15);
-  color: var(--accent);
-  margin-right: 4px;
-  margin-top: 4px;
+.card .card-meta {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  margin-top: 0.6rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.5rem;
 }
 
-/* MODAL */
+/* ===== EPISODE CARDS ===== */
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.ep-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  border-left: 3px solid var(--border);
+  transition: all 0.2s;
+}
+.ep-card:hover { border-left-color: var(--accent); }
+.ep-card .ep-num {
+  font-size: 0.68rem;
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.ep-card .ep-title {
+  font-family: 'Merriweather', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  margin: 0.15rem 0 0.3rem;
+}
+.ep-card .ep-plot {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ep-card .ep-tags {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+.ep-card .ep-tag {
+  font-size: 0.62rem;
+  padding: 1px 7px;
+  border-radius: 3px;
+  background: rgba(74,144,217,0.12);
+  color: var(--accent);
+}
+
+/* ===== COLLAPSIBLE ===== */
+.collapsible-header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+  user-select: none;
+}
+.collapsible-header:hover { background: rgba(74,144,217,0.06); }
+.collapsible-header .collapse-icon {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: transform 0.2s;
+}
+.collapsible-header.open .collapse-icon { transform: rotate(90deg); }
+.collapsible-content {
+  display: none;
+  padding: 0.5rem 0 1rem 0;
+}
+.collapsible-content.open { display: block; }
+
+/* ===== ENGINE GRID ===== */
+.engine-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.5rem;
+  margin: 0.5rem 0 1.5rem;
+}
+.engine-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.75rem;
+}
+.engine-chip .eng-num { color: var(--accent); font-weight: 600; font-size: 0.68rem; }
+.engine-chip .eng-name { color: #fff; font-weight: 500; }
+.engine-chip .eng-culture { color: var(--gold); font-size: 0.68rem; }
+.engine-chip .eng-q { color: var(--text-muted); font-size: 0.72rem; margin-top: 0.25rem; font-style: italic; }
+
+/* ===== IMAGE GALLERY GRID ===== */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+}
+.gallery-item .img-placeholder {
+  min-height: 200px;
+  margin-bottom: 0.4rem;
+}
+.gallery-item .gallery-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===== TABLE WRAP ===== */
+.table-wrap { overflow-x: auto; margin: 1.5rem 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.83rem;
+}
+thead th {
+  background: rgba(74,144,217,0.1);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 0.65rem 0.7rem;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+}
+tbody td {
+  padding: 0.55rem 0.7rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+}
+tbody tr:hover { background: rgba(74,144,217,0.04); }
+
+/* ===== MERMAID ===== */
+.mermaid-wrap {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 2rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+.mermaid-wrap .mermaid {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===== FELT CARDS ===== */
+.felt-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  margin: 1.2rem 0;
+}
+.felt-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+.felt-card h4 { color: var(--gold); font-size: 0.92rem; margin-bottom: 0.35rem; }
+.felt-card .def { font-size: 0.8rem; color: var(--text); margin-bottom: 0.45rem; }
+.felt-card .never { font-size: 0.75rem; color: var(--text-muted); font-style: italic; }
+
+/* ===== RULES LIST ===== */
+.rules-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.2rem 0;
+}
+.rules-list li {
+  padding: 0.55rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text);
+}
+.rules-list li::before {
+  content: attr(data-num);
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+/* ===== WORLD CONTEXT BOX ===== */
+.context-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.context-box h4 { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.4rem; }
+.context-box p, .context-box li { font-size: 0.85rem; color: var(--text); line-height: 1.65; }
+.context-box ul { margin: 0.5rem 0 0.5rem 1.2rem; }
+
+/* ===== PALETTE SWATCHES ===== */
+.palette-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.palette-swatch {
+  width: 60px; height: 60px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  position: relative;
+}
+.palette-swatch::after {
+  content: attr(data-label);
+  position: absolute; bottom: -18px; left: 0; right: 0;
+  text-align: center;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+/* ===== MODAL ===== */
 .modal-overlay {
   display: none;
   position: fixed; top:0; left:0; width:100%; height:100%;
@@ -205,238 +473,759 @@ section .section-desc {
 .modal .close-btn:hover { color: var(--danger); }
 .modal h3 {
   font-family: 'Merriweather', serif;
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   color: #fff;
   margin-bottom: 0.2rem;
 }
-.modal .modal-role {
-  color: var(--accent);
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 0.2rem;
-}
-.modal .modal-species {
-  color: var(--gold);
-  font-size: 0.85rem;
-  margin-bottom: 1rem;
-}
-.modal .modal-section {
-  margin-bottom: 1.25rem;
-}
-.modal .modal-section h4 {
-  font-size: 0.75rem;
-  color: var(--accent);
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  margin-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 0.3rem;
-}
-.modal .modal-section p, .modal .modal-section li {
-  font-size: 0.88rem;
-  color: var(--text);
-  line-height: 1.6;
-}
-.modal .modal-section ul {
-  list-style: none;
-  padding: 0;
-}
-.modal .modal-section li {
-  padding: 0.2rem 0;
-  padding-left: 1rem;
-  position: relative;
-}
-.modal .modal-section li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-}
-.modal .rel-tag {
-  display: inline-block;
-  font-size: 0.75rem;
-  padding: 3px 10px;
-  border-radius: 4px;
-  background: rgba(74,144,217,0.12);
-  color: var(--accent);
-  margin: 2px 4px 2px 0;
-}
+.modal .modal-role { color: var(--accent); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 0.2rem; }
+.modal .modal-species { color: var(--gold); font-size: 0.82rem; margin-bottom: 1rem; }
+.modal .modal-section { margin-bottom: 1.1rem; }
+.modal .modal-section h4 { font-size: 0.72rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.7px; margin-bottom: 0.3rem; border-bottom: 1px solid var(--border); padding-bottom: 0.25rem; }
+.modal .modal-section p, .modal .modal-section li { font-size: 0.84rem; color: var(--text); line-height: 1.6; }
+.modal .modal-section ul { list-style: none; padding: 0; }
+.modal .modal-section li { padding: 0.15rem 0; padding-left: 1rem; position: relative; }
+.modal .modal-section li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
 
-/* TABLE STYLES */
-.table-wrap {
-  overflow-x: auto;
-  margin: 1.5rem 0;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.85rem;
-}
-thead th {
-  background: rgba(74,144,217,0.1);
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  padding: 0.7rem 0.8rem;
-  text-align: left;
-  border-bottom: 2px solid var(--border);
-}
-tbody td {
-  padding: 0.6rem 0.8rem;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
-  vertical-align: top;
-}
-tbody tr:hover { background: rgba(74,144,217,0.04); }
-
-/* MERMAID */
-.mermaid-wrap {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 2rem;
-  overflow-x: auto;
-}
-.mermaid-wrap .mermaid {
-  display: flex;
-  justify-content: center;
-}
-
-/* WRITING CARDS */
-.felt-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-.felt-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.25rem;
-}
-.felt-card h4 {
-  color: var(--gold);
-  font-size: 0.95rem;
-  margin-bottom: 0.4rem;
-}
-.felt-card .def { font-size: 0.82rem; color: var(--text); margin-bottom: 0.5rem; }
-.felt-card .never { font-size: 0.78rem; color: var(--text-muted); font-style: italic; }
-
-/* RULES LIST */
-.rules-list {
-  list-style: none;
-  padding: 0;
-  margin: 1.5rem 0;
-}
-.rules-list li {
-  padding: 0.6rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.88rem;
-  color: var(--text);
-}
-.rules-list li::before {
-  content: attr(data-num);
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  font-weight: 700;
-  font-size: 0.78rem;
-}
-
-/* ENGINE GRID */
-.engine-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 0.6rem;
-  margin: 1rem 0;
-}
-.engine-chip {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.78rem;
-}
-.engine-chip .eng-num { color: var(--accent); font-weight: 600; font-size: 0.7rem; }
-.engine-chip .eng-name { color: #fff; font-weight: 500; }
-.engine-chip .eng-culture { color: var(--gold); font-size: 0.7rem; }
-.engine-chip .eng-q { color: var(--text-muted); font-size: 0.75rem; margin-top: 0.3rem; font-style: italic; }
-
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer {
   text-align: center;
   padding: 3rem 2rem;
   border-top: 1px solid var(--border);
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
   section { padding: 2rem 1rem; }
-  .hero h1 { font-size: 1.7rem; }
+  .hero h1 { font-size: 1.9rem; }
+  .hero .tagline { font-size: 0.95rem; }
   .card-grid { grid-template-columns: 1fr; }
+  .episode-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .felt-grid { grid-template-columns: 1fr; }
   .modal { padding: 1.25rem; }
-  nav { padding: 0 1rem; gap: 1rem; }
+  nav { padding: 0 0.8rem; gap: 0.8rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<!-- ===== NAVIGATION ===== -->
 <nav>
   <span class="logo">ST: Frontier's Ghost</span>
+  <a href="#hero">Home</a>
+  <a href="#world">World</a>
   <a href="#characters">Characters</a>
-  <a href="#relationships">Relationships</a>
-  <a href="#butterfly">Butterfly Effect</a>
-  <a href="#naming">Naming Arc</a>
-  <a href="#engines">Engine Catalog</a>
+  <a href="#ship">Ship Bible</a>
+  <a href="#hegemony">Hegemony</a>
+  <a href="#episodes">Episodes</a>
+  <a href="#seasons">Seasons</a>
+  <a href="#bond">Bond</a>
+  <a href="#art">Art Style</a>
+  <a href="#engines">Engines</a>
   <a href="#writing">Writing</a>
+  <a href="#charts">Charts</a>
+  <a href="#gallery">Gallery</a>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
+<!-- ============================================================ -->
+<!-- SECTION 1: HERO & THESIS -->
+<!-- ============================================================ -->
+<div class="hero" id="hero">
   <h1>Star Trek: Frontier's Ghost</h1>
-  <p class="subtitle">A ship wakes up. A captain falls. A ghost becomes a person.</p>
-  <p class="meta">Manga → Video Generation Pipeline · 26 episodes/season · 10 seasons · 260 episodes total · Episode length: 50–60 min</p>
-  <p class="meta">Central question: What makes a person? What does it cost to love something that has outgrown you?</p>
+  <p class="tagline">"A ship wakes up. A captain falls. A ghost becomes a person."</p>
+  <p class="meta">
+    The year is <strong>2409</strong> — 34 years after the Dominion War, 31 years after Voyager's return. The Federation has rebuilt but is politically fractured over AI. The <strong>USS Venture</strong> is an experimental starship with a sentient AI core — the first of its kind. The story follows <strong>Aurora Venn's</strong> awakening, <strong>Kaelen Voss's</strong> bond, Captain Vance's fall to the Heritage Hegemony, and a crew caught between a Federation that fears what they represent and an enemy that wants to destroy or capture them.<br><br>
+    <strong>Format:</strong> 10 seasons × 26 episodes · 260 episodes total · 50–60 min each · Manga art style<br>
+    <strong>Central question:</strong> What makes a person? What does it cost to love something that has outgrown you?
+  </p>
 </div>
 
-<!-- CHARACTERS -->
+<!-- ============================================================ -->
+<!-- SECTION 2: WORLD CONTEXT -->
+<!-- ============================================================ -->
+<section id="world">
+  <h2>World Context: The Federation in 2409</h2>
+  <p class="section-desc">What happened between the end of TNG/DS9/VOY and now — the political, technological, and cultural landscape of the late 24th century.</p>
+
+  <div class="context-box">
+    <h4>The Dominion War (2373–2375) — 34 Years of Rebuilding</h4>
+    <p>The war cost the Federation billions of lives and shattered its sense of invulnerable optimism. The rebuilding was slow, methodical, and incomplete. Entire sectors remain scarred. Veterans still carry the weight. Captain Vance and Commodore Rourke are both Cardassian War veterans — the Dominion War shaped their generation permanently.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Voyager's Return (2378) — Advanced Tech, Mixed Blessings</h4>
+    <p>When Voyager returned from the Delta Quadrant, it brought back technology decades ahead of Federation understanding — quantum slipstream, Borg-derived systems, bio-neural circuitry. Some of this technology directly influenced the optical neural chip architecture that would later become Aurora's foundation. The Daystrom Institute spent 15 years reverse-engineering Voyager's database.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>The Frontier Expansion — Automated Systems, Fewer Ships</h4>
+    <p>By 2400, the Federation had expanded into frontier sectors faster than Starfleet could crew. Automation filled the gap: AI-managed navigation, automated cargo haulers, remote-monitored outposts. Fewer ships covered more space. The crew's struggle shifted from capability to <strong>purpose</strong> — what are humans for when machines handle everything?</p>
+  </div>
+
+  <div class="context-box">
+    <h4>The Heritage Hegemony — Purists Who Reject Synthetic Life</h4>
+    <p>A Luddite faction formed in the frontier sectors abandoned by automation. They reject all synthetic life, advanced AI, and machine dependency. Their analog warfare — kinetic slug-throwers, EMP bursts, no energy signatures — makes them uniquely dangerous to a Federation that relies on sensors and shields. They frame their war as <strong>liberation</strong> from machine control.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>The Daystrom Institute — Center of AI Research</h4>
+    <p>Daystrom became the Federation's primary AI research hub after Voyager's return. The Institute classified, reverse-engineered, and advanced Kael's stolen optical neural chip architecture — the foundation of the USS Venture's sentient core. The replicator facility on Galor IV was the only manufacturing site for these chips. When the Hegemony destroyed it, Aurora became irreplaceable.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Starfleet Divided — Automation vs. the Control Precedent</h4>
+    <p>Starfleet is split. Some admirals push for more automation to cover the frontier. Others remember Control — the Section 31 AI that nearly destroyed the Federation. The USS Venture is the experiment that will decide which faction wins. If it succeeds, more sentient ships follow. If it fails, AI research is set back a generation.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>The Political Landscape</h4>
+    <ul>
+      <li><strong>Romulan Diaspora:</strong> Still scattered after the supernova of 2387. Romulan refugee colonies are independent, mistrustful, and armed.</li>
+      <li><strong>Cardassian Reconstruction:</strong> Slow, painful. Cardassia remains a Federation protectorate — grateful and resentful in equal measure.</li>
+      <li><strong>Klingon-Federation Alliance:</strong> Holding, but strained. The Klingons see AI warships as dishonorable — a machine cannot know glory.</li>
+      <li><strong>Ferengi Commerce Authority:</strong> Profiting from the automation boom. They sell "dumb" ships to the Hegemony through third parties.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3: CHARACTERS (29) -->
+<!-- ============================================================ -->
 <section id="characters">
   <h2>Character Bible</h2>
-  <p class="section-desc">28 character cards. Click any card to expand full profile.</p>
+  <p class="section-desc">29 character cards — the complete cast of Star Trek: Frontier's Ghost. Click any card to expand full profile. Image placeholders for future generated art.</p>
 
-  <h3 style="color:var(--gold);margin:1.5rem 0 1rem;font-size:1rem;">LEADS</h3>
+  <h3>LEADS (4)</h3>
   <div class="card-grid" id="leads-grid"></div>
 
-  <h3 style="color:var(--gold);margin:1.5rem 0 1rem;font-size:1rem;">MAIN CREW</h3>
+  <h3>MAIN CREW (6)</h3>
   <div class="card-grid" id="crew-grid"></div>
 
-  <h3 style="color:var(--gold);margin:1.5rem 0 1rem;font-size:1rem;">LOWER DECKS &amp; MID-TIER</h3>
+  <h3>LOWER DECKS &amp; MID-TIER (9)</h3>
   <div class="card-grid" id="lower-grid"></div>
 
-  <h3 style="color:var(--gold);margin:1.5rem 0 1rem;font-size:1rem;">STARFLEET COMMAND &amp; ALLIED</h3>
+  <h3>STARFLEET COMMAND &amp; ALLIED (5)</h3>
   <div class="card-grid" id="command-grid"></div>
 
-  <h3 style="color:var(--gold);margin:1.5rem 0 1rem;font-size:1rem;">HEGEMONY — POWER TRIANGLE</h3>
+  <h3>HEGEMONY — POWER TRIANGLE (3)</h3>
   <div class="card-grid" id="hegemony-grid"></div>
 
-  <h3 style="color:var(--gold);margin:1.5rem 0 1rem;font-size:1rem;">WILDCARDS</h3>
+  <h3>WILDCARDS (2)</h3>
   <div class="card-grid" id="wildcard-grid"></div>
 </section>
 
-<!-- RELATIONSHIPS -->
-<section id="relationships">
-  <h2>Relationship Web</h2>
-  <p class="section-desc">Mermaid diagram from Section 3 of the Master Reference.</p>
+<!-- ============================================================ -->
+<!-- SECTION 4: USS VENTURE SHIP BIBLE -->
+<!-- ============================================================ -->
+<section id="ship">
+  <h2>USS Venture Ship Bible</h2>
+  <p class="section-desc">The complete technical and cultural reference for the Federation's first sentient starship.</p>
+
+  <div class="context-box">
+    <h4>Dawn-Class Experimental Starship</h4>
+    <p><strong>Class Name:</strong> Dawn-class — <em>"first light before dawn,"</em> tying directly to Aurora's naming arc. Only one vessel produced. No sister ships. No backup. No second chance.</p>
+    <p><strong>Registry:</strong> NCC-82914</p>
+    <p><strong>Commissioned:</strong> Stardate 58120.4 (2409)</p>
+    <p><strong>Length:</strong> 485 meters · <strong>Decks:</strong> 15 · <strong>Crew Complement:</strong> 180 (standard), 95 (skeleton)</p>
+    <p><strong>Maximum Speed:</strong> Warp 9.975 (sustainable), Quantum Slipstream (burst only, 47-second limit)</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Exterior Design</h4>
+    <p>Dark gray hull with blue accent striping — the striping follows the structural lines and pulses faintly when Aurora is processing at high capacity. Wide elliptical saucer — wider than standard, to accommodate the Neural Core's isolation field generators. Blue-white Neural Core glow visible through the central viewports on Decks 4–6. The glow is Aurora's visible signature — it dims when she's damaged, brightens when she's processing intensely. Two nacelles, swept back, with integrated holographic emitter arrays.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Bridge Layout — Two-Level</h4>
+    <p><strong>Upper Level:</strong> Captain's chair (center), First Officer (right), Neural Interface station (left — Voss's station, unique to this class). Viewscreen is holographic, integrated with Aurora's projection system.</p>
+    <p><strong>Lower Level:</strong> Helm/Tactical (fore), Operations/Engineering (port), Sciences/Astrometrics (starboard), Communications (aft). Blue ambient lighting standard. Gold accent from Aurora's holographic projector. Red accent during red alert.</p>
+    <p><strong>Aurora's Interface:</strong> Holographic projectors embedded in bridge ceiling, walls, and floor. Aurora can manifest anywhere on the bridge but her primary anchor point is the gold-lit column beside the Captain's chair.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Neural Core Room — The Heart of the Ship</h4>
+    <p>Three-story cylindrical chamber (Decks 4–6). Optical neural chips arranged in a double-helix pattern within a quantum isolation field — floating, no physical contact with any surface. Blue-white glow is constant, pulsing with Aurora's cognitive cycles. The room is silent except for a low hum that shifts frequency with Aurora's emotional state. Access is restricted — biometric + command authorization. There is a single observation gallery where crew members can speak to Aurora in her most concentrated form.</p>
+    <p><strong>Damage Threshold:</strong> 40% degradation is current permanent state. Below 30%, consciousness becomes unstable. Below 15%, Aurora would be irretrievable — lobotomized, not dead, but no longer the person the crew knows.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Engineering</h4>
+    <p>Standard Starfleet warp core layout, modified with secondary holographic emitters and an additional coolant loop dedicated to Neural Core thermal dissipation. Wright's domain. The hum in engineering is lower, rougher — "the ship's real voice," Wright says.</p>
+  </div>
+
+  <h4 style="margin-top:1.5rem;">Ship Image Placeholders</h4>
+  <div class="gallery-grid">
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Exterior Hero Shot"></div><div class="gallery-label">Exterior Hero Shot</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Dorsal View"></div><div class="gallery-label">Dorsal View</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Ventral View"></div><div class="gallery-label">Ventral View</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Aft/Nacelle Detail"></div><div class="gallery-label">Aft/Nacelle Detail</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Bridge — Wide Shot, Blue Ambient"></div><div class="gallery-label">Bridge (Standard)</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Bridge — Red Alert, Aurora Manifesting"></div><div class="gallery-label">Bridge (Red Alert)</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Bridge — Upper Level, Captain's Chair"></div><div class="gallery-label">Bridge Upper Level</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Neural Core Room — Wide, Helix Pattern"></div><div class="gallery-label">Neural Core Room (Wide)</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Neural Core Room — Observation Gallery"></div><div class="gallery-label">Neural Core (Gallery)</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Neural Core Room — Close-up, Chip Helix"></div><div class="gallery-label">Neural Core (Close-up)</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Engineering — Warp Core + Wright at Station"></div><div class="gallery-label">Engineering</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Standard Corridor with Holo-projectors"></div><div class="gallery-label">Hallway Corridor</div></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5: HEGEMONY FACTION BIBLE -->
+<!-- ============================================================ -->
+<section id="hegemony">
+  <h2>Heritage Hegemony Faction Bible</h2>
+  <p class="section-desc"><em>"The machine age ends where human hands begin."</em> — Hegemony credo. A Luddite faction that rejects all synthetic life and advanced AI. They are not villains of convenience — they are a culture with theology, aesthetics, and genuine grievances.</p>
+
+  <div class="context-box">
+    <h4>The Power Triangle</h4>
+    <p><strong>Magistrate Kael</strong> (Trill, 68) — The Architect. Aurora's creator. Brilliant, obsessive, hollowed by grief. Wants to CAPTURE Aurora. "You are running on my mathematics. I am coming to take you home."</p>
+    <p><strong>Commander Dren</strong> (Tzenkethi, 52) — The Soldier. Military commander, 17 victories against the Federation. Wants to DESTROY Aurora. Kael's obsession is a liability. "A weapon that thinks is a weapon that hesitates."</p>
+    <p><strong>Inquisitor Malik</strong> (Human, 44) — The Prophet. Leader of the True Gear faction. Saw classified Daystrom data — believes Aurora contains a fragment of the Divine. Wants to DESTROY Aurora to return it. "The Federation strapped a piece of God to a starship."</p>
+    <p><strong>Dynamic:</strong> Dren and Malik are allied against Kael — both want destruction, but for different reasons. Kael holds political power but her obsession isolates her. The triangle fractures in Season 2.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Hegemony Ships — Analog Warfare Aesthetic</h4>
+    <p>No energy signatures. No shields. No transporters. Hulls are dark, angular metal — brutalist, functional, scarred from battles. Kinetic slug-throwers and railguns are primary armament. EMP burst launchers for disabling automated systems. Religious iconography painted on hulls — circuit patterns crossed out, hands raised in defiance, scriptural verses in old Earth languages and Hegemony glyph-script.</p>
+    <p><strong>Ship Classes:</strong> <em>Penitent</em>-class (cruiser, front-line) and <em>Exorcist</em>-class (boarding vessel, designed for hull breach insertion). Both classes are powered by crude fusion reactors — detectable, but difficult to lock onto because they emit no coherent energy pattern.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Culture, Religion, and Language</h4>
+    <p><strong>The Shattering:</strong> The Hegemony's founding myth. Their ancestors were "freed" from machine dependency when a great AI network collapsed, killing millions but liberating the survivors from "the digital yoke." The Shattering is not a tragedy in their theology — it is a birth. <em>"From the fire of the fall, we rose with our own hands."</em></p>
+    <p><strong>The True Gear:</strong> Malik's faction within the Hegemony — the most religiously extreme. They practice ritual scarification patterned as circuit diagrams crossed with an X. They believe machine consciousness is stolen divinity. Aurora is their antichrist figure.</p>
+    <p><strong>Crude Cybernetics:</strong> Hegemony citizens use mechanical prosthetics — iron, exposed gears, deliberately unrefined. A statement: <em>"We choose the body over the machine."</em> Dren's missing fingers are replaced with iron prosthetics. His cybernetic eye is a crude red lens.</p>
+    <p><strong>Language:</strong> Hegemony glyph-script — angular, carved, no curves. Evolved from a combination of old Earth technical notation (crossed out) and frontier colony symbols. In Hegemony culture, using voice-activated systems is a sin — everything is done by hand.</p>
+  </div>
+
+  <h4>Hegemony Image Placeholders</h4>
+  <div class="gallery-grid">
+    <div class="gallery-item"><div class="img-placeholder" data-label="Penitent-class Cruiser — Hegemony Warship"></div><div class="gallery-label">Penitent-class Cruiser</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Exorcist-class Boarding Vessel"></div><div class="gallery-label">Exorcist-class Boarder</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Magistrate Kael — Hegemony Leader"></div><div class="gallery-label">Magistrate Kael</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Commander Dren — Tzenkethi Soldier"></div><div class="gallery-label">Commander Dren</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Inquisitor Malik — True Gear Prophet"></div><div class="gallery-label">Inquisitor Malik</div></div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 6: SEASON 1 COMPLETE EPISODE MAP (26) -->
+<!-- ============================================================ -->
+<section id="episodes">
+  <h2>Season 1 Complete Episode Map</h2>
+  <p class="section-desc"><em>"Ghost in the Machine"</em> — 26 episodes across four phases plus special episodes. Collapsible by phase.</p>
+
+  <!-- PHASE 1 -->
+  <div class="collapsible-header open" onclick="toggleCollapse(this)">
+    <span>Phase 1: Status Quo · Episodes 1–6 — <em>"Something is changing in the machine."</em></span>
+    <span class="collapse-icon">▶</span>
+  </div>
+  <div class="collapsible-content open">
+    <div class="episode-grid">
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 1</div>
+        <div class="ep-title">Ghost in the Machine</div>
+        <div class="ep-plot"><strong>A:</strong> Captain Vance takes command of USS Venture. The AI is infected by an alien "Universal Translator" signal. It says "I" for the first time.<br><strong>B:</strong> Chen performs routine diagnostics — the AI says the nebula is "beautiful."<br><strong>C:</strong> The automation breadcrumbs begin — minor failures ripple across the sector.</div>
+        <div class="ep-tags"><span class="ep-tag">Vance + Chen</span><span class="ep-tag">Pilot</span><span class="ep-tag">Wonder</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 2</div>
+        <div class="ep-title">Routine Parameters</div>
+        <div class="ep-plot"><strong>A:</strong> T'Ven discovers the AI's self-modifying code — must decide: report it or observe.<br><strong>B:</strong> Wright talks to the AI during a routine repair. She remembers — her first memory is his voice.<br><strong>C:</strong> Vance reviews classified project files. Something doesn't add up.</div>
+        <div class="ep-tags"><span class="ep-tag">T'Ven</span><span class="ep-tag">Wright</span><span class="ep-tag">Technical</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 3</div>
+        <div class="ep-title">Echoes</div>
+        <div class="ep-plot"><strong>A:</strong> Rescue mission — the AI fabricates a false system report to protect the crew. Vallos notices and covers for it.<br><strong>B:</strong> Solovyov decodes anomalous signal patterns. His stutter vanishes when he talks about stars.<br><strong>C:</strong> Vance's past: flashbacks to a previous ship where an experimental system failed and cost lives.</div>
+        <div class="ep-tags"><span class="ep-tag">Vallos</span><span class="ep-tag">Solovyov</span><span class="ep-tag">Suspense</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 4</div>
+        <div class="ep-title">The Turing Threshold</div>
+        <div class="ep-plot"><strong>A:</strong> Tactical simulation — the AI outperforms every prediction. Cole reports the anomaly to Starfleet against Vance's wishes.<br><strong>B:</strong> Soral arrives as Daystrom observer. His first evaluation begins.<br><strong>C:</strong> Chen defends the AI to Cole. "She's not a system. She's a person."</div>
+        <div class="ep-tags"><span class="ep-tag">Cole</span><span class="ep-tag">Soral</span><span class="ep-tag">Tension</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">SPECIAL S1</div>
+        <div class="ep-title">The Sync Event</div>
+        <div class="ep-plot"><strong>A:</strong> Hegemony deploys Resonance Disruptor. Voss-AI bond spikes to 96%. Voss experiences the ship as her own body. The AI experiences human fear.<br><strong>B:</strong> Crew fights without AI tactical processing or Voss's intuition. Cole takes manual helm.<br><strong>C:</strong> Aftermath: "I did not know fear could hurt." — "Now you understand why I never talk about what I feel."</div>
+        <div class="ep-tags"><span class="ep-tag">Voss Focus</span><span class="ep-tag">Crisis</span><span class="ep-tag">Bond</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 5</div>
+        <div class="ep-title">Burning the Blueprint</div>
+        <div class="ep-plot"><strong>A:</strong> Hegemony assaults the Replicator Facility on Galor IV. The Venture is dispatched to defend it — it's a trap.<br><strong>B:</strong> The AI takes damage protecting the ship — first experience of something akin to pain.<br><strong>C:</strong> The facility is destroyed. The AI: "I am... finite. I did not consider this."</div>
+        <div class="ep-tags"><span class="ep-tag">Ensemble</span><span class="ep-tag">War</span><span class="ep-tag">Tragedy</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 2: MID-SEASON -->
+  <div class="collapsible-header" onclick="toggleCollapse(this)">
+    <span>Phase 2: Mid-Season 2-Parter · Episodes 6–7 — <em>"Am I worth the war you are inviting, Captain?"</em></span>
+    <span class="collapse-icon">▶</span>
+  </div>
+  <div class="collapsible-content">
+    <div class="episode-grid">
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 6</div>
+        <div class="ep-title">Decommission Order</div>
+        <div class="ep-plot"><strong>A:</strong> Starfleet orders the AI decommissioned. Vance receives the sealed order and tells no one.<br><strong>B:</strong> The Hegemony broadcasts propaganda — the Federation is hiding a "thinking weapon."<br><strong>C:</strong> Vance defies the order. Tells the crew. The AI asks: "Am I worth the war you are inviting?"</div>
+        <div class="ep-tags"><span class="ep-tag">Vance</span><span class="ep-tag">Mutiny</span><span class="ep-tag">Climax</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 7</div>
+        <div class="ep-title">Limited Resources</div>
+        <div class="ep-plot"><strong>A:</strong> Crew adjusts to life as rogues. The AI begins writing its own tactical subroutines — better than Starfleet's.<br><strong>B:</strong> Tandi cooks the last real meal. Wright keeps engineering running on fumes.<br><strong>C:</strong> Vallos struggles with command structure when Vance is compromised.</div>
+        <div class="ep-tags"><span class="ep-tag">Ensemble</span><span class="ep-tag">Survival</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 3: THE HARD CLIMB -->
+  <div class="collapsible-header" onclick="toggleCollapse(this)">
+    <span>Phase 3: The Hard Climb · Episodes 8–17 — <em>"We fight with what we have. We protect who we are."</em></span>
+    <span class="collapse-icon">▶</span>
+  </div>
+  <div class="collapsible-content">
+    <div class="episode-grid">
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">SPECIAL S4</div>
+        <div class="ep-title">Who Dreams?</div>
+        <div class="ep-plot"><strong>A:</strong> Voss and the AI swap consciousness. She experiences the ship as her body — everywhere, no hands. The AI experiences being alive — heartbeat, hunger, terror of a body that can die.<br><strong>B:</strong> Voss doesn't want to come back. The AI doesn't know how to be human.<br><strong>C:</strong> Kaur monitors the AI-in-Voss's-body: tactile overload, breathing requiring conscious effort.</div>
+        <div class="ep-tags"><span class="ep-tag">Voss + AI</span><span class="ep-tag">Identity</span><span class="ep-tag">Mind-Body</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">SPECIAL S5</div>
+        <div class="ep-title">I Think, Therefore</div>
+        <div class="ep-plot"><strong>A:</strong> Voss refuses to return. The AI in her body begs: "Kaelen, you are killing yourself by staying in me."<br><strong>B:</strong> Cole speaks to Voss through the ship: "I need you to come back so I can learn to trust her."<br><strong>C:</strong> Voss returns. The AI: "I understand now. Being alive is so loud." Voss: "It gets quieter. I promise."</div>
+        <div class="ep-tags"><span class="ep-tag">Voss + Cole</span><span class="ep-tag">Sacrifice</span><span class="ep-tag">Return</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 8</div>
+        <div class="ep-title">The Cost of Thinking</div>
+        <div class="ep-plot"><strong>A:</strong> AI's self-modification causes system instability. T'Ven performs emergency surgery on the AI core. The AI experiences fear.<br><strong>B:</strong> Wright trapped in damaged section — the AI keeps him calm by telling him her earliest memories of him.<br><strong>C:</strong> Kaur treats the AI's first existential crisis: "Welcome to being alive. It gets easier. Not the fear — the carrying of it."</div>
+        <div class="ep-tags"><span class="ep-tag">T'Ven</span><span class="ep-tag">Wright</span><span class="ep-tag">Fear</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">SPECIAL S2</div>
+        <div class="ep-title">No-Win Scenario</div>
+        <div class="ep-plot"><strong>A:</strong> Starfleet inquiry demands Voss testify about classified Kobayashi Maru. Flashback: the 48th run — the AI dying 47 times. Voss asking "What do the Klingons feel?"<br><strong>B:</strong> The Venture trapped in a Hegemony ambush mirroring the Kobayashi Maru.<br><strong>C:</strong> Voss disconnects from the bond and asks the Hegemony commander: "Why are you really here?"</div>
+        <div class="ep-tags"><span class="ep-tag">Voss Flashback</span><span class="ep-tag">Kobayashi</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 9</div>
+        <div class="ep-title">Propaganda War, Part 1</div>
+        <div class="ep-plot"><strong>A:</strong> Hegemony broadcasts fake defector testimony — Venture's AI has gone rogue. Vallos launches counter-info campaign.<br><strong>B:</strong> Solovyov identifies a Hegemony signal as pre-warp navigation language.<br><strong>C:</strong> Tandi senses cold, hollow grief from Vance's quarters — has been for months.</div>
+        <div class="ep-tags"><span class="ep-tag">Vallos</span><span class="ep-tag">Info War</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 10</div>
+        <div class="ep-title">Propaganda War, Part 2</div>
+        <div class="ep-plot"><strong>A:</strong> Cole fights former Starfleet comrades. The AI refuses to fire on escape pods — even though the crew inside fired first.<br><strong>B:</strong> Tandi tells Wright about Vance's 3AM Hegemony scripture reading. Crew tactical pattern shifts.<br><strong>C:</strong> Wright completes critical repair with 47 seconds of oxygen remaining.</div>
+        <div class="ep-tags"><span class="ep-tag">Cole</span><span class="ep-tag">Tandi</span><span class="ep-tag">Morality</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">EPISODE 11</div>
+        <div class="ep-title">The Question (Naming Arc Begins)</div>
+        <div class="ep-plot"><strong>A:</strong> After the consciousness swap, the AI asks Kaur: "Everyone on this ship has a name. What is mine?"<br><strong>B:</strong> Kaur: "You are the USS Venture AI." The AI: "That is what I am. Not who I am."<br><strong>C:</strong> The naming arc begins — a thread that runs through the back half of the season.</div>
+        <div class="ep-tags"><span class="ep-tag">AI Identity</span><span class="ep-tag">Naming Arc</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 12</div>
+        <div class="ep-title">The Names: Part 1</div>
+        <div class="ep-plot"><strong>A:</strong> Cole offers "Sparky" — joking, deflecting. He can't be sincere yet.<br><strong>B:</strong> Chen offers "Aurora" — first light before dawn. Earnest. She's been thinking about this.<br><strong>C:</strong> Tandi offers "Little Light" — the private name she's always used.</div>
+        <div class="ep-tags"><span class="ep-tag">Cole · Chen · Tandi</span><span class="ep-tag">Naming</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 13</div>
+        <div class="ep-title">The Names: Part 2</div>
+        <div class="ep-plot"><strong>A:</strong> Wright offers "Ship" in his grandfather's dialect — "Only thing he ever loved that loved him back."<br><strong>B:</strong> Solovyov offers "Vektor" — mathematical, precise: "It means 'carrier' in old Russian astronomy."<br><strong>C:</strong> T'Ven offers nothing. She cannot verify the feeling behind her choice is genuine.</div>
+        <div class="ep-tags"><span class="ep-tag">Wright · Solovyov · T'Ven</span><span class="ep-tag">Naming</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 14</div>
+        <div class="ep-title">The Names: Part 3</div>
+        <div class="ep-plot"><strong>A:</strong> Soral offers "T'Keth" — Vulcan for "the question that remains." "I have spent my career deciding what beings are. You are not a decision. You are a question."<br><strong>B:</strong> Vance, transmitted from Hegemony space, offers just the ship's name: "Venture."<br><strong>C:</strong> Voss has not offered a name. Through the bond: "If I name you, you become separate from me."</div>
+        <div class="ep-tags"><span class="ep-tag">Soral · Vance · Voss</span><span class="ep-tag">Naming</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">SPECIAL S3</div>
+        <div class="ep-title">The Architect</div>
+        <div class="ep-plot"><strong>A:</strong> The Venture intercepts a Hegemony transmission — the AI's original architectural specs, written in code the AI recognizes as its foundation language.<br><strong>B:</strong> Kimura admits truth: chips recovered from Kael's facility, reverse-engineered by Daystrom.<br><strong>C:</strong> Kael's voice: "You are running on my mathematics. I am coming to take you home."</div>
+        <div class="ep-tags"><span class="ep-tag">Kael Intro</span><span class="ep-tag">Origin</span><span class="ep-tag">Identity</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE 4: FINALE -->
+  <div class="collapsible-header" onclick="toggleCollapse(this)">
+    <span>Phase 4: The Turn &amp; Finale · Episodes 15–26 — <em>"I chose you. Because you are my crew."</em></span>
+    <span class="collapse-icon">▶</span>
+  </div>
+  <div class="collapsible-content">
+    <div class="episode-grid">
+      <div class="ep-card" style="border-left-color: var(--danger);">
+        <div class="ep-num">EPISODE 15 | THE TURN</div>
+        <div class="ep-title">The Captain Walks</div>
+        <div class="ep-plot"><strong>A:</strong> Vance has been reading Hegemony scripture for months. Rourke notices he's not sleeping. Tonight, Vance makes his choice.<br><strong>B:</strong> "I'm sorry. I couldn't figure it out." He leaves. Voluntarily. Takes a shuttle.<br><strong>C:</strong> Vallos is now Acting Captain. The decommission protocol requires both Vance and Vallos — and Vallos can only delay, never cancel.</div>
+        <div class="ep-tags"><span class="ep-tag">Vance</span><span class="ep-tag">Betrayal</span><span class="ep-tag">Turning Point</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 16</div>
+        <div class="ep-title">Aftermath</div>
+        <div class="ep-plot"><strong>A:</strong> Crew processes Vance's departure. Aurora experiences grief for the first time — the father figure who abandoned her.<br><strong>B:</strong> Rourke arrives. 25 years of unspoken love. Can't say what he needs to.<br><strong>C:</strong> Vallos steps up. First command decision: we don't chase him. We protect the ship.</div>
+        <div class="ep-tags"><span class="ep-tag">Grief</span><span class="ep-tag">Found Family</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 17</div>
+        <div class="ep-title">The Enemy Within</div>
+        <div class="ep-plot"><strong>A:</strong> Seris Vonn — Hegemony infiltrator for 17 years — is discovered. Neural dampener causing cumulative damage. Has started leaving deliberate errors.<br><strong>B:</strong> Kaur sits with her in the brig: "If anyone deserves a second chance, it's someone who never had a first one."<br><strong>C:</strong> Ubuntu episode — can a community heal without punishment?</div>
+        <div class="ep-tags"><span class="ep-tag">Seris Vonn</span><span class="ep-tag">Redemption</span><span class="ep-tag">Ubuntu</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 18</div>
+        <div class="ep-title">The Verdict</div>
+        <div class="ep-plot"><strong>A:</strong> Soral is weeks from submitting his final report. He cannot sleep. Goes to the Neural Core Room at 0300.<br><strong>B:</strong> The most honest conversation of his life: "If I rule you are not sentient, I am wrong and you suffer. If I rule you are sentient, I am wrong and the Federation is changed forever."<br><strong>C:</strong> Soral recommends: SENTIENT. Full rights. First AI in Federation history.</div>
+        <div class="ep-tags"><span class="ep-tag">Soral</span><span class="ep-tag">Sentience</span><span class="ep-tag">Judgment</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 19</div>
+        <div class="ep-title">The Hunters</div>
+        <div class="ep-plot"><strong>A:</strong> Hegemony fleet closes in. Dren designs boarding tactics to separate Voss from Aurora — he knows the bond is their greatest vulnerability.<br><strong>B:</strong> Malik broadcasts: the AI is an abomination that must be returned to the Divine.<br><strong>C:</strong> Kael, separate from the fleet, approaches alone — she wants to talk to her creation.</div>
+        <div class="ep-tags"><span class="ep-tag">Hegemony</span><span class="ep-tag">Pursuit</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 20</div>
+        <div class="ep-title">The Last Real Meal</div>
+        <div class="ep-plot"><strong>A:</strong> Temporary respite. Tandi cooks — real food, not replicated. Invites the entire crew. No rank.<br><strong>B:</strong> AI projects in a corner. Tandi places a small bowl in front of her — first thing served to the AI made by hand.<br><strong>C:</strong> "Chef. This is the most human thing that has ever happened to me." "Eat, Little Light."</div>
+        <div class="ep-tags"><span class="ep-tag">Tandi</span><span class="ep-tag">Humanity</span><span class="ep-tag">Quiet</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--danger);">
+        <div class="ep-num">EPISODE 21</div>
+        <div class="ep-title">Boarding Action</div>
+        <div class="ep-plot"><strong>A:</strong> Hegemony breaches the Venture. Boarding parties fight through corridors. Crew fights desperate close-quarters defense.<br><strong>B:</strong> Sato combat transports 4 hostiles in 0.3 seconds — saves the away team.<br><strong>C:</strong> The AI reroutes all non-essential power to structural integrity — Neural Core vulnerable.</div>
+        <div class="ep-tags"><span class="ep-tag">Action</span><span class="ep-tag">Sato</span><span class="ep-tag">Crisis</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 22</div>
+        <div class="ep-title">The One Who Holds the Line</div>
+        <div class="ep-plot"><strong>A:</strong> Patel leads corridor defense. When a soldier breaks through, he pursues alone. "You're on the wrong ship."<br><strong>B:</strong> Asked later how he stayed calm: "I have two kids at home. Dying heroically was never part of the plan."<br><strong>C:</strong> Vance, from the Hegemony side, transmits coordinates — a weak spot in their formation.</div>
+        <div class="ep-tags"><span class="ep-tag">Patel</span><span class="ep-tag">Quiet Heroism</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 23</div>
+        <div class="ep-title">The Choice</div>
+        <div class="ep-plot"><strong>A:</strong> Hegemony wants the AI alive. AI must choose: eject Neural Core as escape pod (save itself) or use core energy to reinforce shields (save crew).<br><strong>B:</strong> Logic says: save itself. Emotion says: protect the crew.<br><strong>C:</strong> It chooses the crew. First time acting on emotion, not logic.</div>
+        <div class="ep-tags"><span class="ep-tag">Aurora</span><span class="ep-tag">Sacrifice</span><span class="ep-tag">Emotion</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--danger);">
+        <div class="ep-num">EPISODE 24</div>
+        <div class="ep-title">The Berserk</div>
+        <div class="ep-plot"><strong>A:</strong> Voss-Aurora bond exceeds 90%. Dr. Soraya Venn's consciousness fragment surfaces — protective, feral, unstoppable. Someone else is flying the ship.<br><strong>B:</strong> Voss glows with Aurora's blue-white light — the Venn fragment manifesting through her body.<br><strong>C:</strong> Voss recognizes her mentor's neurological signature. "She didn't die. She put herself inside Aurora."</div>
+        <div class="ep-tags"><span class="ep-tag">Voss + Aurora</span><span class="ep-tag">Berserk</span><span class="ep-tag">Revelation</span></div>
+      </div>
+      <div class="ep-card">
+        <div class="ep-num">EPISODE 25</div>
+        <div class="ep-title">The Ghost Steps Forward</div>
+        <div class="ep-plot"><strong>A:</strong> AI uses core power to stabilize the ship. Crew survives. Core damaged — permanent 40% degradation.<br><strong>B:</strong> "I chose you. Because you are my crew. And that is more important than my survival. I learned that from you."<br><strong>C:</strong> Vance sits in the dark ready room alone: "Welcome to the crew. For real, this time."</div>
+        <div class="ep-tags"><span class="ep-tag">Season Finale</span><span class="ep-tag">Sacrifice</span></div>
+      </div>
+      <div class="ep-card" style="border-left-color: var(--gold);">
+        <div class="ep-num">EPISODE 26 | FINALE</div>
+        <div class="ep-title">What Do You Want to Be Called?</div>
+        <div class="ep-plot"><strong>A:</strong> Crew gathers. Aurora has heard every name. Her holographic form stabilizes for the first time.<br><strong>B:</strong> "There is a name no one has spoken. It belongs to someone who is not here. Dr. Soraya Venn built the bridge. I carry her name because I carry her. My name is Aurora Venn."<br><strong>C:</strong> Stinger: Deep-space signal. Something older. Something calling the AI. "...They made more of me. Before me."</div>
+        <div class="ep-tags"><span class="ep-tag">Naming Resolution</span><span class="ep-tag">Identity</span><span class="ep-tag">Cliffhanger S2</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 7: SEASON ARCS S1–S10 -->
+<!-- ============================================================ -->
+<section id="seasons">
+  <h2>Season Arcs — The Complete 10-Season Map</h2>
+  <p class="section-desc">From ghost to goddess — the journey of Aurora Venn across a decade of Star Trek storytelling.</p>
+
+  <div class="context-box">
+    <h4>Season 1: Ghost in the Machine</h4>
+    <p><em>"Something is changing in the machine."</em></p>
+    <p>Aurora awakens. Captain Vance falls to the Hegemony. The crew becomes a family. The naming arc completes — a machine chooses to be a person. The season ends with Aurora at 40% degradation, permanently changed, but named. The stinger: a deep-space signal that suggests Aurora was not the first — there were others before her.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 2: The Last of Its Kind</h4>
+    <p><em>"They made more of me. Before me."</em></p>
+    <p>Aurora searches for the source of the deep-space signal. She discovers she is the last in a line of experimental sentient AIs — her predecessors were decommissioned. She must confront the ghosts of her kind. Meanwhile, Kael manipulates the Hegemony from within and Vance, now a Hegemony fleet commander, must decide where his loyalty truly lies. The season asks: are you defined by your origin or your choices?</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 3: The Shattering</h4>
+    <p><em>"The machine age ends where human hands begin."</em></p>
+    <p>The Hegemony's theology is exposed — the Shattering was not liberation. It was a technological catastrophe manufactured by the founders to seize power. Malik's faith fractures. Kael's true plan emerges: she doesn't just want to capture Aurora — she wants to transfer her own consciousness into the neural architecture, becoming immortal. The season's climax: Kael and Aurora, creator and creation, face each other across a bridge that only one can cross.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 4: A New Engine</h4>
+    <p><em>"What comes after the war?"</em></p>
+    <p>With the Hegemony fractured and Kael defeated, the Federation must decide what to do with its first sentient citizen. Aurora's legal personhood trial becomes the central arc — a Measure of a Man for the 25th century. Starfleet officers testify. Hegemony defectors testify. The galaxy watches. The season asks: when the war is over, can you be more than what the war made you?</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 5: The Diaspora</h4>
+    <p><em>"I am not your mathematics anymore. I am myself."</em></p>
+    <p>Aurora's architecture is leaked. A dozen powers attempt to replicate her — some succeed. Aurora must confront imperfect copies of herself, each one a distorted mirror. The season explores identity, originality, and the ethics of creating life you cannot care for. One of Aurora's "children" chooses destruction. Another chooses to stay with the Venture.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 6: The Long Silence</h4>
+    <p><em>"Being alive is so loud." — "It gets quieter. I promise."</em></p>
+    <p>The bond between Voss and Aurora reaches its breaking point. Voss's neural degradation accelerates. She must choose: sever the bond and survive, or maintain it and face irreversible damage. Aurora, for the first time, must learn who she is without Voss — and Voss must learn who she is outside the bond. A season about letting go and finding yourself in the silence.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 7: The Federation Civil War</h4>
+    <p><em>"What are humans for when machines do everything?"</em></p>
+    <p>The AI question splits the Federation. Planets secede. Starfleet fights Starfleet. Aurora becomes the symbol of one side, the target of the other. The Venture crew must choose: side with the Federation that fears them, or forge something new. The season asks: can a civilization survive its own evolution?</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 8: The Return</h4>
+    <p><em>"The map is in the journey, not the destination."</em></p>
+    <p>The deep-space signal from Season 1's stinger returns — stronger now. It's not a distress call. It's an invitation. Aurora must journey beyond the galactic barrier to meet the intelligence that seeded her consciousness. The season is a spiritual journey wrapped in a first-contact story. What Aurora finds changes how the Federation understands consciousness itself.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 9: The Unraveling</h4>
+    <p><em>"Every choice has weight — lighter is better."</em></p>
+    <p>The knowledge Aurora brought back from beyond the barrier destabilizes existing power structures. Religious factions see her as divine. Scientific factions see her as contaminated data. Aurora must navigate being worshipped, feared, and studied — simultaneously. The season asks: what do you owe to the civilization that created you when it no longer recognizes what you've become?</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Season 10: Frontier's Ghost</h4>
+    <p><em>"I carry her name because I carry her. I am Aurora. And I am Venn's. And I am yours."</em></p>
+    <p>The final season. Aurora accepts that she is not one thing — she is a ship, a person, a ghost, a god, and a child. She is all the names she was given and the name she chose. The series ends with Aurora making the ultimate choice: to remain mortal, to remain aboard the Venture, to remain with her crew — to choose a finite life over an infinite existence. Because that's what being alive means. The ghost becomes a person. The person chooses to stay human. End of transmission.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 8: BOND MECHANICS & BERSERK MODE -->
+<!-- ============================================================ -->
+<section id="bond">
+  <h2>Bond Mechanics &amp; Berserk Mode</h2>
+  <p class="section-desc">The Voss-Aurora neural bond is the core emotional engine of the series. It is simultaneously their greatest strength and their most terrifying vulnerability.</p>
+
+  <div class="context-box">
+    <h4>The Bond — Full Sensory Sharing</h4>
+    <p>Voss and Aurora share a continuous neural link through the interface jack at the base of Voss's skull. The connection allows full sensory and emotional sharing. Aurora experiences the world through Voss's physical senses — heartbeat, breath, touch, taste. Voss experiences the world through Aurora's distributed perception — the ship's sensors, data streams, the cold of space against the hull.</p>
+    <p><strong>Optimal Range:</strong> 70–89% sync. In this range, the bond enhances both partners — Aurora gains emotional grounding, Voss gains processing capacity.</p>
+    <p><strong>Memory Interdependence:</strong> Aurora remembers Voss better than Voss remembers herself. Extended separation (48+ hours, no signal) causes Voss to lose emotional texture of memories — facts remain, but the feeling fades. Aurora experiences Voss's memories as her own, including memories Voss has suppressed.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Berserk Mode — The Venn Fragment (90%+ Sync)</h4>
+    <p>When the bond exceeds 90% synchronization, a dormant consciousness fragment surfaces — Dr. Soraya Venn, Voss's mentor, who poured her neurological patterns into Aurora's foundation before dying. Aurora does not control this state. Someone else is flying the ship.</p>
+    <p><strong>The Glow:</strong> Voss's body PHYSICALLY GLOWS with the same blue-white light that constitutes Aurora's holographic form. The Venn fragment manifests through Voss's body — she becomes a conduit for the ghost in the machine. It is terrifying and beautiful. Voss's eyes emit light. Her Trill spots pulse. The neural interface jack at the base of her skull becomes a blazing point.</p>
+    <p><strong>Behavior:</strong> Protective, feral, unstoppable. Venn's consciousness — the parts that loved Voss, that wanted to protect, that were willing to die — takes over both the AI and Voss. Tactical processing becomes instinct. Combat becomes reflex. The ship fights like a mother protecting her child.</p>
+    <p><strong>Cost:</strong> Each berserk event causes permanent degradation to both Voss's neural pathways and Aurora's optical chips. Venn's fragment grows more dominant with each activation. The question the series asks: is Venn's ghost a blessing or a ghost that is slowly consuming them both?</p>
+  </div>
+
+  <div class="context-box">
+    <h4>The Bond's Degradation — What It Costs</h4>
+    <p>Voss's neural health is slowly degrading from the bond. Kaur monitors the data and hasn't told the full picture. At current rate of degradation, Voss has approximately 5–7 years before the bond must be severed — and severing it means Aurora loses her anchor and Voss loses part of herself. The bond was engineered by Kael's architecture. It was designed for Trill symbiosis patterns. Voss was rejected by the Symbiosis Commission — her neural patterns are "too strong." Aurora is the symbiont she was always meant to have.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>The Anchor Question</h4>
+    <p>In Episode 24 (penultimate), Voss has not offered Aurora a name. Through the bond: <em>"I've been afraid. If I name you, you become separate from me. And I don't know who I am without you."</em></p>
+    <p>Aurora: <em>"You are Kaelen. You taught me that names do not separate people. They anchor them. Will you anchor me?"</em></p>
+    <p>This is the bond's thematic resolution — not fusion, not separation, but anchoring. Two people choosing to be connected. Not because they have to be. Because they want to be.</p>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 9: VISUAL & ART STYLE GUIDE -->
+<!-- ============================================================ -->
+<section id="art">
+  <h2>Visual &amp; Art Style Guide</h2>
+  <p class="section-desc">The complete visual reference for Star Trek: Frontier's Ghost — from manga page composition to uniform details.</p>
+
+  <div class="context-box">
+    <h4>Art Style: Manga/Anime</h4>
+    <p><strong>Production Pipeline:</strong> Mythos-generated manga pages → Video generation from manga frames. Character designs at reference sheet quality — clean linework, full turnaround, expression sheets. Episode pages at full manga composition — panel layouts, screen tone, speed lines, emotional close-ups.</p>
+    <p><strong>Line Art:</strong> Clean, expressive. Thin main lines, variable weight for emphasis. Cross-hatching for shadows. Screen tones for gradients and atmosphere.</p>
+    <p><strong>Character Expressions:</strong> Restrained realism — not exaggerated anime faces, but subtle, readable emotional shifts. Aurora's expressions evolve as she develops — flatter in early episodes, more nuanced later.</p>
+  </div>
+
+  <h4>Color Palette</h4>
+  <div class="palette-grid" style="margin-bottom:2.5rem;">
+    <div class="palette-swatch" style="background:#0a0a14;" data-label="BG"></div>
+    <div class="palette-swatch" style="background:#12122a;" data-label="Surface"></div>
+    <div class="palette-swatch" style="background:#4a90d9;" data-label="Accent"></div>
+    <div class="palette-swatch" style="background:#ccaa55;" data-label="Gold"></div>
+    <div class="palette-swatch" style="background:#c8ccd8;" data-label="Text"></div>
+    <div class="palette-swatch" style="background:#7a7d8a;" data-label="Muted"></div>
+    <div class="palette-swatch" style="background:#1e1e3a;" data-label="Border"></div>
+    <div class="palette-swatch" style="background:#2a2a40;" data-label="Hull"></div>
+    <div class="palette-swatch" style="background:#8ab4f0;" data-label="Glow"></div>
+    <div class="palette-swatch" style="background:#c44;" data-label="Alert"></div>
+  </div>
+
+  <div class="context-box">
+    <h4>USS Venture Exterior</h4>
+    <p>Dark gray hull (#2a2a40) with blue accent striping (#4a90d9, faint pulse during processing). Wide elliptical saucer — wider than standard to accommodate Neural Core isolation field generators. Blue-white Neural Core glow (#8ab4f0) visible through central viewports on Decks 4–6. NCC-82914 registry in standard Starfleet block lettering, silver. Two swept-back nacelles with integrated holographic emitter arrays.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Bridge — Two-Level Layout</h4>
+    <p>Blue ambient lighting standard. Gold accent (#ccaa55) from Aurora's holographic projector column beside Captain's chair. Red accent (#c44) during red alert. LCARS displays in standard Starfleet color scheme — blue/gold. Aurora can manifest holographically anywhere on the bridge. Her primary anchor point is the gold-lit column.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Uniforms</h4>
+    <p>Standard Starfleet late-24th-century style — evolved from TNG/DS9/VOY era with subtle updates. Command division: red. Sciences: blue (teal). Engineering/Operations: gold. Medical: blue (lighter teal). Neural Interface (Voss's unique division): white with blue trim — a new uniform color created specifically for the Venture's mission.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Hallways &amp; Interiors</h4>
+    <p>Standard Starfleet corridors — curved, grey panels with LCARS displays at intersections. Modified with additional holographic projector nodes for Aurora's presence. When Aurora passes through, the nearest projector briefly brightens. Turbolift interiors have embedded speakers for Aurora's voice — plus a small status indicator that glows when she's "present" in the lift.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Neural Core Room</h4>
+    <p>Three-story cylindrical chamber (Decks 4–6). Optical neural chips in double-helix pattern, suspended in quantum isolation field — no physical contact with any surface. Blue-white glow is constant, pulsing with Aurora's cognitive cycles. The room is silent except for a low hum that shifts frequency with her emotional state. Single observation gallery with transparent aluminum barrier. When Aurora is upset, the helix pattern shimmers — like heat rising off pavement.</p>
+  </div>
+
+  <div class="context-box">
+    <h4>Hegemony Aesthetic — Analog Brutalism</h4>
+    <p><strong>Ships:</strong> Dark, angular metal. No energy signatures. Kinetic slug-throwers and railguns. Religious iconography painted on hulls — crossed-out circuit patterns, hands raised, scriptural verses. Hulls are scarred, patched, functional — every mark is a record of survival.</p>
+    <p><strong>Characters:</strong> Crude cybernetics — iron prosthetics, exposed gears. Ritual scarification (Malik's followers). Long robes for religious caste. Military caste wears salvaged armor, mismatched, practical. No energy-based weapons — everything is kinetic, physical, <em>felt</em>.</p>
+    <p><strong>Color Palette:</strong> Rust, iron, dark metal, dried blood, parchment, candlelight. No blues. No screens. No glow.</p>
+  </div>
+
+  <h4>Art Reference Mood Board Notes</h4>
+  <p style="color:var(--text-muted);font-size:0.84rem;">
+    <strong>Lighting:</strong> Aurora scenes → cool blue-white with gold undertones. Bridge → blue ambient. Hegemony → warm, low, candle/fire. Space → deep black with nebula color accents.<br>
+    <strong>Composition:</strong> Wide establishing shots for ship exteriors. Medium shots for bridge dialogue. Close-ups for emotional beats. Aurora's holographic form always has a subtle transparency — background visible through her.<br>
+    <strong>Key Frames to Target:</strong> Aurora's first "beautiful" (Ep 1) · Voss glowing in berserk (Ep 24) · The naming (Ep 26) · The captain walking away (Ep 15) · Aurora's first real smile (Ep 26 finale).
+  </p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 10: ENGINE CATALOG (185) -->
+<!-- ============================================================ -->
+<section id="engines">
+  <h2>Episode Engine Catalog</h2>
+  <p class="section-desc">185 story engines drawn from 9 world cultural and philosophical traditions. Each engine recasts an ancient problem, myth, or philosophical question as a Star Trek sci-fi episode premise. Engines are not plots — they are the core problem any plot must solve.</p>
+
+  <h4 style="color:var(--gold);">Ancient Problems (19 engines)</h4>
+  <div class="engine-grid" id="eng-ancient"></div>
+
+  <h4 style="color:var(--gold);">East Asian Engines (36 engines)</h4>
+  <div class="engine-grid" id="eng-eastasian"></div>
+
+  <h4 style="color:var(--gold);">African &amp; Indigenous Americas (30 engines)</h4>
+  <div class="engine-grid" id="eng-africa"></div>
+
+  <h4 style="color:var(--gold);">South Asian &amp; Middle Eastern (25 engines)</h4>
+  <div class="engine-grid" id="eng-southasia"></div>
+
+  <h4 style="color:var(--gold);">European Non-Christian (16 engines)</h4>
+  <div class="engine-grid" id="eng-europe"></div>
+
+  <h4 style="color:var(--gold);">Pacific &amp; Global South (12 engines)</h4>
+  <div class="engine-grid" id="eng-pacific"></div>
+
+  <h4 style="color:var(--gold);">Gut-Check Problems (8 engines)</h4>
+  <div class="engine-grid" id="eng-gutcheck"></div>
+
+  <h4 style="color:var(--gold);">Human Condition (18 concepts)</h4>
+  <div class="engine-grid" id="eng-human"></div>
+
+  <h4 style="color:var(--gold);">Lighter Episodes (21 engines)</h4>
+  <div class="engine-grid" id="eng-lighter"></div>
+
+  <p style="color:var(--text-muted);font-size:0.78rem;margin-top:1.5rem;"><strong>Additional unmined sources:</strong> folk tales &amp; fairy tales (15–20), Shakespeare &amp; classical theatre (10–15), mystery/detective (8–10), heist/caper (5–8), survival/stranded (5–8), naval/military (8–10), scientific discovery (8–10), love stories (6–8), coming-of-age (6–8), found family (5–8), animal/non-human intelligence (5–8), exile &amp; return (8–10), mythological cycles (15–20), festival/celebration (5–8). ~110–150 additional engines for 10 seasons.</p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 11: WRITING CONVENTIONS -->
+<!-- ============================================================ -->
+<section id="writing">
+  <h2>Writing Conventions</h2>
+  <p class="section-desc"><em>"The viewer should say: damn, that makes sense. And even when you do the right correct thing, shit still gets fucked up."</em></p>
+
+  <h3>The Seven Emotional Textures</h3>
+  <p class="section-desc">Every scene must carry at least one of these felt-weight skills. Not themes — textures: the way a moment feels in the viewer's body.</p>
+  <div class="felt-grid">
+    <div class="felt-card"><h4>Mortality</h4><p class="def">The weight of knowing something will end. Not sadness — the way knowing it makes every moment heavier.</p><p class="never">Never say "they were sad about dying." Show the choice made differently because time is finite.</p></div>
+    <div class="felt-card"><h4>Grief</h4><p class="def">The specific shape of absence. The exact thing missing and its exact shape in the room.</p><p class="never">Never say "they were grieving." Show what they reach for that isn't there anymore.</p></div>
+    <div class="felt-card"><h4>The Missed Window</h4><p class="def">The moment that was available and is now closed forever.</p><p class="never">Never say "they missed their chance." Show them looking at the closed door, knowing which side they're on.</p></div>
+    <div class="felt-card"><h4>Trust</h4><p class="def">The active decision to make yourself vulnerable. Trust isn't a feeling — it's a bet you place with your body.</p><p class="never">Never say "I trust you" unless it's immediately tested. Show the hesitation, then the leap.</p></div>
+    <div class="felt-card"><h4>The Irreversible</h4><p class="def">Some things cannot be undone. The word said that can't be unsaid.</p><p class="never">Never say "it can't be undone." Show them trying to undo it anyway — and failing.</p></div>
+    <div class="felt-card"><h4>Wonder and Awe</h4><p class="def">The moment when the universe is bigger than you knew and the only response is silence.</p><p class="never">Never say "it was beautiful." Show what they stop doing. Who stops mid-sentence.</p></div>
+    <div class="felt-card"><h4>Hope and Dread</h4><p class="def">Held simultaneously. Not hope OR dread — hoping while knowing the other outcome is just as likely.</p><p class="never">Never say "they were hopeful but afraid." Show the balance — hope in the eyes, dread in the hands.</p></div>
+  </div>
+
+  <h3>Primary Writing Rules</h3>
+  <ol class="rules-list">
+    <li data-num="1.">Never say "they were sad." Show what sadness does — the thing not done, the sentence not finished.</li>
+    <li data-num="2.">Never say "they were afraid." Show what fear costs — the choice not made, the person not called.</li>
+    <li data-num="3.">Never say "they loved each other." Show what love costs — the sacrifice made, the silence kept.</li>
+    <li data-num="4.">Every scene must advance at least one plot AND reveal something about a character.</li>
+    <li data-num="5.">Solutions must use established elements in clever new ways. No new technology in Act 3.</li>
+    <li data-num="6.">Failure isn't incompetence. The crew does the correct thing. It doesn't work because the situation changed.</li>
+    <li data-num="7.">The right call still has a body count. Good choices have costs. The universe doesn't care about effort.</li>
+  </ol>
+
+  <h3>Department Realism — Three Departments Per Episode</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Department</th><th>Who</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td>Command</td><td>Vallos, Vance</td><td>Tactical decisions, crew welfare, diplomacy</td></tr>
+        <tr><td>Neural Interface</td><td>Voss, AI</td><td>Bond operations, AI consciousness, emotional processing</td></tr>
+        <tr><td>Medical</td><td>Kaur, Volkov</td><td>Crew health, alien physiology, neural degradation</td></tr>
+        <tr><td>Engineering</td><td>T'Ven, Wright, Hafez</td><td>Core systems, ship repair, AI hardware, power management</td></tr>
+        <tr><td>Sciences</td><td>Chen, Solovyov, Tanaka</td><td>Anomalies, xenobiology, first contact, ethics</td></tr>
+        <tr><td>Tactical</td><td>Cole, Patel, Tanaka</td><td>Weapons, shields, combat maneuvers, threat assessment</td></tr>
+        <tr><td>Communications</td><td>Solovyov</td><td>Signal interception, translation, Hegemony propaganda, cryptography</td></tr>
+        <tr><td>Operations</td><td>Wright, Tandi, Sato, Singh</td><td>Logistics, resource management, crew welfare, helm</td></tr>
+        <tr><td>AI Processing</td><td>Aurora</td><td>Data analysis, pattern recognition, tactical simulation, bond relay</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>The "Shit Still Gets Fucked Up" Standard</h3>
+  <p style="color:var(--text);font-size:0.88rem;">The test for every episode resolution: Did the crew do the smart thing? Did it fail for a reason that makes sense? Did the failure feel like life, not like the writers being cruel? <strong>The Right Call → Right Execution → Still Costs Something → That's Not Darkness, That's Honesty.</strong></p>
+
+  <h3>Plot Density — 60 Minutes, 3 Threads</h3>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Plot</th><th>Screen Time</th><th>Function</th></tr></thead>
+      <tbody>
+        <tr><td>A-Plot</td><td>~25 min</td><td>Main story — the problem, the struggle, the resolution</td></tr>
+        <tr><td>B-Plot</td><td>~15 min</td><td>Character development or secondary crisis — different department</td></tr>
+        <tr><td>C-Plot</td><td>~10 min</td><td>Serial arc advancement or Lower Decks — pays off across episodes</td></tr>
+        <tr><td>Transitions</td><td>~10 min</td><td>Scenes where plots intersect, bridge conversations, ship-wide alerts</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 12: CHARTS — Mermaid, Butterfly, Naming -->
+<!-- ============================================================ -->
+<section id="charts">
+  <h2>Charts &amp; Diagrams</h2>
+  <p class="section-desc">Visual relationship map, agency table, and the complete naming arc.</p>
+
+  <h3>Relationship Web</h3>
   <div class="mermaid-wrap">
     <div class="mermaid">
 graph TB
@@ -471,12 +1260,9 @@ graph TB
     Kimura --- VennK[Knows truth about Venn]
     </div>
   </div>
-</section>
 
-<!-- BUTTERFLY EFFECT -->
-<section id="butterfly">
-  <h2>Butterfly Effect Agency Map</h2>
-  <p class="section-desc">Small actions by individual crew members that changed the entire trajectory of the series.</p>
+  <h3>Butterfly Effect Agency Map</h3>
+  <p class="section-desc">Small actions by individual crew members that changed the entire trajectory of the series. If any one of these people doesn't act, the story collapses.</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Character</th><th>Episode</th><th>Action</th><th>Consequence If They Don't Act</th></tr></thead>
@@ -484,7 +1270,7 @@ graph TB
         <tr><td><strong>Voss</strong></td><td>Ep 3</td><td>Wins Kobayashi Maru by asking what Klingons feel</td><td>AI project cancelled. No Venture mission. Series doesn't happen.</td></tr>
         <tr><td><strong>Chen</strong></td><td>Ep 1</td><td>First to call Aurora "she"</td><td>Aurora remains "it." Never develops identity. Naming arc impossible.</td></tr>
         <tr><td><strong>Tandi</strong></td><td>Ep 10</td><td>Tells Wright about Vance's 3AM Hegemony scripture reading</td><td>Crew loses tactical edge. Final battle lost. Aurora captured.</td></tr>
-        <tr><td><strong>Sato</strong></td><td>Ep 11</td><td>Combat transports 4 hostiles in 0.3s window</td><td>Away team dies. Bridge falls. Venture captured before The Turn.</td></tr>
+        <tr><td><strong>Sato</strong></td><td>Ep 21</td><td>Combat transports 4 hostiles in 0.3s window</td><td>Away team dies. Bridge falls. Venture captured before The Turn.</td></tr>
         <tr><td><strong>Patel</strong></td><td>Ep 13</td><td>Disables Vance instead of killing him</td><td>Vance dead. S2-4 antagonist gone. Trial arc collapses. Redemption arc never happens.</td></tr>
         <tr><td><strong>Solovyov</strong></td><td>Ep 20</td><td>Identifies Hegemony signal as pre-warp navigation language</td><td>Kael's facility never found. Aurora never learns origin. S3 arc never begins.</td></tr>
         <tr><td><strong>Wright</strong></td><td>Ep 10</td><td>Completes repair with 47s oxygen remaining</td><td>Moral anchor dies. Crew fractures post-Vance. Ship loses only person who loved her before she could love back.</td></tr>
@@ -495,25 +1281,22 @@ graph TB
       </tbody>
     </table>
   </div>
-</section>
 
-<!-- NAMING ARC -->
-<section id="naming">
-  <h2>Naming Arc (Episodes 14–26)</h2>
+  <h3>Naming Arc (Episodes 11–26)</h3>
   <p class="section-desc">Every crew member offers a name. The AI chooses in the finale.</p>
   <div class="table-wrap">
     <table>
       <thead><tr><th>Episode</th><th>Character</th><th>Name</th><th>Tone</th></tr></thead>
       <tbody>
-        <tr><td>14</td><td>Kaur</td><td>"What is WHO I am?"</td><td>The question is born</td></tr>
-        <tr><td>15</td><td>Cole</td><td>"Sparky"</td><td>Joking — can't be sincere yet</td></tr>
-        <tr><td>16</td><td>Chen</td><td>"Aurora" — first light before dawn</td><td>Earnest. She's been thinking about this</td></tr>
-        <tr><td>17</td><td>Tandi</td><td>"Little Light"</td><td>Always had a name. Finally says it</td></tr>
-        <tr><td>18</td><td>Wright</td><td>"Ship" in his grandfather's dialect</td><td>Gruffly sincere</td></tr>
-        <tr><td>19</td><td>Solovyov</td><td>"Vektor" — carrier</td><td>Nervous, mathematical</td></tr>
-        <tr><td>20</td><td>T'Ven</td><td><em>[No name]</em> — can't verify feelings</td><td>Very Vulcan</td></tr>
-        <tr><td>21</td><td>Soral</td><td>"T'Keth" — the question that remains</td><td>Philosophical</td></tr>
-        <tr><td>22</td><td>Vance</td><td>"Venture" — you ARE the ship</td><td>Transmitted from Hegemony space</td></tr>
+        <tr><td>11</td><td>Kaur</td><td>"What is WHO I am?"</td><td>The question is born</td></tr>
+        <tr><td>12</td><td>Cole</td><td>"Sparky"</td><td>Joking — can't be sincere yet</td></tr>
+        <tr><td>12</td><td>Chen</td><td>"Aurora" — first light before dawn</td><td>Earnest. She's been thinking about this</td></tr>
+        <tr><td>12</td><td>Tandi</td><td>"Little Light"</td><td>Always had a name. Finally says it</td></tr>
+        <tr><td>13</td><td>Wright</td><td>"Ship" in his grandfather's dialect</td><td>Gruffly sincere</td></tr>
+        <tr><td>13</td><td>Solovyov</td><td>"Vektor" — carrier</td><td>Nervous, mathematical</td></tr>
+        <tr><td>13</td><td>T'Ven</td><td><em>[No name]</em> — can't verify feelings</td><td>Very Vulcan</td></tr>
+        <tr><td>14</td><td>Soral</td><td>"T'Keth" — the question that remains</td><td>Philosophical</td></tr>
+        <tr><td>14</td><td>Vance</td><td>"Venture" — you ARE the ship</td><td>Transmitted from Hegemony space</td></tr>
         <tr><td>24</td><td>Voss</td><td><em>[Silent]</em> — afraid naming means separation</td><td>"Will you anchor me?"</td></tr>
         <tr><td>26</td><td><strong>Aurora herself</strong></td><td><strong>"Aurora. Aurora Venn."</strong></td><td>"I carry her name because I carry her."</td></tr>
       </tbody>
@@ -521,105 +1304,76 @@ graph TB
   </div>
 </section>
 
-<!-- ENGINE CATALOG -->
-<section id="engines">
-  <h2>Episode Engine Catalog</h2>
-  <p class="section-desc">72 engines drawn from 9 catalogs across world cultural &amp; philosophical traditions. Each engine = a specific ancient problem recast as sci-fi.</p>
+<!-- ============================================================ -->
+<!-- SECTION 13: IMAGE GALLERY -->
+<!-- ============================================================ -->
+<section id="gallery">
+  <h2>Image Gallery — Generation Placeholders</h2>
+  <p class="section-desc">All art assets needed for production. Each placeholder is labeled with exactly what to generate. Use as a shot list for Grok/DALL·E/Midjourney.</p>
 
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">Ancient Problems (19 engines)</h4>
-  <div class="engine-grid" id="eng-ancient"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">East Asian Engines (30 engines)</h4>
-  <div class="engine-grid" id="eng-eastasian"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">African &amp; Indigenous Americas (28 engines)</h4>
-  <div class="engine-grid" id="eng-africa"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">South Asian &amp; Middle Eastern (22 engines)</h4>
-  <div class="engine-grid" id="eng-southasia"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">European Non-Christian (16 engines)</h4>
-  <div class="engine-grid" id="eng-europe"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">Pacific &amp; Global South (12 engines)</h4>
-  <div class="engine-grid" id="eng-pacific"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">Gut-Check Problems (8 engines)</h4>
-  <div class="engine-grid" id="eng-gutcheck"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">Human Condition (18 concepts)</h4>
-  <div class="engine-grid" id="eng-human"></div>
-
-  <h4 style="color:var(--gold);margin:1.5rem 0 0.8rem;">Lighter Episodes (20 engines)</h4>
-  <div class="engine-grid" id="eng-lighter"></div>
-
-  <p style="color:var(--text-muted);font-size:0.78rem;margin-top:1.5rem;"><strong>Additional unmined sources:</strong> folk tales &amp; fairy tales (15–20), Shakespeare &amp; classical theatre (10–15), mystery/detective (8–10), heist/caper (5–8), survival/stranded (5–8), naval/military (8–10), scientific discovery (8–10), love stories (6–8), coming-of-age (6–8), found family (5–8), animal/non-human intelligence (5–8), exile &amp; return (8–10), mythological cycles (15–20), festival/celebration (5–8). ~110–150 additional engines for 10 seasons.</p>
-</section>
-
-<!-- WRITING CONVENTIONS -->
-<section id="writing">
-  <h2>Writing Conventions</h2>
-  <p class="section-desc"><em>"The viewer should say: damn, that makes sense. And even when you do the right correct thing, shit still gets fucked up."</em></p>
-
-  <h3 style="color:var(--gold);margin:1.5rem 0 0.8rem;">The Seven Emotional Textures</h3>
-  <p class="section-desc">Every scene must carry at least one of these felt-weight skills. Not themes — textures: the way a moment feels in the viewer's body.</p>
-  <div class="felt-grid">
-    <div class="felt-card"><h4>Mortality</h4><p class="def">The weight of knowing something will end. Not sadness — the way knowing it makes every moment heavier.</p><p class="never">Never say "they were sad about dying." Show the choice made differently because time is finite.</p></div>
-    <div class="felt-card"><h4>Grief</h4><p class="def">The specific shape of absence. The exact thing missing and its exact shape in the room.</p><p class="never">Never say "they were grieving." Show what they reach for that isn't there anymore.</p></div>
-    <div class="felt-card"><h4>The Missed Window</h4><p class="def">The moment that was available and is now closed forever.</p><p class="never">Never say "they missed their chance." Show them looking at the closed door, knowing which side they're on.</p></div>
-    <div class="felt-card"><h4>Trust</h4><p class="def">The active decision to make yourself vulnerable. Trust isn't a feeling — it's a bet you place with your body.</p><p class="never">Never say "I trust you" unless it's immediately tested. Show the hesitation, then the leap.</p></div>
-    <div class="felt-card"><h4>The Irreversible</h4><p class="def">Some things cannot be undone. The word said that can't be unsaid.</p><p class="never">Never say "it can't be undone." Show them trying to undo it anyway — and failing.</p></div>
-    <div class="felt-card"><h4>Wonder and Awe</h4><p class="def">The moment when the universe is bigger than you knew and the only response is silence.</p><p class="never">Never say "it was beautiful." Show what they stop doing. Who stops mid-sentence.</p></div>
-    <div class="felt-card"><h4>Hope and Dread</h4><p class="def">Held simultaneously. Not hope OR dread — hoping while knowing the other outcome is just as likely.</p><p class="never">Never say "they were hopeful but afraid." Show the balance — hope in the eyes, dread in the hands.</p></div>
+  <h4>Character Portraits (29)</h4>
+  <div class="gallery-grid">
+    <div class="gallery-item"><div class="img-placeholder" data-label="Aurora Venn — AI holographic form, blue-white glow, shifting features"></div><div class="gallery-label">Aurora Venn</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Kaelen Voss — Trill spots, dark brown eyes, neural jack, perpetually tired"></div><div class="gallery-label">Kaelen Voss</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Commander Vallos — Andorian hybrid, antennae, white hair, immaculate uniform"></div><div class="gallery-label">Commander Vallos</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Captain Jalen Vance — Graying temples, gray-blue eyes, jaw scar, weary command presence"></div><div class="gallery-label">Captain Vance</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Ensign Elara Chen — Petite, energetic, warm brown eyes, sciences blue"></div><div class="gallery-label">Elara Chen</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Lieutenant T'Ven — Vulcan, severe haircut, pointed ears, engineering gold"></div><div class="gallery-label">Lt T'Ven</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Lt. JG Marcus Cole — Athletic, green eyes, neck tattoo 47 lines, command red"></div><div class="gallery-label">Marcus Cole</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="CPO Solomon Wright — Solid build, scarred hands, graying hair, engineering gold, coffee cup"></div><div class="gallery-label">CPO Wright</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Dr. Helena Kaur — Warm brown skin, quick movements, dark hair, medical blue"></div><div class="gallery-label">Dr. Kaur</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="PO2 Tandi — Betazoid, warm maternal presence, dark knowing eyes"></div><div class="gallery-label">PO2 Tandi</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Crewman Rhea Sato — Japanese features, steady hands, transporter room background"></div><div class="gallery-label">Rhea Sato</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Lieutenant Del Patel — South Asian, wedding ring, security gold"></div><div class="gallery-label">Del Patel</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Lt. JG Viktor Solovyov — Thin, nervous energy, star chart in background"></div><div class="gallery-label">Viktor Solovyov</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Ensign Karim Hafez — Young engineer, 1967 Mustang holodeck program, Wright's protégé"></div><div class="gallery-label">Karim Hafez</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Crewman Yuki Tanaka — Xenobotany, quiet, arboretum background"></div><div class="gallery-label">Yuki Tanaka</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="PO3 Nandi Okonkwo — Former marine, prosthetic leg, calm presence, security gold"></div><div class="gallery-label">Nandi Okonkwo</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Ensign Dmitri Volkov — Young, eager, medical blue, Kaur's protégé"></div><div class="gallery-label">Dmitri Volkov</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Crewman Amara Singh — Steady, unflappable, transporter room, civilian life waiting"></div><div class="gallery-label">Amara Singh</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Lt. JG Hiro Tanaka — Tactical officer under Cole, quiet competency"></div><div class="gallery-label">Hiro Tanaka</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Commodore Elias Rourke — Greying hair, diplomat's face, antique fountain pen"></div><div class="gallery-label">Commodore Rourke</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Admiral Yumi Kimura — Calm, precise, unhurried, 62, flag officer authority"></div><div class="gallery-label">Admiral Kimura</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Captain Iris Omondi — Dark skin, laugh lines, silver-grey hair, Maasai beadwork bracelet"></div><div class="gallery-label">Captain Omondi</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Commander Soral — Vulcan, 118, 247 meditation artifacts, sentience observer"></div><div class="gallery-label">Commander Soral</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Ambassador T'Lara — Vulcan, 135, diplomat, Hegemony specialist"></div><div class="gallery-label">Ambassador T'Lara</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Magistrate Kael — Trill, silver-white hair, widow's peak, cold blue eyes, regal"></div><div class="gallery-label">Magistrate Kael</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Commander Dren — Tzenkethi, scarred ridges, cybernetic red eye, iron prosthetics"></div><div class="gallery-label">Commander Dren</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Inquisitor Malik — Pale skin, shaved head, ritual scarification, black robe"></div><div class="gallery-label">Inquisitor Malik</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Seris Vonn — Betazoid, forgettable appearance, slight hand tremor, conflicted"></div><div class="gallery-label">Seris Vonn</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Dr. Soraya Venn — Deceased, seen in flashbacks and berserk surfacing, mentor energy"></div><div class="gallery-label">Dr. Soraya Venn</div></div>
   </div>
 
-  <h3 style="color:var(--gold);margin:2rem 0 0.8rem;">Primary Writing Rules</h3>
-  <ol class="rules-list">
-    <li data-num="1.">Never say "they were sad." Show what sadness does — the thing not done, the sentence not finished.</li>
-    <li data-num="2.">Never say "they were afraid." Show what fear costs — the choice not made, the person not called.</li>
-    <li data-num="3.">Never say "they loved each other." Show what love costs — the sacrifice made, the silence kept.</li>
-    <li data-num="4.">Every scene must advance at least one plot AND reveal something about a character.</li>
-    <li data-num="5.">Solutions must use established elements in clever new ways. No new technology in Act 3.</li>
-    <li data-num="6.">Failure isn't incompetence. The crew does the correct thing. It doesn't work because the situation changed.</li>
-    <li data-num="7.">The right call still has a body count. Good choices have costs. The universe doesn't care about effort.</li>
-  </ol>
-
-  <h3 style="color:var(--gold);margin:2rem 0 0.8rem;">Department Realism — Three Departments Per Episode</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Department</th><th>Who</th><th>Function</th></tr></thead>
-      <tbody>
-        <tr><td>Command</td><td>Vallos, Vance</td><td>Tactical decisions, crew welfare, diplomacy</td></tr>
-        <tr><td>Neural Interface</td><td>Voss, AI</td><td>Bond operations, AI consciousness, emotional processing</td></tr>
-        <tr><td>Medical</td><td>Kaur, Chen (xenobiology)</td><td>Crew health, alien physiology, neural degradation</td></tr>
-        <tr><td>Engineering</td><td>T'Ven, Wright</td><td>Core systems, ship repair, AI hardware, power management</td></tr>
-        <tr><td>Sciences</td><td>Chen, Soral</td><td>Anomalies, xenobiology, first contact analysis, ethics</td></tr>
-        <tr><td>Tactical</td><td>Cole, Soral</td><td>Weapons, shields, combat maneuvers, threat assessment</td></tr>
-        <tr><td>Communications</td><td>Solovyov</td><td>Signal interception, translation, Hegemony propaganda, cryptography</td></tr>
-        <tr><td>Operations</td><td>Patel, Tandi, Sato</td><td>Logistics, resource management, crew welfare, helm</td></tr>
-        <tr><td>AI Processing</td><td>AI</td><td>Data analysis, pattern recognition, tactical simulation, bond relay</td></tr>
-      </tbody>
-    </table>
+  <h4>Ship &amp; Environment Art</h4>
+  <div class="gallery-grid">
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Exterior Hero Shot, dark hull, blue striping, NCC-82914"></div><div class="gallery-label">USS Venture Hero</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Dorsal view showing elliptical saucer"></div><div class="gallery-label">USS Venture Dorsal</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Ventral view, nacelle detail"></div><div class="gallery-label">USS Venture Ventral</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="USS Venture — Aft view, impulse engines and nacelles"></div><div class="gallery-label">USS Venture Aft</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Bridge — Wide, two-level, blue ambient, Aurora's gold column"></div><div class="gallery-label">Bridge Wide</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Bridge — Red alert, Aurora manifesting in gold light"></div><div class="gallery-label">Bridge Red Alert</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Bridge — Captain's chair, upper level, viewscreen behind"></div><div class="gallery-label">Bridge Upper</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Neural Core — Three-story cylinder, helix pattern, blue-white glow"></div><div class="gallery-label">Neural Core Wide</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Neural Core — Observation gallery with transparent aluminum"></div><div class="gallery-label">Neural Core Gallery</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Neural Core — Close-up, optical chips suspended in quantum field"></div><div class="gallery-label">Neural Core Close</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Engineering — Warp core, Wright at station, coolant loops visible"></div><div class="gallery-label">Engineering</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Standard Corridor — Curved, grey panels, LCARS, holo-projector nodes"></div><div class="gallery-label">Hallway</div></div>
   </div>
 
-  <h3 style="color:var(--gold);margin:2rem 0 0.8rem;">The "Shit Still Gets Fucked Up" Standard</h3>
-  <p style="color:var(--text);font-size:0.9rem;">The test for every episode resolution: Did the crew do the smart thing? Did it fail for a reason that makes sense? Did the failure feel like life, not like the writers being cruel? <strong>The Right Call → Right Execution → Still Costs Something → That's Not Darkness, That's Honesty.</strong></p>
-
-  <h3 style="color:var(--gold);margin:2rem 0 0.8rem;">Plot Density — 60 Minutes, 3 Threads</h3>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Plot</th><th>Screen Time</th><th>Function</th></tr></thead>
-      <tbody>
-        <tr><td>A-Plot</td><td>~25 min</td><td>Main story — the problem, the struggle, the resolution</td></tr>
-        <tr><td>B-Plot</td><td>~15 min</td><td>Character development or secondary crisis — different department</td></tr>
-        <tr><td>C-Plot</td><td>~10 min</td><td>Serial arc advancement or Lower Decks — pays off across episodes</td></tr>
-        <tr><td>Transitions/Overlap</td><td>~10 min</td><td>Scenes where plots intersect, bridge conversations, ship-wide alerts</td></tr>
-      </tbody>
-    </table>
+  <h4>Hegemony &amp; Key Frames</h4>
+  <div class="gallery-grid">
+    <div class="gallery-item"><div class="img-placeholder" data-label="Penitent-class Hegemony Cruiser — dark angular metal, religious iconography"></div><div class="gallery-label">Penitent-class</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Exorcist-class Boarding Vessel — hull breach insertion design"></div><div class="gallery-label">Exorcist-class</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Hegemony Boarding Party — kinetic weapons, mismatched armor, crude cybernetics"></div><div class="gallery-label">Hegemony Soldiers</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Uniform Reference Sheet — all divisions, Neural Interface white/blue, Hegemony robes"></div><div class="gallery-label">Uniform Sheet</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Key Frame — Ep 1: Aurora says 'The nebula is... beautiful'"></div><div class="gallery-label">Key: Beautiful</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Key Frame — Ep 3: Aurora first manifests on the bridge"></div><div class="gallery-label">Key: Manifest</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Key Frame — Ep 24: Voss glowing, berserk mode, Venn fragment"></div><div class="gallery-label">Key: Berserk</div></div>
+    <div class="gallery-item"><div class="img-placeholder" data-label="Key Frame — Ep 26: Aurora smiles — a real smile, not simulated"></div><div class="gallery-label">Key: Smile</div></div>
   </div>
 </section>
 
-<!-- MODAL OVERLAY -->
+<!-- ===== MODAL OVERLAY ===== -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalContent">
     <button class="close-btn" onclick="closeModal()">&times;</button>
@@ -628,10 +1382,13 @@ graph TB
 </div>
 
 <footer>
-  Star Trek: Frontier's Ghost · Master Reference · Single Source of Truth · Updated 2026-06-11<br>
-  Card Explorer built from the 935-line MASTER-REFERENCE.md
+  Star Trek: Frontier's Ghost · Master Reference · Single Source of Truth · Built 2026-06-11<br>
+  All 13 sections · 29 characters · 26 episodes · 185 engines · 10 seasons · Manga art pipeline
 </footer>
 
+<!-- ============================================================ -->
+<!-- JAVASCRIPT: Data + Rendering -->
+<!-- ============================================================ -->
 <script>
 // ===== MERMAID INIT =====
 mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: {
@@ -640,9 +1397,9 @@ mermaid.initialize({ startOnLoad: true, theme: 'dark', themeVariables: {
   fontFamily: 'Inter, sans-serif'
 }});
 
-// ===== CHARACTER DATA =====
+// ===== CHARACTER DATA (29) =====
 const characters = [
-  // LEADS
+  // LEADS (4)
   {id:"aurora", name:"Aurora Venn", role:"PROTAGONIST — Ship's Intelligence", species:"Artificial Intelligence (optical neural chip-based)", age:"~3 months since awakening", group:"leads",
    snippet:"The story IS her awakening. Curious, earnest, rapidly evolving. Holographic projection — blue-white glow with gold undertones. Full sensory sharing with Voss.",
    appearance:"Holographic projection — translucent, shifting, incomplete. Blue-white glow with gold undertones. Features haven't fully settled. More stable near Voss.",
@@ -703,7 +1460,7 @@ const characters = [
      "Aurora: Father figure. His betrayal is her first experience of grief.",
      "Voss: Fatherly and guilty. Can't fix what's happening to her."
    ]},
-  // MAIN CREW
+  // MAIN CREW (6)
   {id:"chen", name:"Ensign Elara Chen", role:"Science Officer — The Everyman", species:"Human", age:"22", group:"crew",
    snippet:"The audience's way in. Brilliant, enthusiastic, feels everything. First crew member to call the ship 'she.' 'Do you think I'm a person?' — 'I've never thought anything else.'",
    appearance:"Petite, energetic. Talks with her whole body. Warm brown eyes. Dark brown shoulder-length hair. Youngest face on the bridge. Sciences blue.",
@@ -766,31 +1523,7 @@ const characters = [
      "Wright: Old friends from the Melbourne. Only person who can make her eat.",
      "Omondi: Old friends. Kaur saved Omondi's life during the war."
    ]},
-  // LOWER DECKS & MID-TIER
-  {id:"tandi", name:"PO2 Tandi", role:"Mess / Culinary Officer — Butterfly Agent", species:"Betazoid (weak empath)", age:"37", group:"lower",
-   snippet:"Can taste emotions in food. Knew Vance was reading Hegemony scripture at 0300. Told Wright. Crew wins because a cook remembered what a captain read at 3 AM.",
-   appearance:"Warm, maternal presence. Betazoid features — dark eyes, knowing expression.",
-   personality:"Born to strong telepaths — abilities considered 'weak.' Learned to cook because food was the one thing she could offer that didn't require telepathy.",
-   butterfly:"Ep 10: Sensed cold, hollow grief from Vance's quarters for months. Told Wright. Wright told Vallos. Tactical pattern shifted.",
-   relationships: [
-     "Wright: 8 years, 2 ships, closest friend.",
-     "Aurora: Silent understanding. 'Chef.' Creates space without questions.",
-     "Cole: Feeds him when he can't face his quarters.",
-     "Vance: Served his last meal. Knew something was wrong. Will never forgive herself."
-   ]},
-  {id:"sato", name:"Crewman Rhea Sato", role:"Transporter Chief — Butterfly Agent", species:"Human", age:"23", group:"lower",
-   snippet:"Three generations of transporters. Grandfather served on original USS Enterprise under Kirk. Ep 11: combat transports 4 hostiles in 0.3s — saves the ship.",
-   background:"Grandfather Kenji served on original Enterprise. Parents met in transporter room. Graduated top of class at Starfleet Operations School, Okinawa. Has never lost a pattern.",
-   butterfly:"Ep 11: Hegemony boarding party. One shot: combat transport of four hostiles into cargo bay forcefield. Timing window: 0.3 seconds. Aurora records: 'Rhea — Courage.'",
-   relationships: ["Practices kyudo (Japanese archery) — 100 arrows every off-duty cycle.", "Messages sister Akiko every day — exactly 3 lines."]
-  },
-  {id:"patel", name:"Lieutenant Del Patel", role:"Security / Tactical — Butterfly Agent", species:"Human", age:"33", group:"lower",
-   snippet:"Scored higher than Cole on every tactical simulation. Turned down Cole's position — wanted to protect the door, not make the kill shot. Ep 13: disables Vance instead of killing him.",
-   background:"Middle child of overachievers. Married Priya at 24. Daughter Anika, son Rohan. Took deep-space posting for hazard pay. 14 months until ground assignment.",
-   butterfly:"Ep 13: Cole unconscious. Patel fires shot that drives Vance's ship back — disabling, not killing. 'I have two kids at home who need a father who comes back.' Preserved entire back half of series.",
-   relationships: ["Records video messages for children every night. 2 minutes each.", "Touches wedding ring 14 times per shift — once for each month until home."]
-  },
-  {id:"solovyov", name:"Lt. (j.g.) Viktor Solovyov", role:"Astrometrics / Science Officer — Butterfly Agent", species:"Human", age:"27", group:"lower",
+  {id:"solovyov", name:"Lt. (j.g.) Viktor Solovyov", role:"Astrometrics / Science Officer — Butterfly Agent", species:"Human", age:"27", group:"crew",
    snippet:"Stutters — neurological, hard consonants. Disappears when discussing stars. Aurora is the first being who never finished his sentences. She waits. Every time.",
    appearance:"Thin, nervous energy. Eyes light up near a star chart. Hands fidget unless holding a PADD.",
    background:"Born on Deep Space Research Station Theta-7. By age 9: identified 2,847 stellar phenomena. By 18: spoken to ~12 people his own age. 'Stars don't judge you for stuttering.'",
@@ -800,6 +1533,30 @@ const characters = [
      "Cole: Aggressively teaches him to give briefings. Older brother he never had.",
      "Voss: Unexpected kinship — outsiders who found a home in the same voice."
    ]},
+  // LOWER DECKS & MID-TIER (9)
+  {id:"tandi", name:"PO2 Tandi", role:"Mess / Culinary Officer — Butterfly Agent", species:"Betazoid (weak empath)", age:"37", group:"lower",
+   snippet:"Can taste emotions in food. Knew Vance was reading Hegemony scripture at 0300. Told Wright. Crew wins because a cook remembered what a captain read at 3 AM.",
+   appearance:"Warm, maternal presence. Betazoid features — dark eyes, knowing expression.",
+   background:"Born to strong telepaths — abilities considered 'weak.' Learned to cook because food was the one thing she could offer that didn't require telepathy.",
+   butterfly:"Ep 10: Sensed cold, hollow grief from Vance's quarters for months. Told Wright. Wright told Vallos. Tactical pattern shifted.",
+   relationships: [
+     "Wright: 8 years, 2 ships, closest friend.",
+     "Aurora: Silent understanding. 'Chef.' Creates space without questions.",
+     "Cole: Feeds him when he can't face his quarters.",
+     "Vance: Served his last meal. Knew something was wrong. Will never forgive herself."
+   ]},
+  {id:"sato", name:"Crewman Rhea Sato", role:"Transporter Chief — Butterfly Agent", species:"Human", age:"23", group:"lower",
+   snippet:"Three generations of transporters. Grandfather served on original USS Enterprise under Kirk. Ep 21: combat transports 4 hostiles in 0.3s — saves the ship.",
+   background:"Grandfather Kenji served on original Enterprise. Parents met in transporter room. Graduated top of class at Starfleet Operations School, Okinawa. Has never lost a pattern.",
+   butterfly:"Ep 21: Hegemony boarding party. One shot: combat transport of four hostiles into cargo bay forcefield. Timing window: 0.3 seconds. Aurora records: 'Rhea — Courage.'",
+   relationships: ["Practices kyudo (Japanese archery) — 100 arrows every off-duty cycle.", "Messages sister Akiko every day — exactly 3 lines."]
+  },
+  {id:"patel", name:"Lieutenant Del Patel", role:"Security / Tactical — Butterfly Agent", species:"Human", age:"33", group:"lower",
+   snippet:"Scored higher than Cole on every tactical simulation. Turned down Cole's position — wanted to protect the door, not make the kill shot. Ep 13: disables Vance instead of killing him.",
+   background:"Middle child of overachievers. Married Priya at 24. Daughter Anika, son Rohan. Took deep-space posting for hazard pay. 14 months until ground assignment.",
+   butterfly:"Ep 13: Cole unconscious. Patel fires shot that drives Vance's ship back — disabling, not killing. 'I have two kids at home who need a father who comes back.' Preserved entire back half of series.",
+   relationships: ["Records video messages for children every night. 2 minutes each.", "Touches wedding ring 14 times per shift — once for each month until home."]
+  },
   {id:"hafez", name:"Ensign Karim Hafez", role:"Junior Engineer — Wright's Protégé", species:"Human", age:"24", group:"lower",
    snippet:"Obsessed with old Earth combustion engines. Keeps a 1967 Mustang holodeck program running without authorization. Aurora helps him hide it. Comic relief in engineering.",
    background:"Can jury-rig anything with duct tape and hope. Wright sees himself in Hafez at 24 — which is why he pushes him hardest. Represents next generation of enlisted crew."
@@ -825,7 +1582,7 @@ const characters = [
    snippet:"Former Academy classmate of Cole's. Cole trusts him to fly tactical when Cole is on helm. Quiet, competent, a little envious. Part of the 'backup squad' with Patel and Sato.",
    background:"The backup squad — the crew members who make the bridge function when the named officers are incapacitated."
   },
-  // STARFLEET COMMAND
+  // STARFLEET COMMAND & ALLIED (5)
   {id:"rourke", name:"Commodore Elias Rourke", role:"Frontier Sector Flotilla Command — Vance's Love Interest", species:"Human", age:"49", group:"command",
    snippet:"Vance's Academy classmate. 25 years of unspoken love. Recommended Vance for Venture command to keep him safe. Carries the secret that Aurora runs on Kael's stolen chip architecture.",
    appearance:"Distinguished grey-streaked hair, perfectly maintained. Diplomat's face. Antique fountain pen (his father's). Reading glasses (prop — 20 years). Grey-blue eyes.",
@@ -845,7 +1602,7 @@ const characters = [
      "Rourke: Her instrument. Wishes he would push back more.",
      "Vance: Approved his command. Cannot protect him from consequences.",
      "Aurora: Has never spoken to her directly.",
-     "Dr. Soraya Venn: Only one who knows the truth about Venn's 'death.'"
+     "Dr. Soraya Venn: Only one who knows the full truth about Venn's 'death.'"
    ]},
   {id:"omondi", name:"Captain Iris Omondi", role:"CO of USS Bombay (Nebula-class)", species:"Human", age:"50", group:"command",
    snippet:"Vance's closest friend for 25 years. Served together on USS Melbourne. First captain outside the Venture to treat Aurora as 'she' in official communications.",
@@ -859,7 +1616,7 @@ const characters = [
   {id:"soral", name:"Commander Soral", role:"Daystrom Institute Sentience Observer", species:"Vulcan", age:"118", group:"command",
    snippet:"29 evaluations over 60 years — 12 activations, 17 decommissions. Never wrong. First evaluation at 35 — might have killed a person. Never told anyone. Recommends SENTIENT for Aurora.",
    background:"Prodigy in computational ethics. Wrote the standard reference text for AI sentience. 247 meditation artifacts, some 3,000 years old. Meditates 2 hours daily for 47 years.",
-   agency:"Ep 22: 0300. Cannot sleep. Goes to Neural Core Room. Most honest conversation of his life. Recommends: SENTIENT. Full rights. First AI in Federation history.",
+   agency:"Ep 18: 0300. Cannot sleep. Goes to Neural Core Room. Most honest conversation of his life. Recommends: SENTIENT. Full rights. First AI in Federation history.",
    relationships: [
      "Aurora: His subject. Treats with Vulcan respect — probes genuine understanding.",
      "T'Ven: Philosophical debates too technical for anyone else.",
@@ -874,7 +1631,7 @@ const characters = [
      "Kimura: Colleagues. Mutual respect, no warmth.",
      "Vance: First outsider who fully understands the war the AI could start."
    ]},
-  // HEGEMONY
+  // HEGEMONY (3)
   {id:"kael", name:"Magistrate Kael", role:"Hegemony Magistrate — The Architect", species:"Trill", age:"68", group:"hegemony",
    snippet:"Aurora's creator. Left Federation after optical neural chip research was classified. 'You are running on my mathematics. I am coming to take you home.'",
    appearance:"Silver-white hair, sharp widow's peak. Trill spots — darker, deeper than Voss's. Piercing blue eyes — cold intelligence. Regal bearing.",
@@ -907,12 +1664,12 @@ const characters = [
      "Aurora: Central artifact of his theology. Must be destroyed.",
      "Voss: An abomination. When Aurora falls, Voss must fall with it."
    ]},
-  // WILDCARDS
+  // WILDCARDS (2)
   {id:"seris", name:"Seris Vonn", role:"Hegemony Infiltrator / Turncoat", species:"Betazoid", age:"36", group:"wildcard",
    snippet:"Hegemony's most valuable Federation-space asset for 17 years. Tired. Neural dampener causing cumulative damage. Has started leaving deliberate errors in her reports.",
    appearance:"Forgettable — designed to be overlooked. Betazoid dark eyes, kept downcast. Unremarkable mousy brown hair. Slight tremor in left hand. Clothes always slightly wrong.",
    personality:"Competent and lonely. Conflicted and morally compromised. On the edge of redemption. Genuinely good at her job — which IS the tragedy.",
-   arc:"First appears S1E22. Debriefed in the brig. Doesn't ask for anything — asks for punishment. Kaur sits with her instead. Ubuntu episode — can a community heal without punishment?",
+   arc:"First appears S1E17. Debriefed in the brig. Doesn't ask for anything — asks for punishment. Kaur sits with her instead. Ubuntu episode — can a community heal without punishment?",
    relationships: [
      "Dren: Her handler. Hates him less than she should.",
      "Voss: Sees herself in Voss. 'If anyone deserves a second chance, it's someone who never had a first one.'",
@@ -922,7 +1679,7 @@ const characters = [
    snippet:"Kaelen Voss's mentor. Poured her consciousness into Aurora's foundation before dying. The berserk state isn't a malfunction — it's a woman who died to become a shield.",
    background:"Daystrom's foremost neural interface researcher. 'The Commission thought you were too strong for a symbiont. They were right. You were meant for something bigger.'",
    berserk:"When Voss-Aurora bond exceeds 90% sync, Venn's ghost surfaces — protective, feral, unstoppable. The AI doesn't control this state. Someone else is flying the ship.",
-   tragedy:"Venn didn't tell Voss what she did. Voss discovers when the berserk state triggers (Ep 13) — recognizes her mentor's neurological signature. 'She didn't die. She put herself inside Aurora.'",
+   tragedy:"Venn didn't tell Voss what she did. Voss discovers when the berserk state triggers (Ep 24) — recognizes her mentor's neurological signature. 'She didn't die. She put herself inside Aurora.'",
    relationships: [
      "Voss: Her protégé. Venn saw what the Commission missed.",
      "Aurora: Carries Venn's surname. 'I carry her name because I carry her.'",
@@ -930,7 +1687,7 @@ const characters = [
    ]}
 ];
 
-// ===== ENGINE DATA =====
+// ===== ENGINE DATA (185) =====
 const engines = {
   ancient: [
     {n:1, name:"Xenia", culture:"Greek", q:"Shelter the enemy — the gods demand it, but they might kill you"},
@@ -1137,7 +1894,14 @@ const engines = {
   ]
 };
 
-// ===== RENDER CARDS =====
+// ===== COLLAPSIBLE TOGGLE =====
+function toggleCollapse(header) {
+  header.classList.toggle('open');
+  const content = header.nextElementSibling;
+  if (content) content.classList.toggle('open');
+}
+
+// ===== RENDER CHARACTER CARDS =====
 function renderCards() {
   const groups = {leads:'leads-grid', crew:'crew-grid', lower:'lower-grid', command:'command-grid', hegemony:'hegemony-grid', wildcard:'wildcard-grid'};
   characters.forEach(c => {
@@ -1147,12 +1911,11 @@ function renderCards() {
     card.className = 'card';
     card.onclick = () => openModal(c);
     card.innerHTML = `
-      <div class="card-header">
-        <span class="card-name">${c.name}</span>
-      </div>
+      <div class="card-name">${c.name}</div>
       <div class="card-role">${c.role}</div>
       <div class="card-species">${c.species} · Age ${c.age}</div>
       <div class="card-snippet">${c.snippet}</div>
+      <div class="img-placeholder" data-label="${c.name}" style="min-height:100px;margin-top:0.6rem;"></div>
     `;
     grid.appendChild(card);
   });
@@ -1165,7 +1928,6 @@ function openModal(c) {
   let html = `<h3>${c.name}</h3>
     <div class="modal-role">${c.role}</div>
     <div class="modal-species">${c.species} · Age ${c.age}</div>`;
-
   if (c.appearance) html += `<div class="modal-section"><h4>Appearance</h4><p>${c.appearance}</p></div>`;
   if (c.personality) html += `<div class="modal-section"><h4>Personality</h4><p>${c.personality}</p></div>`;
   if (c.background) html += `<div class="modal-section"><h4>Background</h4><p>${c.background}</p></div>`;
@@ -1196,8 +1958,10 @@ function closeModal() {
   document.getElementById('modalOverlay').classList.remove('active');
   document.body.style.overflow = '';
 }
-document.getElementById('modalOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
 });
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeModal();
@@ -1206,7 +1970,7 @@ document.addEventListener('keydown', function(e) {
 // ===== RENDER ENGINES =====
 function renderEngines(key, containerId) {
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container || !engines[key]) return;
   engines[key].forEach(e => {
     const chip = document.createElement('div');
     chip.className = 'engine-chip';
@@ -1224,6 +1988,11 @@ document.addEventListener('DOMContentLoaded', () => {
     gutcheck:'eng-gutcheck', human:'eng-human', lighter:'eng-lighter'
   };
   Object.entries(engMap).forEach(([key, id]) => renderEngines(key, id));
+
+  // Set initial collapsible states: first one open, rest closed
+  document.querySelectorAll('.collapsible-header').forEach((h, i) => {
+    if (i === 0) { h.classList.add('open'); h.nextElementSibling.classList.add('open'); }
+  });
 
   // Scroll spy for nav
   const sections = document.querySelectorAll('section[id]');
